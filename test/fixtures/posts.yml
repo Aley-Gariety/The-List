@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  url: MyString
+  text: MyText
+  user: MyString
+  upvote: 1
+  downvote: 1
+  id: 1
+  comment_count: 1
+
+two:
+  title: MyString
+  url: MyString
+  text: MyText
+  user: MyString
+  upvote: 1
+  downvote: 1
+  id: 1
+  comment_count: 1

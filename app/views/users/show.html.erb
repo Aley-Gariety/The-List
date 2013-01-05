@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Username:</b>
+  <%= @user.username %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @user.password %>
+</p>
+
+<p>
+  <b>Good karma:</b>
+  <%= @user.good_karma %>
+</p>
+
+<p>
+  <b>Bad karma:</b>
+  <%= @user.bad_karma %>
+</p>
+
+<p>
+  <b>Last login:</b>
+  <%= @user.last_login %>
+</p>
+
+<p>
+  <b>Influence:</b>
+  <%= @user.influence %>
+</p>
+
+<p>
+  <b>Creation:</b>
+  <%= @user.creation %>
+</p>
+
+<p>
+  <b>Saved:</b>
+  <%= @user.saved %>
+</p>
+
+<p>
+  <b>Site:</b>
+  <%= @user.site %>
+</p>
+
+<p>
+  <b>Full name:</b>
+  <%= @user.full_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
