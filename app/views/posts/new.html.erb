@@ -1,3 +1,8 @@
 <h2>New post</h2>
-
-<%= render 'form' %>
+  <% if current_user %>
+    <%= render 'form' %>
+  <% else %>
+<script type="text/javascript">
+    window.location.href="/log_in"  // put your correct path in a string here
+  </script>
+  	<% end %>
