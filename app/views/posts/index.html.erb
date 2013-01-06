@@ -2,7 +2,7 @@
   <% @posts.each do |post| %>
     <li>
       <a href="<%= post.url %>" target="_blank" class="title"><%= post.title %></a><br>
-      <span class="meta">Submitted by <%= post.user %>&nbsp;&bull;&nbsp;on <%= post.created_at %>&nbsp;&bull;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
+      <span class="meta">Submitted by <%= post.user %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
     </li>
   <% end %>
 </ol>

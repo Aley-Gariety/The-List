@@ -10,17 +10,19 @@
   <header>
     <section>
       <h1><a href="/">The List</a></h1>
-      <% if current_user %>
-        <%= current_user.email %>
-        &nbsp;&bull;&nbsp;
-        <%= link_to 'Submit', new_post_path %>
-        &nbsp;&bull;&nbsp;
-        <%= link_to "Sign Out", log_out_path %>
-      <% else %>
-        <%= link_to "Sign Up", sign_up_path %>
-        &nbsp;&bull;&nbsp;
-        <%= link_to "Sign In", log_in_path %>
-      <% end %>
+      <div class="meta-header">
+        <% if current_user %>
+          <%= current_user.email %>
+          &nbsp;&bull;&nbsp;
+          <%= link_to 'Submit', new_post_path %>
+          &nbsp;&bull;&nbsp;
+          <%= link_to "Sign Out", log_out_path %>
+        <% else %>
+          <%= link_to "Sign Up", sign_up_path %>
+          &nbsp;&bull;&nbsp;
+          <%= link_to "Sign In", log_in_path %>
+        <% end %>
+      </div>
     </section>
   </header>
   <section>
@@ -29,5 +31,31 @@
 <% end %>
     <%= yield %>
   </section>
+  <footer>
+    <style>
+      /* Responsiveness */
+
+      @media only screen and (max-width: 650px) {
+        body > header {
+          height: 100px;
+          line-height: normal;
+          text-align: center;
+          font-size: .75em;
+        }
+
+        h1 {
+          display: block;
+          width: 100%;
+          text-align: center;
+          position: static;
+        }
+
+        body > header > section {
+          padding-top: 10px;
+          padding-bottom: 20px;
+        }
+      }
+    </style>
+  </footer>
 </body>
 </html>
