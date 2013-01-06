@@ -1,34 +1,26 @@
-<h1>Listing posts</h1>
+<%= link_to 'New Post', new_post_path %>
 
 <table>
   <tr>
+    <th>#</th>
     <th>Title</th>
-    <th>Url</th>
-    <th>Text</th>
     <th>User</th>
+<<<<<<< HEAD
     <th>Upvote</th>
     <th>Downvote</th>
     <th>Id</th>
     <th>Comment count</th>
+    <th>Comments</th>
+    <th>Show</th>
   </tr>
 
 <% @posts.each do |post| %>
   <tr>
-    <td><%= post.title %></td>
-    <td><%= post.url %></td>
-    <td><%= post.text %></td>
+    <td><%= @posts.index(post) + 1 %></td>
+    <td><a href="<%= post.url %>" target="_blank"><%= post.title %></a></td>
     <td><%= post.user %></td>
-    <td><%= post.upvote %></td>
-    <td><%= post.downvote %></td>
-    <td><%= post.id %></td>
     <td><%= post.comment_count %></td>
     <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Post', new_post_path %>
