@@ -42,11 +42,6 @@ body {
   font-weight: 400;
 }
 
-body > section {
-  width: 900px;
-  margin: 0 auto;
-}
-
 a, a:link {
   color: #000;
   text-decoration: none;
@@ -54,6 +49,20 @@ a, a:link {
 
 a:hover {
   text-decoration: underline;
+}
+
+body > section, body > header {
+  width: auto;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header {
+  background: #666;
+}
+
+header a, header a:link {
+  color: #FFF;
 }
 
 h1 {
