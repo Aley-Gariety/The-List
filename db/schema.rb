@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106061127) do
+ActiveRecord::Schema.define(:version => 20130106071835) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20130106061127) do
     t.string   "password_salt"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "username"
+    t.integer  "good_karma"
+    t.integer  "bad_karma"
   end
+
+  add_index "users", ["bad_karma"], :name => "index_users_on_bad_karma"
+  add_index "users", ["good_karma"], :name => "index_users_on_good_karma"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end

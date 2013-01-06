@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	def new
 	  @user = User.new
 	end
-	
+
 	def create
 	  @user = User.new(params[:user])
 	  if @user.save
@@ -11,11 +11,11 @@ class UsersController < ApplicationController
 	    render "new"
 	  end
 	end
-	
+
 	def profile
 	  @current_user ||= User.find(session[:user_id])
 	  if session[:user_id] == ""
 	  redirect_to 'http://google.com'
 	  end
-	  end
+  end
 end
