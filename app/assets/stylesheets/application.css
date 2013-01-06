@@ -48,12 +48,11 @@ a, a:link {
 }
 
 a:hover {
-  color: #777;
-  text-decoration: underline;
+  color: #ff4747;
 }
 
 a:active {
-  color: #ff4747;
+  color: #000;
 }
 
 body > section, body > header {
@@ -66,6 +65,11 @@ body > header {
   height: 80px;
   line-height: 80px;
   text-align: right;
+  border-bottom: 1px dotted red;
+}
+
+body > section {
+  margin-top: 30px;
 }
 
 h1 {
@@ -80,7 +84,31 @@ h1 a, h1 a:hover {
 
 ol {
   padding-left: 20px;
-  font-size: 1em;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+li .title {
+  font-size: 1.5em;
+}
+
+li .meta {
+  color: #777;
+  font-size: .75em;
+}
+
+li .meta a {
+  color: #777;
+}
+
+li .meta a:hover {
+  color: #ff4747;
+}
+
+li .meta a:active {
+  color: #000;
 }
 
 p {
