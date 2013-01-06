@@ -11,35 +11,11 @@
 </p>
 
 <p>
-  <b>Text:</b>
-  <%= @post.text %>
-</p>
-
-<p>
   <b>User:</b>
   <%= @post.user %>
 </p>
 
 <p>
-  <b>Upvote:</b>
-  <%= @post.upvote %>
+  <b>Text:</b>
+  <%= @post.text %>
 </p>
-
-<p>
-  <b>Downvote:</b>
-  <%= @post.downvote %>
-</p>
-
-<p>
-  <b>Id:</b>
-  <%= @post.id %>
-</p>
-
-<p>
-  <b>Comment count:</b>
-  <%= @post.comment_count %>
-</p>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
