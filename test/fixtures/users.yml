@@ -1,27 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  username: MyString
   email: MyString
-  password: MyString
-  good_karma: 1
-  bad_karma: 1
-  last_login: 2013-01-05 13:47:13
-  influence: 1
-  creation: 2013-01-05 13:47:13
-  saved: MyString
-  site: MyString
-  full_name: MyString
+  password_hash: MyString
+  password_salt: MyString
 
 two:
-  username: MyString
   email: MyString
-  password: MyString
-  good_karma: 1
-  bad_karma: 1
-  last_login: 2013-01-05 13:47:13
-  influence: 1
-  creation: 2013-01-05 13:47:13
-  saved: MyString
-  site: MyString
-  full_name: MyString
+  password_hash: MyString
+  password_salt: MyString

@@ -1,8 +1,15 @@
 ThelistIo::Application.routes.draw do
-  get "users/new"
 
-  resources :users
+  root :to => "posts#index"
+  
+  get "sessions/new"
 
+    get "log_out" => "sessions#destroy", :as => "log_out"
+	get "log_in" => "sessions#new", :as => "log_in"
+	get "sign_up" => "users#new", :as => "sign_up"
+	root :to => "users#new"
+	resources :users
+	resources :sessions
 
   resources :posts
 
@@ -10,7 +17,7 @@ ThelistIo::Application.routes.draw do
   resources :comments
 
 
-  root :to => "posts#index"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
