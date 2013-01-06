@@ -32,18 +32,28 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}bu
   src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGCmgpmuQqK2I-L2S9cF65Ek.woff) format('woff');
 }
 
+* {
+  margin: 0;
+}
+
 body {
   font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
+  margin: 0;
+  top: 0;
 }
 
 a, a:link {
   color: #000;
-  text-decoration: none;
 }
 
 a:hover {
+  color: #777;
   text-decoration: underline;
+}
+
+a:active {
+  color: #ff4747;
 }
 
 body > section, body > header {
@@ -53,16 +63,34 @@ body > section, body > header {
 }
 
 body > header {
-  border-top: 5px solid #666;
+  height: 80px;
+  line-height: 80px;
+  text-align: right;
 }
 
 h1 {
+  display: inline-block;
   font-size: 2.5em;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 0;
+  position: absolute;
+}
+
+h1 a, h1 a:hover {
+  text-decoration: none;
+}
+
+h1 a:hover {
+}
+
+h1 a:active {
 }
 
 ol {
   padding-left: 20px;
   font-size: 1em;
+}
+
+p {
+  margin-bottom: 10px;
+  margin-top: 10px;
 }

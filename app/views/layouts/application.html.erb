@@ -8,13 +8,17 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1>The List</h1></a>
+    <h1><a href="/">The List</a></h1>
   <% if current_user %>
-    Logged in as <%= current_user.email %>.
-    <%= link_to "Log out", log_out_path %>
+    <%= current_user.email %>
+    &nbsp;&bull;&nbsp;
+    <%= link_to 'Submit', new_post_path %>
+    &nbsp;&bull;&nbsp;
+    <%= link_to "Sign Out", log_out_path %>
   <% else %>
-    <%= link_to "Sign up", sign_up_path %> or
-    <%= link_to "log in", log_in_path %>
+    <%= link_to "Sign Up", sign_up_path %>
+    &nbsp;&bull;&nbsp;
+    <%= link_to "Sign In", log_in_path %>
   <% end %>
   </header>
   <section>

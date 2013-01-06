@@ -1,5 +1,3 @@
-<%= link_to 'New Post', new_post_path %>
-
 <ol>
   <% @posts.each do |post| %>
     <li><a href="<%= post.url %>" target="_blank"><%= post.title %></a><%= post.user %><%= post.comment_count %><%= link_to 'Show', post %></td>
