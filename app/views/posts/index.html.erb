@@ -1,7 +1,34 @@
 <%= link_to 'New Post', new_post_path %>
 
+<<<<<<< HEAD
 <ol>
   <% @posts.each do |post| %>
     <li><a href="<%= post.url %>" target="_blank"><%= post.title %></a><%= post.user %><%= post.comment_count %><%= link_to 'Show', post %></td>
   <% end %>
 </ol>
+=======
+<table>
+  <tr>
+    <th>#</th>
+    <th>Title</th>
+    <th>User</th>
+<<<<<<< HEAD
+    <th>Upvote</th>
+    <th>Downvote</th>
+    <th>Id</th>
+    <th>Comment count</th>
+    <th>Comments</th>
+    <th>Show</th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= @posts.index(post) + 1 %></td>
+    <td><a href="<%= post.url %>" target="_blank"><%= post.title %></a></td>
+    <td><%= post.user %></td>
+    <td><%= post.comment_count %></td>
+    <td><%= link_to 'Show', post %></td>
+  </tr>
+<% end %>
+</table>
+>>>>>>> 166baebe4d851b098886f56dfd55649c0cd8cccc
