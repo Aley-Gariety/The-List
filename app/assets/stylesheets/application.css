@@ -57,14 +57,12 @@ body > section, body > header {
   margin: 0 auto;
 }
 
-header {
-  background: #666;
-}
-
-header a, header a:link {
-  color: #FFF;
+body > header {
+  border-top: 6px solid #666;
 }
 
 h1 {
   font-size: 2.5em;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
