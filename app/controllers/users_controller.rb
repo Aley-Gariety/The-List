@@ -11,4 +11,8 @@ class UsersController < ApplicationController
 	    render "new"
 	  end
 	end
+	
+	def profile
+	  @current_user ||= User.find(session[:user_id])
+	  end
 end
