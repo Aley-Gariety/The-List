@@ -69,20 +69,13 @@ body > header {
 }
 
 h1 {
-  display: inline-block;
+  display: block;
   font-size: 2.5em;
-  margin: 0;
   position: absolute;
 }
 
 h1 a, h1 a:hover {
   text-decoration: none;
-}
-
-h1 a:hover {
-}
-
-h1 a:active {
 }
 
 ol {
