@@ -1,5 +1,6 @@
 <%= link_to 'New Post', new_post_path %>
 
+<<<<<<< HEAD
 <table>
   <tr>
     <th>#</th>
@@ -23,3 +24,10 @@
   </tr>
 <% end %>
 </table>
+=======
+<ol>
+  <% @posts.each do |post| %>
+    <li><a href="<%= post.url %>" target="_blank"><%= post.title %></a><%= post.user %><%= post.comment_count %><%= link_to 'Show', post %></td>
+  <% end %>
+</ol>
+>>>>>>> 0ffc17a7fab655460408a3e9f0ae2a96a85f9d72
