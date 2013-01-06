@@ -59,13 +59,18 @@ body > section, body > header {
   width: auto;
   max-width: 1000px;
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 body > header {
   height: 80px;
   line-height: 80px;
   text-align: right;
-  border-bottom: 1px dotted red;
+}
+
+body > header > section {
+  border-bottom: 1px solid #ffbfbf;
 }
 
 body > section {
@@ -74,7 +79,7 @@ body > section {
 
 h1 {
   display: block;
-  font-size: 2.5em;
+  font-size: 3em;
   position: absolute;
 }
 
@@ -87,7 +92,7 @@ ol {
 }
 
 li {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 li .title {
