@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @post.title %></h2>
+<a href="<%= @post.url %>" target="_blank"><h2><%= @post.title %></h2></a>
 <%= @post.url %><br>
-<%= @post.user %>
+Submitted by <%= @post.user %>
