@@ -1,4 +1,4 @@
-<h1>Listing users</h1>
+<h1>Current user</h1>
 
 <table>
   <tr>
@@ -7,15 +7,11 @@
     <th>Password</th>
     <th>Good karma</th>
     <th>Bad karma</th>
-    <th>Last login</th>
     <th>Influence</th>
-    <th>Creation</th>
     <th>Saved</th>
     <th>Site</th>
     <th>Full name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 
 <% @users.each do |user| %>
@@ -25,15 +21,13 @@
     <td><%= user.password %></td>
     <td><%= user.good_karma %></td>
     <td><%= user.bad_karma %></td>
-    <td><%= user.last_login %></td>
     <td><%= user.influence %></td>
-    <td><%= user.creation %></td>
     <td><%= user.saved %></td>
     <td><%= user.site %></td>
     <td><%= user.full_name %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete you account?', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
