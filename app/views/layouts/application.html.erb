@@ -12,7 +12,7 @@
       <h1><a href="/">The List</a></h1>
       <div class="meta-header">
         <% if current_user %>
-          <%= link_to current_user.username, profile_path %>
+          <%= link_to current_user.username, profile_path, :class => 'profile-link' %>
           &nbsp;&bull;&nbsp;
           <%= link_to 'Submit', new_post_path %>
           &nbsp;&bull;&nbsp;

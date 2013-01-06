@@ -62,6 +62,18 @@ li .meta a:active {
   color: #000;
 }
 
+a.profile-link {
+  color: #ff4747;
+}
+
+a.profile-link:hover {
+  color: #ff8888;
+}
+
+a.profile-link:active {
+  color: #000;
+}
+
 /* Page structure */
 
 * {
