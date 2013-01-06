@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106013308) do
+ActiveRecord::Schema.define(:version => 20130106061127) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -39,9 +39,6 @@ ActiveRecord::Schema.define(:version => 20130106013308) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.string   "username"
-    t.string   "good_karma"
-    t.string   "bad_karma"
     t.string   "password_hash"
     t.string   "password_salt"
     t.datetime "created_at",    :null => false
