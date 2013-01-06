@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
 	def profile
 	  @current_user ||= User.find(session[:user_id])
-	  if session[:user_id] == ""
+	  if session[:user_id] == nil
 	  redirect_to 'http://google.com'
 	  end
   end
