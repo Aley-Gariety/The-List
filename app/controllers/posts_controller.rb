@@ -9,6 +9,7 @@ class PostsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @posts }
     end
+
   end
 
   # GET /posts/1
