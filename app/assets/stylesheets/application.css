@@ -168,6 +168,11 @@ p {
 .order {
   float: left;
   line-height: 100px;
+  -webkit-user-select: none;
+   -khtml-user-select: none;
+     -moz-user-select: none;
+       -o-user-select: none;
+          user-select: none;
 }
 
 .suffrage {
@@ -177,13 +182,17 @@ p {
   top: 50%;
   margin-top: -30px;
   position: relative;
+  -webkit-user-select: none;
+   -khtml-user-select: none;
+     -moz-user-select: none;
+       -o-user-select: none;
+          user-select: none;
 }
 
 .submission {
   height: 100px;
   margin-left: 65px;
   padding-right: 20px;
-  position: absolute;
 }
 
 .submission:before {
@@ -194,13 +203,23 @@ p {
   margin-right: -0.25em; /* Adjusts for spacing */
 }
 
-.submission * {
+.submission-inner {
   display: inline-block;
   vertical-align: middle;
 }
 
 .up, .down {
   cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.up {
+  padding-bottom: 3px;
+}
+
+.down {
+  padding-top: 3px;
 }
 
 .up:hover, .down:hover {

@@ -28,4 +28,19 @@ $(function(){
       }
   }
 
+  $('.up,.down').click(function(){
+    $.ajax({
+      type: 'POST',
+      url: '/posts',
+      data: {
+        post: {
+          upvote: 1
+        }
+      },
+      success: function(){
+        alert('success')
+      }
+    });
+  });
+
 });
