@@ -16,3 +16,6 @@
 
 # Ignore rails environmental changes
 /config/environment.rb
+
+# Ignore precompiled assets
+/public/assets/

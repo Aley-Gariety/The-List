@@ -89,7 +89,7 @@ body {
 
 body > section, body > header {
   width: auto;
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
@@ -134,20 +134,23 @@ h1 a, h1 a:hover {
 
 ol {
   padding-left: 0;
+  list-style: none;
 }
 
 li {
-  margin-bottom: 30px;
-  line-height: 20px;
+  display: block;
+  height: 100px;
 }
 
 li .title {
   font-size: 1.5em;
+  line-height: normal;
 }
 
 li .meta {
   color: #777;
   font-size: .75em;
+  line-height: normal;
 }
 
 /* Generic elements */
@@ -155,4 +158,67 @@ li .meta {
 p {
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+/* Suffrage */
+.order {
+  float: left;
+  line-height: 100px;
+}
+
+.suffrage {
+  width: 50px;
+  text-align: center;
+  float: left;
+  top: 50%;
+  margin-top: -30px;
+  position: relative;
+}
+
+.submission {
+  height: 100px;
+  margin-left: 65px;
+  padding-right: 20px;
+  position: absolute;
+}
+
+.submission:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+.submission * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.up, .down {
+  cursor: pointer;
+}
+
+.up:hover, .down:hover {
+  color: #666;
+}
+
+.up:active, .down:active {
+  color: #ff4747;
+}
+
+@media only screen and (max-width: 400px) {
+  li {
+    height: 150px;
+  }
+  .order {
+    line-height: 150px;
+  }
+  .submission {
+    height: 150px;
+  }
 }
