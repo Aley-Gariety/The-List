@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 	def create
 	  @user = User.new(params[:user])
 	  if @user.save
+	  	Invite.invite.deliver
 	    redirect_to root_url
 	  else
 	    render "new"
