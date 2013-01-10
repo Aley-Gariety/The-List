@@ -32,6 +32,7 @@ $(function(){
     $.ajax({
       type: 'POST',
       url: '/posts',
+      dataType: 'JSON',
       data: {
         post: {
           upvote: 1

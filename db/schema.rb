@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106071956) do
+ActiveRecord::Schema.define(:version => 20130110002043) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(:version => 20130106071956) do
     t.integer  "post_id"
     t.integer  "comment_id"
     t.integer  "parent_id"
-    t.integer  "upvote"
-    t.integer  "downvote"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "upvote",     :default => 0
+    t.integer  "downvote",   :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -30,22 +30,22 @@ ActiveRecord::Schema.define(:version => 20130106071956) do
     t.string   "url"
     t.text     "text"
     t.string   "user"
-    t.integer  "upvote"
-    t.integer  "downvote"
-    t.integer  "comment_count"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "upvote",        :default => 0
+    t.integer  "downvote",      :default => 0
+    t.integer  "comment_count", :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "username"
-    t.integer  "good_karma"
-    t.integer  "bad_karma"
+    t.integer  "good_karma",    :default => 0
+    t.integer  "bad_karma",     :default => 0
   end
 
   add_index "users", ["bad_karma"], :name => "index_users_on_bad_karma"
