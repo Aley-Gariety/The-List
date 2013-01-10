@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+    skip_before_filter :require_login, :only => :index
+
   # GET /posts
   # GET /posts.json
   def index
@@ -42,7 +44,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+
     @post = Post.new(params[:post].merge(:user => current_user.username))
+
 
     respond_to do |format|
       if @post.save
@@ -62,7 +66,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -90,7 +94,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(:upvote => @post.upvote + 1)
-        format.html { redirect_to @post, notice: 'Post was successfully voted on.' }
+        format.html { redirect_to @post }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -106,7 +110,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(:downvote => @post.downvote + 1)
-        format.html { redirect_to @post, notice: 'Post was successfully voted on.' }
+        format.html { redirect_to @post }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

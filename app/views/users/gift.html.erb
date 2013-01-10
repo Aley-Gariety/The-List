@@ -1,11 +1,13 @@
-<h2>Invite A User</h2>
+<h2>Gift</h2>
 
-<%= form_for @gift do |f| %>
-  <% if @gift.errors.any? %>
+<p>Gifting karma is the only way to invite people to The List. <br> There is a minimum of 10, which is also the amount required to create one post.</p>
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
       <ul>
-        <% for message in @gift.errors.full_messages %>
+        <% for message in @user.errors.full_messages %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -15,9 +17,9 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
+    <p>
+    <%= f.label :karma  %><br />
+    <%= f.text_field :good_karma  %>
   </p>
-  <p class="button"><%= f.submit %></p>
+  <p class="button"><%= f.submit "Send Karma" %></p>
 <% end %>

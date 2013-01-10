@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+    skip_before_filter :require_login, :only => :new
+
 #for adding a new user
 	def new
 	  @user = User.new
@@ -16,19 +19,7 @@ class UsersController < ApplicationController
 	    render "new"
 	  end
 	end
-#The gift form yo
-	def gift
-		@gift = Gift.new
-	  end
-	
-	def newgift
-	  @gift = Invite.new(params[:gift])
-	  if @gift.save
-	  	redirect_to root_url
-	  else
-	  	render "gift"
-	  end
-	end
+
 		
 	def profile
 	  @current_user ||= User.find(session[:user_id])
@@ -36,4 +27,9 @@ class UsersController < ApplicationController
 	  redirect_to 'http://google.com'
 	  end
   end
+  
+  def gift
+	  @user = User.new(params[:user])
+  end
+  
 end

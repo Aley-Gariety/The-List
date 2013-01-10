@@ -10,6 +10,8 @@ ThelistIo::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
 
   get "profile" => "users#profile", :as => "profile"
+  
+  get "gift" => "users#gift", :as => "gift"
 
   resources :users
 
