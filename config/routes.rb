@@ -8,12 +8,12 @@ ThelistIo::Application.routes.draw do
 	get "log_in" => "sessions#new", :as => "log_in"
 	get "sign_up" => "users#new", :as => "sign_up"
 	get "profile" => "users#profile", :as => "profile"
+	get "gift" => "users#gift", :as => "gift"
+	
 	resources :users
 	resources :sessions
 
   resources :posts
-
-
   resources :comments
 
 
