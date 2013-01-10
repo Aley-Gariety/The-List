@@ -1,28 +1,27 @@
 ThelistIo::Application.routes.draw do
-  root :to => "posts#index"
+  root :to => "posts#index"
 
-  get "sessions/new"
+  get "sessions/new"
 
-  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_out" => "sessions#destroy", :as => "log_out"
 
-get "log_in" => "sessions#new", :as => "log_in"
+  get "log_in" => "sessions#new", :as => "log_in"
 
-get "sign_up" => "users#new", :as => "sign_up"
+  get "sign_up" => "users#new", :as => "sign_up"
 
-get "profile" => "users#profile", :as => "profile"
+  get "profile" => "users#profile", :as => "profile"
 
+  resources :users
 
-resources :users
+  resources :sessions
 
-resources :sessions
+  resources :comments
 
-  resources :comments
-
-  resources :posts do
-    put "upvote", :to => "posts#upvote", as: :upvote
-    put "downvote", :to => "posts#downvote", as: :downvote
-  end
-
+  resources :posts do
+    put "upvote", :to => "posts#upvote", as: :upvote
+    put "downvote", :to => "posts#downvote", as: :downvote
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
