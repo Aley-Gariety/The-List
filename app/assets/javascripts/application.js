@@ -1,4 +1,5 @@
 //= require jquery
+//= require jquery_ujs
 
 $(function(){
 
@@ -27,21 +28,5 @@ $(function(){
           setMediaQuery()
       }
   }
-
-  $('.up,.down').click(function(){
-    $.ajax({
-      type: 'POST',
-      url: '/posts',
-      dataType: 'JSON',
-      data: {
-        post: {
-          upvote: 1
-        }
-      },
-      success: function(){
-        alert('success')
-      }
-    });
-  });
 
 });

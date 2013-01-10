@@ -82,4 +82,36 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # PUT /posts/1/upvote
+  # PUT /posts/1/upvote.json
+  def upvote
+    @post = Post.find params[:post_id]
+
+    respond_to do |format|
+      if @post.update_attributes(:upvote => @post.upvote + 1)
+        format.html { redirect_to @post, notice: 'Post was successfully voted on.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /posts/1/downvote
+  # PUT /posts/1/downvote.json
+  def downvote
+    @post = Post.find params[:post_id]
+
+    respond_to do |format|
+      if @post.update_attributes(:downvote => @post.downvote + 1)
+        format.html { redirect_to @post, notice: 'Post was successfully voted on.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

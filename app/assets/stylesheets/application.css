@@ -212,6 +212,7 @@ p {
   cursor: pointer;
   padding-left: 20px;
   padding-right: 20px;
+  text-decoration: none;
 }
 
 .up {
