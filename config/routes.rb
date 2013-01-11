@@ -10,8 +10,16 @@ ThelistIo::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
 
   get "profile" => "users#profile", :as => "profile"
-  
+
   get "gift" => "users#gift", :as => "gift"
+
+  put "upvote_post", :to => "vote#upvote_post", as: :upvote_post
+
+  put "downvote_post", :to => "vote#downvote_post", as: :downvote_post
+
+  put "upvote_comment", :to => "vote#upvote_comment", as: :upvote_comment
+
+  put "downvote_comment", :to => "vote#downvote_comment", as: :downvote_comment
 
   resources :users
 
@@ -19,11 +27,8 @@ ThelistIo::Application.routes.draw do
 
   resources :comments
 
-  resources :posts do
-    put "upvote", :to => "posts#upvote", as: :upvote
-    put "downvote", :to => "posts#downvote", as: :downvote
-  end
-  
+  resources :posts
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
