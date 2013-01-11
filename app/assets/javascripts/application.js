@@ -29,4 +29,29 @@ $(function(){
       }
   }
 
+  $('.suffrage > a').click(function(){
+    var _this = $(this),
+        direction = _this.attr('class'),
+        suffrage = _this.parent(),
+        countSpan = _this.siblings('span'),
+        origScore = _this.siblings('span').html()
+
+    if (direction == 'up') {
+      if ($('.suffrage.downactive').length) {
+        countSpan.html(parseInt(origScore) + 2)
+      } else if (!$('.suffrage.upactive').length) {
+        countSpan.html(parseInt(origScore) + 1)
+      }
+    } else {
+      if ($('.suffrage.upactive').length) {
+        countSpan.html(parseInt(origScore) - 2)
+      } else if (!$('.suffrage.downactive').length) {
+        countSpan.html(parseInt(origScore) - 1)
+      }
+    }
+
+    suffrage.attr('class','suffrage ' + direction + 'active')
+
+  });
+
 });
