@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
-    skip_before_filter :require_login, :only => :new
+  skip_before_filter :require_login, :except => [:gift,:profile]
 
-#for adding a new user
+  #for adding a new user
 	def new
 	  @user = User.new
 	end
 
-	
+
 	def create
 	  @user = User.new(params[:user])
 	  if @user.save
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 	    render "new"
 	  end
 	end
-  
+
   def gift
 	  @user = User.new
   end
@@ -25,5 +25,5 @@ class UsersController < ApplicationController
 	def profile
 	  @current_user ||= User.find(session[:user_id])
   end
- 
+
 end

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: false
+  direction: false
+  user_id: 1
+  post_id: 1
+
+two:
+  type: false
+  direction: false
+  user_id: 1
+  post_id: 1
