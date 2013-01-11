@@ -37,15 +37,15 @@ $(function(){
         origScore = _this.siblings('span').html()
 
     if (direction == 'up') {
-      if ($('.suffrage.downactive').length) {
+      if (suffrage.hasClass('downactive')) {
         countSpan.html(parseInt(origScore) + 2)
-      } else if (!$('.suffrage.upactive').length) {
+      } else {
         countSpan.html(parseInt(origScore) + 1)
       }
     } else {
-      if ($('.suffrage.upactive').length) {
+      if (suffrage.hasClass('upactive')) {
         countSpan.html(parseInt(origScore) - 2)
-      } else if (!$('.suffrage.downactive').length) {
+      } else {
         countSpan.html(parseInt(origScore) - 1)
       }
     }
