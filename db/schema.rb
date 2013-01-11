@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111005505) do
+ActiveRecord::Schema.define(:version => 20130111035114) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20130111005505) do
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "votes", :force => true do |t|
-    t.boolean  "type"
+    t.boolean  "vote_type"
     t.boolean  "direction"
     t.integer  "user_id"
     t.integer  "post_id"

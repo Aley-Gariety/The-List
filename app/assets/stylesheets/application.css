@@ -227,8 +227,9 @@ p {
   color: #666;
 }
 
-.up:active, .down:active {
+.up:active, .down:active, .upactive .up, .downactive .down {
   color: #ff4747;
+  cursor: default;
 }
 
 @media only screen and (max-width: 400px) {
