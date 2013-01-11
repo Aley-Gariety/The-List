@@ -5,9 +5,9 @@
         <span><%= @posts.index(post) + 1 %>.</span>
       </div>
       <div class="suffrage">
-        <%= link_to '&#9650;'.html_safe, post_upvote_path(post), :remote => true, :method => "put", :class => "up" %><br>
-        <span><%= post.upvote - post.downvote %></span><br>
-        <%= link_to '&#9660;'.html_safe, post_downvote_path(post), :remote => true, :method => "put", :class => "down" %><br>
+        <%= link_to '&#9650;'.html_safe, :remote => true, :method => "put", :class => "up" %><br>
+        <span></span><br>
+        <%= link_to '&#9660;'.html_safe, :remote => true, :method => "put", :class => "down" %><br>
       </div>
       <div class="submission">
         <div class="submission-inner">
