@@ -18,9 +18,6 @@ class UsersController < ApplicationController
 	  end
 	end
 
-  def gift
-	  @user = User.new
-  end
 
 	def profile
 	  @current_user ||= User.find(session[:user_id])
