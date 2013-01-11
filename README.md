@@ -30,5 +30,8 @@ FAQ
  - Q: Why does it cost karma to post?
    A: This is part of quality control. We incentivize submitting only quality content by privatizing The List as a resource. You can gain karma by posting things people like.
 
- - Q: What's with the comments?
-   A: Part of the list is ensuring all content is quality, we think this should include commenting as well. We've taken cues from [Branch](http://branch.com) in building our comment system so that conversations can flow as if you were sitting at a dinner table.
+ - Q: What's with the comments? How can I reply directly to a comment?
+   A: Part of the list is ensuring all content is quality, we think this should include commenting as well. We've taken cues from [Branch](http://branch.com) in building our comment system so that conversations can flow as if you were sitting at a dinner table. Though you can't reply directly to a comment, you can quote all or some of a previous user's comment.
+
+ - Q: I don't like democracy, how can I withdraw my vote on a post?
+   A: Send personal@jacksongariety.com an email outlining your frustration with the democratic system of the website as well as your username and we will remove your vote from the database in a timely manner.

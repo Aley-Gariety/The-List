@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation, :username, :good_karma
+  attr_accessible :email, :password, :password_confirmation, :username, :good_karma, :bad_karma
 
   has_many :posts
 

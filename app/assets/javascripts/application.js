@@ -36,13 +36,13 @@ $(function(){
         countSpan = _this.siblings('span'),
         origScore = _this.siblings('span').html()
 
-    if (direction == 'up') {
+    if (direction == 'up' && !suffrage.hasClass('upactive')) {
       if (suffrage.hasClass('downactive')) {
         countSpan.html(parseInt(origScore) + 2)
       } else {
         countSpan.html(parseInt(origScore) + 1)
       }
-    } else {
+    } else if (direction == 'down' && !suffrage.hasClass('downactive')) {
       if (suffrage.hasClass('upactive')) {
         countSpan.html(parseInt(origScore) - 2)
       } else {
