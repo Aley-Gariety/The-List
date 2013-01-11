@@ -1,25 +1,28 @@
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <h2><%= pluralize(@post.errors.count, "problem") %> were found:</h2>
 
       <ul>
       <% @post.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
-      </ul>
+      </ul><br>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div><br>
   <div class="field">
-    <%= f.label :url %><br />
+    <%= f.label :url %><br>
     <%= f.text_field :url %>
-  </div>
-  <p>Please read the <a href="">guidelines</a> before posting.</p>
+  </div><br>
+  <div class="field">
+    <%= check_box(:post, :agreement) %>
+    <%= label(:post, :agreement, 'I have read the <a href="/guidelines" target="_blank">guidelines</a> and I understand that posting this will cost me 10 karma'.html_safe) %>
+  </div><br>
   <div class="actions">
     <%= f.submit %>
   </div>

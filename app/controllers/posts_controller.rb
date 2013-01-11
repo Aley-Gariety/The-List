@@ -1,11 +1,9 @@
 class PostsController < ApplicationController
 
-    skip_before_filter :require_login, :only => :index
+  skip_before_filter :require_login, :only => :index
 
   # GET /posts
   # GET /posts.json
-  
-  
   def index
     @posts = Post.all
 
@@ -46,9 +44,11 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @post = Post.new(params[:post].merge(:user_id => current_user.username))
 
-    @post = Post.new(params[:post].merge(:user => current_user.username))
-
+    User.find(current_user.id).update_attributes({
+  	  :bad_karma => current_user.bad_karma + 10
+	  })
 
     respond_to do |format|
       if @post.save
@@ -86,38 +86,6 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
-    end
-  end
-
-  # PUT /posts/1/upvote
-  # PUT /posts/1/upvote.json
-  def upvote
-    @post = Post.find params[:post_id]
-
-    respond_to do |format|
-      if @post.update_attributes(:upvote => @post.upvote + 1)
-        format.html { redirect_to @post }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /posts/1/downvote
-  # PUT /posts/1/downvote.json
-  def downvote
-    @post = Post.find params[:post_id]
-
-    respond_to do |format|
-      if @post.update_attributes(:downvote => @post.downvote + 1)
-        format.html { redirect_to @post }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
     end
   end
 end

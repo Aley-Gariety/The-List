@@ -28,7 +28,7 @@ ThelistIo::Application.routes.draw do
   resources :comments
 
   resources :posts
-  
+
   resources :gifts
 
   # The priority is based upon order of creation:

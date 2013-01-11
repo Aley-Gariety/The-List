@@ -7,7 +7,7 @@ class VoteController < ApplicationController
   	  :direction => 0
 	  })
 
-	  @better_karma = User.find(current_user.id).update_attributes({
+	  User.find(current_user.id).update_attributes({
   	  :good_karma => current_user.good_karma + 1
 	  })
 
@@ -22,7 +22,7 @@ class VoteController < ApplicationController
   	  :direction => 1
 	  })
 
-	  @worse_karma = User.find(current_user.id).update_attributes({
+	  User.find(current_user.id).update_attributes({
   	  :bad_karma => current_user.bad_karma + 1
 	  })
 

@@ -137,17 +137,17 @@ ol {
   list-style: none;
 }
 
-li {
+body > section ol li {
   display: block;
   height: 100px;
 }
 
-li .title {
+body > section ol li .title {
   font-size: 1.5em;
   line-height: normal;
 }
 
-li .meta {
+body > section ol li .meta {
   color: #777;
   font-size: .75em;
   line-height: normal;
@@ -162,6 +162,10 @@ p {
 
 .clearfix {
   clear: both;
+}
+
+.field_with_errors {
+  display: inline-block;
 }
 
 /* Suffrage */
@@ -180,7 +184,7 @@ p {
   text-align: center;
   float: left;
   top: 50%;
-  margin-top: -30px;
+  margin-top: -34px;
   position: relative;
   -webkit-user-select: none;
    -khtml-user-select: none;
@@ -213,6 +217,7 @@ p {
   padding-left: 20px;
   padding-right: 20px;
   text-decoration: none;
+  font-size: 1.2em;
 }
 
 .up {
@@ -232,8 +237,13 @@ p {
   cursor: default;
 }
 
+.upactive .up, .downactive .down {
+
+  pointer-events: none;
+}
+
 @media only screen and (max-width: 400px) {
-  li {
+  body > section ol li {
     height: 150px;
   }
   .order {
