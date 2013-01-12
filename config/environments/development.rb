@@ -36,5 +36,5 @@ ThelistIo::Application.configure do
   config.assets.debug = true
 
   # Enable mailers
-  config.action_mailer.default_url_options = { :host => "localhost" }
+  config.action_mailer.default_url_options = { :host => "thelist.dev" }
 end
