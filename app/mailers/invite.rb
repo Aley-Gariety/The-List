@@ -1,7 +1,13 @@
 class Invite < ActionMailer::Base
-  default from: "invites@organichackers.com"
-  
+  default from: "timmy.wrinkle@gmail.com"
+
   def invite
-    mail(:to => "colbyaley@gmail.com", :subject => "You have recieved a gift!")
+    #@user = user
+    mail :to => "colby@aley.me", :subject => "The List - You have recieved a gift!"
+  end
+
+  def password_reset(user)
+    @user = user
+    mail :to => user.email, :subject => "The List - Password Reset"
   end
 end

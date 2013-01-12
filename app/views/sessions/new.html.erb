@@ -1,13 +1,22 @@
-<h2>Log in</h2>
+<h2>Sign In</h2>
 
 <%= form_tag sessions_path do %>
-  <p>
-    <%= label_tag :email %><br />
-    <%= text_field_tag :email, params[:email] %>
-  </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p class="button"><%= submit_tag "Log in" %></p>
+
+  <table cellspacing="0">
+    <tbody>
+      <tr>
+        <td><label for="email"><%= label_tag :email %></label></td>
+        <td><label for="pass"><%= label_tag :password %></label></td>
+      </tr>
+      <tr>
+        <td><%= text_field_tag :email, params[:email] %></td>
+        <td><%= password_field_tag :password %></td>
+        <td><%= submit_tag "Log in" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= link_to "Forgot your password?", new_password_reset_path %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>

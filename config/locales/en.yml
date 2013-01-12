@@ -3,5 +3,3 @@
 
 en:
   hello: "Hello world"
-  errors:
-    format: "%{message}"

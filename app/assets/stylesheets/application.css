@@ -168,6 +168,10 @@ p {
   display: inline-block;
 }
 
+form td {
+  padding-right: 20px;
+}
+
 /* Suffrage */
 .order {
   float: left;

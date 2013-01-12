@@ -3,7 +3,7 @@ class GiftsController < ApplicationController
   skip_before_filter :require_login, :except => :gift
 
   #for adding a new gift
-  
+
    def gift
 	  @gift = Gift.new
   end
