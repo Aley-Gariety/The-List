@@ -9,7 +9,7 @@ $(function(){
       mediaQueries =  $('style')
 
   function setMediaQuery() {
-    mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 226) + 'px)'));
+    mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'));
   }
 
   $(window).resize(function() {

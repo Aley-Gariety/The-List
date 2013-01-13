@@ -1,4 +1,4 @@
-<h2>Sign Up</h2>
+<h2>Sign Up</h2><br>
 
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
@@ -11,21 +11,21 @@
       </ul>
     </div>
   <% end %>
-  <p>
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
-  </p>
-    <p>
+  </div><br>
+  <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username %>
-  </p>
-  <p>
+  </div><br>
+  <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password %>
-  </p>
-  <p>
+  </div><br>
+  <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
-  </p>
+  </div><br>
   <p class="button"><%= f.submit %></p>
 <% end %>
