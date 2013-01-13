@@ -3,9 +3,9 @@ class VoteController < ApplicationController
   	return false unless Vote.where(:user_id => current_user.id, :post_id => params[:post_id], :direction => 0).count == 0
 
 	  if Vote.where(:user_id => current_user.id, :post_id => params[:post_id], :direction => 1).count == 1
-	   increment = 2
+	   increment = 4
 	  else
-	   increment = 1
+	   increment = 2
 	  end
 
 	  @new_vote = Vote.find_or_initialize_by_post_id_and_user_id(:user_id => current_user.id, :post_id => params[:post_id])
@@ -25,9 +25,9 @@ class VoteController < ApplicationController
   	return false unless Vote.where(:user_id => current_user.id, :post_id => params[:post_id], :direction => 1).count == 0
 
 	  if Vote.where(:user_id => current_user.id, :post_id => params[:post_id], :direction => 0).count == 1
-	   increment = 2
+	   increment = 4
 	  else
-	   increment = 1
+	   increment = 2
 	  end
 
 	  @new_vote = Vote.find_or_initialize_by_post_id_and_user_id(:user_id => current_user.id, :post_id => params[:post_id])
@@ -43,9 +43,9 @@ class VoteController < ApplicationController
 	  @new_vote.save
 	end
 
-# 	def upvote_comment
-# 	end
-#
-# 	def downvote_comment
-# 	end
+	def upvote_comment
+	end
+
+	def downvote_comment
+	end
 end

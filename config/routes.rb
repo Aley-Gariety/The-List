@@ -1,6 +1,10 @@
 ThelistIo::Application.routes.draw do
   root :to => "posts#index"
 
+  match '/guidelines' => 'pages#guidelines'
+
+  match '/about' => 'pages#about'
+
   get "sessions/new"
 
   get "log_out" => "sessions#destroy", :as => "log_out"

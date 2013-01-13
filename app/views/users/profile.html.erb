@@ -1,6 +1,6 @@
-<h3>Welcome, <%= current_user.username %>.</h3>
-You currently have <%= current_user.karma %> karma.
+<h2>Welcome, <%= current_user.username %>.</h2><br>
+<span>You currently have <%= current_user.karma %> karma.</span>
 <br>
-<% if (current_user.karma) >= 20%>
-  Send an invite to a friend!
+<% if (current_user.karma) >= 10%>
+  <span>Send a <%= link_to 'Gift', gift_path %> to a friend?</span>
 <% end %>

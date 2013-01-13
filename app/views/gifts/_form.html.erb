@@ -1,0 +1,21 @@
+<%= form_for @gift do |f| %>
+  <% if @gift.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @gift.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+    <p>
+    <%= f.label :karma  %><br />
+    <%= f.text_field :karma %>
+  </p>
+  <p class="button"><%= f.submit "Send Karma"%></p>
+<% end %>

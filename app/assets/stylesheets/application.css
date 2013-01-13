@@ -129,8 +129,26 @@ h1 {
           user-select: none;
 }
 
+h1 .beta {
+  font-size: .3em;
+  font-weight: 100;
+  color: #666;
+}
+
 h1 a, h1 a:hover {
   text-decoration: none;
+}
+
+h1 a:hover .beta {
+  color: #ff4747;
+}
+
+h1 a:active .beta {
+  color: #666;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 /* Lists */
@@ -151,7 +169,7 @@ body > section ol li .title {
   line-height: normal;
 }
 
-body > section ol li .meta {
+.meta {
   color: #777;
   font-size: .75em;
   line-height: normal;
@@ -178,6 +196,28 @@ form td {
 
 .red {
   color: #ff4747;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  height: 1px;
+  background: #666;
+}
+
+ul.qa li:nth-child(2n - 1) {
+  font-weight: 600;
+  font-size: 1.25em;
+}
+
+ul.qa li:nth-child(2n) {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+ul {
+  padding-left: 0;
 }
 
 /* Suffrage */
