@@ -9,8 +9,9 @@ class GiftsController < ApplicationController
   end
 
 	def create
-	  @gift = Gift.new(params[:gift])
+	  @gift = Gift.new(params[:gift].merge(:gift_token => gift.gift_token))
 	  if @gift.save
+	  Invite.gift(@gift).deliver
 
 	    redirect_to root_url
 	  else

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112231800) do
+ActiveRecord::Schema.define(:version => 20130113020744) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130112231800) do
     t.datetime "password_reset_sent_at"
     t.string   "password_digest"
     t.integer  "karma",                  :default => 0
+    t.string   "gift_token"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"
