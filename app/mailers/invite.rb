@@ -7,8 +7,8 @@ class Invite < ActionMailer::Base
   end
 
   def gift(gift)
-    @gift = gift
-    mail :to => gift.email, :subject => "The List - You have recieved a gift!"
+  @user = user
+  mail :to => user.email, :subject => "You have received a gift."
   end
 
   def password_reset(user)

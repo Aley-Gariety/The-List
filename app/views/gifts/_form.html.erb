@@ -1,21 +1,11 @@
-<%= form_for @gift do |f| %>
-  <% if @gift.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @gift.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+<%= form_tag password_resets_path, :method => :post do %>
+  <p class="field">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email] %>
   </p>
-    <p>
-    <%= f.label :karma  %><br />
-    <%= f.text_field :karma %>
+  <p class="field">
+    <%= label_tag :karma %>
+    <%= text_field_tag :karma, params[:karma] %>
   </p>
-  <p class="button"><%= f.submit "Send Karma"%></p>
+  <div class="actions"><%= submit_tag "Send Gift" %></div>
 <% end %>
