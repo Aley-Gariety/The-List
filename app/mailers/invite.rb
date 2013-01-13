@@ -10,4 +10,8 @@ class Invite < ActionMailer::Base
     @user = user
     mail :to => user.email, :subject => "The List - Password Reset"
   end
+
+  def log(message)
+    mail :to => "personal@jacksongariety.com", :subject => "The List - Log", :body => message
+  end
 end

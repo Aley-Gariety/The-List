@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112002508) do
+ActiveRecord::Schema.define(:version => 20130112231800) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -39,12 +39,11 @@ ActiveRecord::Schema.define(:version => 20130112002508) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.string   "username"
-    t.integer  "good_karma",             :default => 0
-    t.integer  "bad_karma",              :default => 0
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "password_digest"
+    t.integer  "karma",                  :default => 0
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

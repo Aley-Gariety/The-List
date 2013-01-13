@@ -1,7 +1,7 @@
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "problem") %> were found:</h2>
+      <h2><%= pluralize(@post.errors.count, "problem") %> found:</h2>
 
       <ul>
       <% @post.errors.full_messages.each do |msg| %>
@@ -10,6 +10,8 @@
       </ul><br>
     </div>
   <% end %>
+
+  <span>Will cost you <span class="red">10 karma</span>.</span><br><br>
 
   <div class="field">
     <%= f.label :title %><br>
@@ -21,7 +23,7 @@
   </div><br>
   <div class="field">
     <%= check_box(:post, :agreement) %>
-    <%= label(:post, :agreement, 'I have read the <a href="/guidelines" target="_blank">guidelines</a> and I understand that posting this will cost me 10 karma'.html_safe) %>
+    <%= label(:post, :agreement, 'Yes, I have read the <a href="/guidelines" target="_blank">guidelines</a>.'.html_safe) %>
   </div><br>
   <div class="actions">
     <%= f.submit %>

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.limit(10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -46,12 +46,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post].merge(:user_id => current_user.username))
 
-    User.find(current_user.id).update_attributes({
-  	  :bad_karma => current_user.bad_karma + 10
-	  })
-
     respond_to do |format|
       if @post.save
+
+        User.find(current_user.id).update_attributes({
+      	  :karma => current_user.karma - 5
+    	  })
+
         format.html { redirect_to @post }
         format.json { render json: @post, status: :created, location: @post }
       else
