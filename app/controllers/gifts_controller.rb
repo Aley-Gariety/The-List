@@ -1,6 +1,7 @@
 class GiftsController < ApplicationController
 
-  skip_before_filter :require_login, :except => :gift
+  skip_before_filter :require_login, :except => [:gift, :redeem]
+  
    def gift
 	  @gift = Gift.new
   end
@@ -21,5 +22,9 @@ class GiftsController < ApplicationController
 	  else
 	    render "gift"
 	  end
+	end
+	
+	def redeem
+		  @user = User.new
 	end
 end

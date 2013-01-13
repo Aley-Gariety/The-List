@@ -1,5 +1,7 @@
 class Gift < ActiveRecord::Base
-  attr_accessible :email, :karma, :gift, :gift_token
+  attr_accessible :email, :karma, :gift, :gift_token, :username, :password, :password_salt
+  
+  before_save :encrypt_password
 
   set_table_name "users"
 
