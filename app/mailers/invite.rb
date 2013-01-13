@@ -1,9 +1,14 @@
 class Invite < ActionMailer::Base
   default from: "timmy.wrinkle@gmail.com"
 
+  def invite(gift)
+    @gift = gift
+    mail :to => gift.email, :subject => "You have recieved an invite to The List - A social knowledge aggregator"
+  end
+
   def gift(gift)
     @gift = gift
-    mail :to => gift.email, :subject => "The List - You have recieved a gift!", :body => "Welcome to the list!"
+    mail :to => gift.email, :subject => "The List - You have recieved a gift!"
   end
 
   def password_reset(user)

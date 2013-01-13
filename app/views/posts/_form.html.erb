@@ -11,7 +11,8 @@
     </div>
   <% end %>
 
-  <span>Will cost you <span class="red">10 karma</span>.</span><br><br>
+  <span>Will cost you <span class="red">10 karma</span>.</span><br>
+  <span>You currently have <%= current_user.karma %> karma.</span><br><br>
 
   <div class="field">
     <%= f.label :title %><br>

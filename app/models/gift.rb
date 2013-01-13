@@ -4,11 +4,14 @@ class Gift < ActiveRecord::Base
   set_table_name "users"
 
   validates_presence_of :email
+  validates :karma, :numericality => {:only_integer => true}
+  
+  before_create { generate_token(:gift_token) }
   
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
-    end while Gift.exists?(column => self[column])
+    end while User.exists?(column => self[column])
   end
 
 end
