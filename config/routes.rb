@@ -31,6 +31,8 @@ ThelistIo::Application.routes.draw do
 
   resources :gifts
 
+  resources :password_resets
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

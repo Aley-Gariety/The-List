@@ -9,15 +9,15 @@ $(function(){
       mediaQueries =  $('style')
 
   function setMediaQuery() {
-    mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('h1').width() + $('.meta-header').width() + 60) + 'px)'));
+    mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 226) + 'px)'));
   }
 
   $(window).resize(function() {
-      rtime = new Date();
-      if (timeout === false) {
-          timeout = true;
-          setTimeout(resizeend, delta);
-      }
+    rtime = new Date();
+    if (timeout === false) {
+        timeout = true;
+        setTimeout(resizeend, delta);
+    }
   });
 
   function resizeend() {

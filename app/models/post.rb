@@ -7,14 +7,9 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
 
-  validate :hasduekarma
-  validates_presence_of :url, :on => :create, :message => "We need a URL"
-  validates_presence_of :title, :on => :create, :message => "We need a title"
+  validates_presence_of :url, :on => :create
+  validates_presence_of :title, :on => :create
   validates_acceptance_of :agreement, :on => :create, :message => "Please verify you have read the guidelines"
-  validates_uniqueness_of :url, :on => :create, :message => "That URL has already been submitted, try something fresssssshhhhhh"
-  validates_format_of :url, :with => URI.regexp, :on => :create, :message => "That doesn't look like a URL"
-
-  def hasduekarma
-    errors.add(:all, "You have less than 10 karma")
-  end
+  validates_uniqueness_of :url, :on => :create, :message => "has already been submitted, try something fresssssshhhhhh"
+  validates_format_of :url, :with => URI.regexp, :on => :create, :message => "doesn't look like quite right"
 end

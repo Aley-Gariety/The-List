@@ -1,2 +1,6 @@
-<h2>New post</h2><br>
+<h2>New Post</h2><br>
+<% if current_user.karma >= 10 %>
 <%= render 'form' %>
+  <% else %>
+  <span>You need at least 10 karma to submit. You currently have <%= current_user.karma %>. See the FAQ to learn about getting karma once yours has been depleted.</span>
+<% end %>

@@ -1,0 +1,25 @@
+<h2>Reset Your Password</h2><br>
+
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "problem") %> were found:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul><br>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div><br>
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div><br>
+  <div class="actions"><%= f.submit "Update Password" %></div>
+<% end %>

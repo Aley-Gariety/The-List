@@ -37,12 +37,10 @@
     <style>
       /* Responsiveness */
 
-      @media only screen and (max-width: 650px) {
+      @media only screen and (max-width: 650px), only screen and (min-device-width: 320px) and (max-device-width: 480px) {
         body > header {
-          height: 100px;
           line-height: normal;
           text-align: center;
-          font-size: .75em;
         }
 
         h1 {
@@ -58,7 +56,7 @@
         }
       }
     </style>
-  <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application" %>
   </footer>
 </body>
 </html>

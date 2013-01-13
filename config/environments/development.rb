@@ -34,4 +34,7 @@ ThelistIo::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Enable mailers
+  config.action_mailer.default_url_options = { :host => "thelist.dev" }
 end

@@ -11,24 +11,28 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}bu
   font-weight: 700;
   src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
   src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: italic;
   font-weight: 400;
   src: local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/M2Jd71oPJhLKp0zdtTvoM_bce-VcyLJMRR1FC9qWbU8.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 900;
   src: local('Source Sans Pro Black'), local('SourceSansPro-Black'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGC7eGk4PJkA83J1AXCmgUfc.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
@@ -96,7 +100,6 @@ body > section, body > header {
 }
 
 body > header {
-  height: 80px;
   line-height: 80px;
   text-align: right;
 }
@@ -139,11 +142,12 @@ ol {
 
 body > section ol li {
   display: block;
-  height: 100px;
+  clear: both;
+  margin-bottom: 30px;
 }
 
 body > section ol li .title {
-  font-size: 1.5em;
+  font-size: 1.25em;
   line-height: normal;
 }
 
@@ -168,10 +172,20 @@ p {
   display: inline-block;
 }
 
+form td {
+  padding-right: 20px;
+}
+
+.red {
+  color: #ff4747;
+}
+
 /* Suffrage */
 .order {
+  width: 10px;
   float: left;
-  line-height: 100px;
+  text-align: right;
+  line-height: 53px;
   -webkit-user-select: none;
    -khtml-user-select: none;
      -moz-user-select: none;
@@ -179,12 +193,16 @@ p {
           user-select: none;
 }
 
+.order span {
+  float: right;
+}
+
 .suffrage {
-  width: 50px;
+  width: 40px;
   text-align: center;
   float: left;
-  top: 50%;
-  margin-top: -34px;
+  margin-top: -5px;
+  font-size: 1.05em;
   position: relative;
   -webkit-user-select: none;
    -khtml-user-select: none;
@@ -193,31 +211,11 @@ p {
           user-select: none;
 }
 
-.submission {
-  height: 100px;
-  margin-left: 65px;
-  padding-right: 20px;
-}
-
-.submission:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -0.25em; /* Adjusts for spacing */
-}
-
-.submission-inner {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 .up, .down {
   cursor: pointer;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
   text-decoration: none;
-  font-size: 1.2em;
 }
 
 .up {
@@ -238,18 +236,15 @@ p {
 }
 
 .upactive .up, .downactive .down {
-
   pointer-events: none;
 }
 
-@media only screen and (max-width: 400px) {
-  body > section ol li {
-    height: 150px;
-  }
-  .order {
-    line-height: 150px;
-  }
-  .submission {
-    height: 150px;
+.submission {
+  margin-left: 50px;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  body {
+    zoom: 200%;
   }
 }
