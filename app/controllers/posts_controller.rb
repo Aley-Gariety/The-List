@@ -50,7 +50,7 @@ class PostsController < ApplicationController
       if @post.save
 
         User.find(current_user.id).update_attributes({
-      	  :karma => current_user.karma - 5
+      	  :karma => current_user.karma - 10
     	  })
 
         format.html { redirect_to @post }
