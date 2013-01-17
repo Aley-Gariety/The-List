@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :comment_count, :downvote, :id, :text, :title, :upvote, :url, :user_id, :username, :agreement
+  attr_accessible :comment_count, :downvote, :id, :title, :upvote, :url, :user_id, :agreement
 
   has_many :votes
 
