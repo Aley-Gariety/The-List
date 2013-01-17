@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.joins("LEFT JOIN votes ON posts.id = votes.post_id").select("posts.id,sum(if(direction = 0, 1, -1)) as score,posts.created_at,url,title,posts.user_id,comment_count").group("posts.id").order("score DESC,posts.created_at DESC")
+    @posts = Post.joins("LEFT JOIN votes ON posts.id = votes.post_id").select("posts.id,sum(if(direction = 0, 1, if(direction is null, 0, -1))) as score,posts.created_at,url,title,posts.user_id,comment_count").group("posts.id").order("score DESC,posts.created_at DESC").limit(10)
 
     respond_to do |format|
       format.html # index.html.erb
