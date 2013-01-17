@@ -14,6 +14,8 @@
         <% if current_user %>
           <%= link_to current_user.username, profile_path, :class => 'profile-link' %>
           &nbsp;&bull;&nbsp;
+          <%= link_to 'Recent', recent_path %>
+          &nbsp;&bull;&nbsp;
           <%= link_to 'About', about_path %>
           &nbsp;&bull;&nbsp;
           <%= link_to 'Submit', new_post_path %>
@@ -22,6 +24,10 @@
           &nbsp;&bull;&nbsp;
           <%= link_to "Sign Out", log_out_path %>
         <% else %>
+          <%= link_to 'Recent', recent_path %>
+          &nbsp;&bull;&nbsp;
+          <%= link_to 'About', about_path %>
+          &nbsp;&bull;&nbsp;
           <%= link_to "Sign Up", sign_up_path %>
           &nbsp;&bull;&nbsp;
           <%= link_to "Sign In", log_in_path %>

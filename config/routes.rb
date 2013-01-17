@@ -5,6 +5,8 @@ ThelistIo::Application.routes.draw do
 
   match '/about' => 'pages#about'
 
+  match '/recent' => 'posts#recent'
+
   get "sessions/new"
 
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -22,6 +24,11 @@ ThelistIo::Application.routes.draw do
   put "upvote_comment", :to => "vote#upvote_comment", as: :upvote_comment
 
   put "downvote_comment", :to => "vote#downvote_comment", as: :downvote_comment
+<<<<<<< HEAD
+
+  get "gifts/redeem" => "gifts#redeem", :as => "redeem"
+=======
+>>>>>>> 549518bfe2e03e9fcd0a8f8a26e1205346281c59
 
   resources :users
 
