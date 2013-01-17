@@ -5,7 +5,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.joins("LEFT JOIN votes ON posts.id = votes.post_id").select("posts.id,sum(if(direction = 0, 1, if(direction is null, 0, -1))) as score,posts.created_at,url,title,posts.user_id,comment_count").group("posts.id").order("score DESC,posts.created_at DESC").limit(10)
+    @posts = Post.joins("LEFT JOIN votes ON posts.id = votes.post_id").select(
+        "posts.id," +
+        "sum(if(direction = 0, 1, if(direction is null, 0, -1))) as score," +
+        "(sum(if(direction = 0, 1, if(direction is null, 0, -1))) * " +
+        " if(unix_timestamp() - unix_timestamp(posts.created_at) < 7200, 3, 1)) as rank," +
+        "posts.created_at,url,title,posts.user_id,comment_count"
+    ).group("posts.id").order("rank DESC,posts.created_at DESC").limit(10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -88,5 +94,9 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  def recent
+    @posts = Post.order('created_at DESC').limit(10)
   end
 end
