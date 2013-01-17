@@ -2,5 +2,5 @@
 <span>You currently have <%= current_user.karma %> karma.</span>
 <br>
 <% if (current_user.karma) >= 10%>
-  <span>Send a <%= link_to 'Gift', gift_path %> to a friend?</span>
+  <span>Send a <%= link_to 'Gift', new_gift_path %> to a friend?</span>
 <% end %>
