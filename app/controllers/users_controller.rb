@@ -18,6 +18,12 @@ class UsersController < ApplicationController
 	  end
 	end
 
+  def send_gift(email,karma,sender)
+  	new_gift_token = SecureRandom.urlsafe_base64
+		@new_user = User.new
+		@new_user.save
+	  Invite.gift(email, karma, new_gift_token, sender).deliver
+  end
 
 	def profile
 	  @current_user ||= User.find(session[:user_id])

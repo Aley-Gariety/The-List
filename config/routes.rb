@@ -17,8 +17,6 @@ ThelistIo::Application.routes.draw do
 
   get "profile" => "users#profile", :as => "profile"
 
-  get "gifts" => "gifts#gift", :as => "gift"
-
   put "upvote_post", :to => "vote#upvote_post", as: :upvote_post
 
   put "downvote_post", :to => "vote#downvote_post", as: :downvote_post
@@ -26,8 +24,11 @@ ThelistIo::Application.routes.draw do
   put "upvote_comment", :to => "vote#upvote_comment", as: :upvote_comment
 
   put "downvote_comment", :to => "vote#downvote_comment", as: :downvote_comment
+<<<<<<< HEAD
 
   get "gifts/redeem" => "gifts#redeem", :as => "redeem"
+=======
+>>>>>>> 549518bfe2e03e9fcd0a8f8a26e1205346281c59
 
   resources :users
 

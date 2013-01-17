@@ -20,7 +20,7 @@
           &nbsp;&bull;&nbsp;
           <%= link_to 'Submit', new_post_path %>
           &nbsp;&bull;&nbsp;
-          <%= link_to 'Gift', gift_path %>
+          <%= link_to 'Gift', new_gift_path %>
           &nbsp;&bull;&nbsp;
           <%= link_to "Sign Out", log_out_path %>
         <% else %>
@@ -37,8 +37,8 @@
   </header>
   <section>
   <% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
+	  <%= content_tag :div, msg, :id => "flash_#{name}" %><br><br>
+	<% end %>
     <%= yield %>
   </section>
   <footer>

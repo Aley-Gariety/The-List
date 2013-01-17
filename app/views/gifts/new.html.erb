@@ -1,0 +1,10 @@
+<h2>Gift</h2>
+
+<p>Gifting karma is the only way to invite people to The List. <br> There is a minimum of 10, which is also the amount required to create one post.<br><br>You currently have <%= current_user.karma %> karma.</p>
+
+
+<% if current_user.karma >= 10 %>
+<%= render 'form' %>
+  <% else %>
+  <span>You do not have enough karma to gift.</span>
+<% end %>

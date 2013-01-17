@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  attr_accessible :email, :password, :password_confirmation, :username, :karma
+  attr_accessible :email, :password, :password_confirmation, :username, :karma, :gift_token
 
   has_many :posts
 
@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   before_create { generate_token(:auth_token) }
+  
+  before_create { generate_token(:gift_token) }
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
