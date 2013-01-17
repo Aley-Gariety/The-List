@@ -1,25 +1,30 @@
 class GiftsController < ApplicationController
 
-  skip_before_filter :require_login, :except => :gift
-   def gift
-	  @gift = Gift.new
-  end
-
+  skip_before_filter :require_login, :except => [:gift, :redeem]  
+		
+	def index
+	end
+		
+	def new
+		@gift = Gift.new
+	end
+		
 	def create
-		@user = 'test'
-	  @gift = Gift.new(params[:gift].merge(:gift_token => gift.gift_token))
-	  if @gift.save
-	  User.find(current_user.id).update_attributes({
-      	  :karma => current_user.karma - @gift.karma
-    	  })
-	  	if Gift.where(:email => @gift.email).count == 0
-	  		Invite.invite(@gift).deliver
-	  	elsif Gift.where(:email => @gift.email).count >1
-	  		Invite.gift(@gift).deliver
-	  	end
-	    redirect_to root_url
+		user = User.first
+		user.send_gift(params[:email], params[:karma], current_user.username)
+	  redirect_to root_url, :notice => "Your gift has been sent."
+	end
+	
+	def edit
+	  @user = User.find_by_gift_token!(params[:id])
+	end
+	
+	def redeem
+	  @user = User.find_by_gift_token!(params[:id])
+	  if @user.update_attributes(params[:user])
+	    redirect_to root_url, :notice => "You account has been created"
 	  else
-	    render "gift"
+	    render :edit
 	  end
 	end
 end

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.limit(10)
+    @posts = Post.joins("LEFT JOIN votes ON posts.id = votes.post_id").select("posts.id,sum(if(direction = 0, 1, -1)) as score,posts.created_at,url,title,posts.user_id,comment_count").group("posts.id").order("score DESC,posts.created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
       if @post.save
 
         User.find(current_user.id).update_attributes({
-      	  :karma => current_user.karma - 5
+      	  :karma => current_user.karma - 10
     	  })
 
         format.html { redirect_to @post }

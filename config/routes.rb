@@ -15,8 +15,6 @@ ThelistIo::Application.routes.draw do
 
   get "profile" => "users#profile", :as => "profile"
 
-  get "gifts" => "gifts#gift", :as => "gift"
-
   put "upvote_post", :to => "vote#upvote_post", as: :upvote_post
 
   put "downvote_post", :to => "vote#downvote_post", as: :downvote_post
