@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+
+  opinio_subjectum
   attr_accessible :comment_count, :downvote, :id, :title, :upvote, :url, :user_id, :agreement
 
   has_many :votes
