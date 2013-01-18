@@ -5,25 +5,42 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.joins("LEFT JOIN votes ON posts.id = votes.post_id").select(
-        "posts.id," +
+    @posts = Post
+      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+      .select("posts.id," +
         "sum(if(direction = 0, 1, if(direction is null, 0, -1))) as score," +
-        "(sum(if(direction = 0, 1, if(direction is null, 0, -1))) * " +
-        " if(unix_timestamp() - unix_timestamp(posts.created_at) < 7200, 3, 1)) as rank," +
-        "posts.created_at,url,title,posts.user_id,comment_count"
-    ).group("posts.id").order("rank DESC,posts.created_at DESC").limit(10)
+        "posts.created_at," +
+        "url," +
+        "title," +
+        "posts.user_id," +
+        "comment_count")
+      .group("posts.id")
+      .order("log10(abs(sum(if(direction = 0, 1, if(direction is null, 0, -1)))) + 1) * sign(sum(if(direction = 0, 1, if(direction is null, 0, -1)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
+      .limit(10)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
     end
-
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+
+    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0).count[@post.id] || 0
+    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1).count[@post.id] || 0
+
+    @score = upvotes - downvotes
+
+    if current_user
+      if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0).count > 0
+        @active = ' upactive'
+      elsif Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 1).count > 0
+        @active = ' downactive'
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

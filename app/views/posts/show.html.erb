@@ -1,25 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<%
-  if current_user
-    if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0).count > 0
-      active = ' upactive'
-    elsif Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 1).count > 0
-      active = ' downactive'
-    end
-  end
-
-  upvotes = Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0).count || 0
-  downvotes = Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 1).count || 0
-%>
-
-<div class="suffrage<%= active %>">
+<div class="suffrage<%= @active %>">
   <% if current_user %>
     <%= link_to '&#9650;'.html_safe, upvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "up" %><br>
   <% else %>
     <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
   <% end %>
-  <span><%= upvotes - downvotes %></span><br>
+  <span><%= @score %></span><br>
   <% if current_user %>
     <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "down" %><br>
   <% else %>
