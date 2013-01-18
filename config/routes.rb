@@ -1,4 +1,6 @@
 ThelistIo::Application.routes.draw do
+  opinio_model
+
   root :to => "posts#index"
 
   match '/guidelines' => 'pages#guidelines'
@@ -30,10 +32,9 @@ ThelistIo::Application.routes.draw do
   resources :users
 
   resources :sessions
-
-  resources :comments
-
-  resources :posts
+  resources :posts do
+  opinio
+end
 
   resources :gifts
 

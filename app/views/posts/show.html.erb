@@ -28,4 +28,5 @@
 </div>
 
 <a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
-<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{@post.comment_count} Comments", @post %></span>
+<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span><%=  %>
+<%= comments_for @post %>
