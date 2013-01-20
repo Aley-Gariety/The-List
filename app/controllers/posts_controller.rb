@@ -29,6 +29,17 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    
+    @comments = Comment
+      .joins("LEFT JOIN votes ON comments.id = votes.post_id")
+      .select("comments.id," +
+        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+        "comments.created_at," +
+        "body," +
+        "comments.user_id")
+      .where(:post_id => @post.id)
+      .group("comments.id")
+      .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(comments.created_at) / 300000) DESC")
 
     upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0).count[@post.id] || 0
     downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1).count[@post.id] || 0

@@ -11,7 +11,7 @@ class GiftsController < ApplicationController
 		
 	def create
 		user = User.first
-		user.send_gift(params[:email], params[:karma], current_user.username)
+		user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.email)
 	  redirect_to root_url, :notice => "Your gift has been sent."
 	end
 	
