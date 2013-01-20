@@ -292,6 +292,48 @@ pre {
   margin-left: 50px;
 }
 
+/* Comments */
+
+#new_comment {
+  border: 1px solid #DDD;
+  padding: 20px;
+  display: inline-block;
+}
+
+#comment_body {
+  height: 150px;
+  width: 450px;
+  max-width: 842px;
+  padding: 5px;
+}
+
+#comment_body:focus {
+  outline: 0;
+  border: 1px solid #FF8888;
+}
+
+.comment {
+  padding: 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  border: 1px solid #DDD;
+  width: 567px;
+}
+.comment-photo {
+  float: left;
+  border: 1px solid #CCC;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.comment-submit {
+  float: right;
+}
+
+.show-li {
+  margin-bottom: 20px;
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   body {
     zoom: 200%;
