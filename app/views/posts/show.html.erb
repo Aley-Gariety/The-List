@@ -16,3 +16,5 @@
 
 <a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
 <span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
+<%= render "newcomment" %>
+<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>

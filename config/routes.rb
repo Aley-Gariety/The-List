@@ -1,5 +1,4 @@
 ThelistIo::Application.routes.draw do
-  opinio_model
 
   root :to => "posts#index"
 
@@ -32,14 +31,10 @@ ThelistIo::Application.routes.draw do
   get "gifts/redeem" => "gifts#redeem", :as => "redeem"
 
   resources :users
-
   resources :sessions
-  resources :posts do
-  opinio
-end
-
+  resources :posts
+  resources :comments
   resources :gifts
-
   resources :password_resets
 
   # The priority is based upon order of creation:

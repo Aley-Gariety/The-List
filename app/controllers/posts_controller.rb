@@ -17,6 +17,7 @@ class PostsController < ApplicationController
       .group("posts.id")
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
       .limit(10)
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,6 +28,14 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
+
+    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0).count[@post.id] || 0
+    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1).count[@post.id] || 0
+
+    @score = upvotes - downvotes
+    
+    @comment = Comment.new
     @post = Post
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
