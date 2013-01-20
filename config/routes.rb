@@ -4,7 +4,9 @@ ThelistIo::Application.routes.draw do
 
   match '/guidelines' => 'pages#guidelines'
 
-  match '/about' => 'pages#about'
+  match '/docs' => 'pages#docs'
+
+  match '/stats' => 'pages#stats'
 
   match '/recent' => 'posts#recent'
 

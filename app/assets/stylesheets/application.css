@@ -151,6 +151,11 @@ h2 {
   font-size: 2em;
 }
 
+h2.welcome {
+  font-size: 3em;
+  text-align: center;
+}
+
 /* Lists */
 
 ol {
@@ -218,6 +223,10 @@ ul.qa li:nth-child(2n) {
 
 ul {
   padding-left: 0;
+}
+
+pre {
+  white-space:pre-line;
 }
 
 /* Suffrage */

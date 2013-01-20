@@ -8,14 +8,14 @@ class PostsController < ApplicationController
     @posts = Post
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
-        "sum(if(direction = 0, 1, if(direction is null, 0, -1))) as score," +
+        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
         "posts.created_at," +
         "url," +
         "title," +
         "posts.user_id," +
         "comment_count")
       .group("posts.id")
-      .order("log10(abs(sum(if(direction = 0, 1, if(direction is null, 0, -1)))) + 1) * sign(sum(if(direction = 0, 1, if(direction is null, 0, -1)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
+      .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
       .limit(10)
     
 
@@ -36,6 +36,15 @@ class PostsController < ApplicationController
     @score = upvotes - downvotes
     
     @comment = Comment.new
+    @post = Post
+      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+      .select("posts.id," +
+        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+        "posts.created_at," +
+        "url," +
+        "title," +
+        "posts.user_id," +
+        "comment_count").find(params[:id])
 
     if current_user
       if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0).count > 0
@@ -56,6 +65,10 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
 
+    @threshold = (current_user.karma * 0.02).round
+
+    @threshold = 10 if @threshold < 10
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
@@ -72,11 +85,28 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post].merge(:user_id => current_user.username))
 
+    @threshold = (current_user.karma * 0.02).round
+
+    @threshold = 10 if @threshold < 10
+
     respond_to do |format|
       if @post.save
 
+        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => (current_user.karma * 0.02).ceil)
+
+        @new_vote.update_attributes({
+      	  :vote_type => 0,
+      	  :direction => 0
+    	  })
+
+        @new_vote.save
+
+        threshold = (current_user.karma * 0.02).round
+
+        threshold = 10 if threshold < 10
+
         User.find(current_user.id).update_attributes({
-      	  :karma => current_user.karma - 10
+      	  :karma => current_user.karma - threshold
     	  })
 
         format.html { redirect_to @post }
