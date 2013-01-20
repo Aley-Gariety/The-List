@@ -1,4 +1,4 @@
-<%= form_for(@post) do |f| %>
+<%= form_for @post do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "problem") %> found:</h2>
@@ -11,8 +11,7 @@
     </div>
   <% end %>
 
-  <span>Will cost you <span class="red">10 karma</span>.</span><br>
-  <span>You currently have <%= current_user.karma %> karma.</span><br><br>
+  <span>Will cost you <span class="red"><%= @threshold %> karma</span>.</span><br><br>
 
   <div class="field">
     <%= f.label :title %><br>

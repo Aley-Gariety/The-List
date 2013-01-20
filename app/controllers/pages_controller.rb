@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   def guidelines
   end
 
-  def about
+  def docs
+  end
+
+  def stats
   end
 end

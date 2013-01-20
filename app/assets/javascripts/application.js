@@ -34,19 +34,20 @@ $(function(){
         direction = _this.attr('class'),
         suffrage = _this.parent(),
         countSpan = _this.siblings('span'),
-        origScore = _this.siblings('span').html()
+        origScore = _this.siblings('span').html(),
+        increment = suffrage.attr('data-value') || 1
 
     if (direction == 'up' && !suffrage.hasClass('upactive')) {
       if (suffrage.hasClass('downactive')) {
-        countSpan.html(parseInt(origScore) + 2)
+        countSpan.html(parseInt(origScore) + (increment * 2))
       } else {
-        countSpan.html(parseInt(origScore) + 1)
+        countSpan.html(parseInt(origScore) + increment)
       }
     } else if (direction == 'down' && !suffrage.hasClass('downactive')) {
       if (suffrage.hasClass('upactive')) {
-        countSpan.html(parseInt(origScore) - 2)
+        countSpan.html(parseInt(origScore) - (increment * 2))
       } else {
-        countSpan.html(parseInt(origScore) - 1)
+        countSpan.html(parseInt(origScore) - increment)
       }
     }
 

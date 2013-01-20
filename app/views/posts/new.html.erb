@@ -2,5 +2,5 @@
 <% if current_user.karma >= 10 %>
 <%= render 'form' %>
   <% else %>
-  <span>You need at least 10 karma to submit. You currently have <%= current_user.karma %>. See the FAQ to learn about getting karma once yours has been depleted.</span>
+  <span>You need at least <%= @threshold %> karma to submit. You currently have <span class="red"><%= current_user.karma %> karma</span>. See the FAQ to learn about getting karma once yours has been depleted.</span>
 <% end %>
