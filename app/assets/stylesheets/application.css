@@ -250,7 +250,7 @@ pre {
   width: 40px;
   text-align: center;
   float: left;
-  margin-top: -5px;
+  margin-top: -6px;
   font-size: 1.05em;
   position: relative;
   -webkit-user-select: none;
@@ -296,15 +296,16 @@ pre {
 
 #new_comment {
   border: 1px solid #DDD;
-  padding: 20px;
   display: inline-block;
+  padding: 10px;
 }
 
 #comment_body {
-  height: 150px;
-  width: 450px;
+  height: 100px;
+  width: 300px;
   max-width: 842px;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 #comment_body:focus {
@@ -313,17 +314,32 @@ pre {
 }
 
 .comment {
-  padding: 20px;
   display: inline-block;
   margin-bottom: 20px;
   border: 1px solid #DDD;
-  width: 567px;
+  width: 368px;
+  padding: 10px;
 }
+
+.comment .meta {
+  display: block;
+}
+
+.comment p {
+  margin: 0;
+  margin-left: 30px;
+}
+
+.comment .suffrage {
+  margin-left: -10px;
+}
+
 .comment-photo {
   float: left;
   border: 1px solid #CCC;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-right: 10px;
+  width: 41px;
+  height: 41px;
 }
 
 .comment-submit {

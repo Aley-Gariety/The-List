@@ -2,19 +2,21 @@ class PostsController < ApplicationController
 
   skip_before_filter :require_login, :only => [:index, :show, :recent]
 
+  @@posts = Post
+    .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+    .select("posts.id," +
+      "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+      "posts.created_at," +
+      "url," +
+      "title," +
+      "posts.user_id," +
+      "comment_count")
+    .group("posts.id")
+
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post
-      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
-      .select("posts.id," +
-        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
-        "posts.created_at," +
-        "url," +
-        "title," +
-        "posts.user_id," +
-        "comment_count")
-      .group("posts.id")
+    @posts = @@posts
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
       .limit(10)
 
@@ -159,6 +161,11 @@ class PostsController < ApplicationController
   end
 
   def recent
-    @posts = Post.order('created_at DESC').limit(10)
+
+    @posts = @posts = @@posts
+      .order("created_at DESC")
+      .limit(10)
+
+    render :template => 'posts/index'
   end
 end

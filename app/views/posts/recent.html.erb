@@ -7,23 +7,25 @@
         elsif Vote.where(:user_id => current_user.id, :post_id => post.id, :direction => 1).count > 0
           active = ' downactive'
         end
-      end
 
-      upvotes = Vote.group(:post_id).where(:post_id => @posts.map(&:id), :direction => 0).count[post.id] || 0
-      downvotes = Vote.group(:post_id).where(:post_id => @posts.map(&:id), :direction => 1).count[post.id] || 0
+        if Vote.find_by_post_id_and_user_id(post.id, current_user.id)
+          value = Vote.find_by_post_id_and_user_id(post.id, current_user.id).value
+        end
+
+      end
     %>
 
     <li>
       <div class="order">
         <span><%= @posts.index(post) + 1 %>.</span>
       </div>
-      <div class="suffrage<%= active %>">
+      <div class="suffrage<%= active %>" data-value="<%= value %>">
         <% if current_user %>
           <%= link_to '&#9650;'.html_safe, upvote_post_path(:post_id => post.id), :remote => true, :method => "put", :class => "up" %><br>
         <% else %>
           <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
         <% end %>
-        <span><%= upvotes - downvotes %></span><br>
+        <span><%= post.score.to_i %></span><br>
         <% if current_user %>
           <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => post.id), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>
