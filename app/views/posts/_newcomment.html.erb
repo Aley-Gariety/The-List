@@ -1,3 +1,8 @@
+<% @comments.each do |c| %>
+	<%= User.find(c.user_id).username %><br>
+	<%= c.body %><br><br>
+<% end %>
+
 <%= form_for(@comment) do |f| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
@@ -15,7 +20,7 @@
     <%= f.text_area :body %>
   </div><br>
   <div class="field">
-    <%= f.hidden_field :post_id %>
+    <%= f.hidden_field :post_id, :value => @post.id %>
   </div><br>
   <div class="actions">
     <%= f.submit %>

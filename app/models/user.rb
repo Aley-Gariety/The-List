@@ -50,4 +50,8 @@ class User < ActiveRecord::Base
     save!
     Invite.password_reset(self).deliver
   end
+  
+	def send_gift(email, karma, gift_token, sender)
+		Invite.gift(email, karma, gift_token, sender).deliver
+	end
 end
