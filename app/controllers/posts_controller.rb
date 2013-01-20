@@ -17,6 +17,7 @@ class PostsController < ApplicationController
       .group("posts.id")
       .order("log10(abs(sum(if(direction = 0, 1, if(direction is null, 0, -1)))) + 1) * sign(sum(if(direction = 0, 1, if(direction is null, 0, -1)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
       .limit(10)
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -33,6 +34,8 @@ class PostsController < ApplicationController
     downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1).count[@post.id] || 0
 
     @score = upvotes - downvotes
+    
+    @comment = Comment.new
 
     if current_user
       if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0).count > 0
