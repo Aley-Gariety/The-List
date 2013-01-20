@@ -1,9 +1,9 @@
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
+<%= form_for @gift do |f| %>
+  <% if @gift.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
       <ul>
-        <% for message in @user.errors.full_messages %>
+        <% for message in @gift.errors.full_messages %>
           <li><%= message %></li>
         <% end %>
       </ul>

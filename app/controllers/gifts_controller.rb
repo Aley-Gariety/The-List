@@ -10,9 +10,14 @@ class GiftsController < ApplicationController
 	end
 		
 	def create
-		user = User.first
-		user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.email)
-	  redirect_to root_url, :notice => "Your gift has been sent."
+	 @gift = Gift.new()
+	 if @gift.save
+			user = User.first
+			user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.email)
+		  redirect_to root_url, :notice => "Your gift has been sent."
+	 else
+	 		render :new
+	  end
 	end
 	
 	def edit

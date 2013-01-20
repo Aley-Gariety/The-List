@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
     Invite.password_reset(self).deliver
   end
   
-	def send_gift(email, karma, gift_token, sender)
-		Invite.gift(email, karma, gift_token, sender).deliver
+	def send_gift(gifts, karma, gift_token, sender)
+		Invite.gift(gifts, karma, gift_token, sender).deliver
 	end
 end

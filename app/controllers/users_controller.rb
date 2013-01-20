@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 	  end
 	end
 
-  def send_gift(email,karma,sender)
+  def send_gift(email,karma,new_gift_token,sender)
   	new_gift_token = SecureRandom.urlsafe_base64
 		@new_user = User.new
 		@new_user.save
