@@ -16,7 +16,7 @@
   </div>
 
   <a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
-  <span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
+  <span class="meta">Submitted by <%= link_to @post.user_id, :controller => "users", :action => "user", :id => @post.user_id  %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
 </div>
 <% @comments.each do |c| %>
   <div class="comment">

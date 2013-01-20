@@ -25,7 +25,12 @@ class UsersController < ApplicationController
 	  Invite.gift(email, karma, new_gift_token, sender).deliver
   end
 
-	def profile
-	  @current_user ||= User.find(session[:user_id])
+	def user
+    @user = User.find(params[:id])
+    @posts = Post
+      .order("created_at DESC")
+      .limit(10)
+      .where(:user_id => @user.id)
+
   end
 end
