@@ -6,7 +6,7 @@
   <% else %>
     <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
   <% end %>
-  <span><%= @score %></span><br>
+  <span><%= @post.score.to_i %></span><br>
   <% if current_user %>
     <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "down" %><br>
   <% else %>
@@ -15,5 +15,4 @@
 </div>
 
 <a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
-<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span><%=  %>
-<%= comments_for @post %>
+<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
