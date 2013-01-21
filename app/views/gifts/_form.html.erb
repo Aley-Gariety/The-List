@@ -1,10 +1,14 @@
 <%= form_tag gifts_path, :method => :post do %>
   <p class="field">
-    <%= label_tag :email %>
+    <%= label_tag :name, "Name:" %>
+    <%= text_field_tag :name, params[:name] %>
+  </p>
+  <p class="field">
+    <%= label_tag :email, "Email:" %>
     <%= text_field_tag :email, params[:email] %>
   </p>
   <p class="field">
-    <%= label_tag :karma %>
+    <%= label_tag :karma, "Gift:" %>
     <%= text_field_tag :karma, params[:karma] %>
   </p>
   <div class="actions"><%= submit_tag "Send Gift" %></div>

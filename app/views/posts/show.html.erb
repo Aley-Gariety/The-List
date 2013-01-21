@@ -16,7 +16,7 @@
   </div>
 
   <a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
-  <span class="meta">Submitted by <a href="/user/<%= @post.user_id %>"><%= User.find(@post.user_id).username %></a>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
+  <span class="meta">Submitted by <a href="/user/<%= User.find(@post.user_id).username.downcase %>"><%= User.find(@post.user_id).username %></a>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
 </div>
 <% @comments.each do |c| %>
   <div class="comment">

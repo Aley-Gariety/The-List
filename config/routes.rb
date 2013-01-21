@@ -9,8 +9,8 @@ ThelistIo::Application.routes.draw do
   match '/stats' => 'pages#stats'
 
   match '/recent' => 'posts#recent'
-  
-  match '/user/:id' => 'users#user'
+
+  match '/user/:username' => 'users#user'
 
   get "sessions/new"
 

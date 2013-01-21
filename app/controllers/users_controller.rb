@@ -26,14 +26,18 @@ class UsersController < ApplicationController
   end
 
 	def user
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
 
     @posts = Post
-      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
-      .select("sum(if(direction = 0, value, if(direction is null, 0, -value))) as score, posts.id, url, title, posts.user_id, posts.created_at, comment_count")
-      .order("posts.created_at DESC")
-      .limit(10)
-      .where(:user_id => params[:id])
-
+    .where(:user_id => User.find_by_username(params[:username]).id)
+    .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+    .select("posts.id," +
+      "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+      "posts.created_at," +
+      "url," +
+      "title," +
+      "posts.user_id," +
+      "comment_count")
+    .group("posts.id")
   end
 end

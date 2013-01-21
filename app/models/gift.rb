@@ -3,6 +3,10 @@ attr_accessible :email, :karma, :gift, :username, :password, :password_salt
 
 set_table_name "users"
 
+before_create { generate_token(:auth_token) }
+
+before_create { generate_token(:gift_token) }
+
 
 	def generate_token(column)
 		begin

@@ -4,13 +4,12 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-	    <h2>Hello <%= @email %>,</h2>
+	    <h2>Hello <%= @name %>,</h2>
     <p>
-      You have received <%= @karma %> karma from <%= @sender %>.<br/>
+      You have received <%= @karma %> karma on The List from <%= @sender %>.<br/>
     </p>
-        <p>
-      Click <a href="http://thelist.dev/redeem/token=<%= @token %>">here</a> to sign up.<br/>
+    <p>
+      Click <a href="http://thelist.dev/user/<%= @name %>">here</a> to see your profile.<br/>
     </p>
-    <p>Have a great day!</p>
   </body>
 </html>

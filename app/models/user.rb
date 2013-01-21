@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   before_create { generate_token(:auth_token) }
-  
+
   before_create { generate_token(:gift_token) }
 
   validates_confirmation_of :password
@@ -50,8 +50,12 @@ class User < ActiveRecord::Base
     save!
     Invite.password_reset(self).deliver
   end
-  
-	def send_gift(gifts, karma, gift_token, sender)
-		Invite.gift(gifts, karma, gift_token, sender).deliver
+
+	def send_gift(gifts, karma, gift_token, sender, bool)
+    if bool == 0
+		  Invite.gift_invite(gifts, karma, gift_token, sender).deliver
+		elsif bool == 1
+		  Invite.gift(gifts, karma, gift_token, sender).deliver
+		end
 	end
 end
