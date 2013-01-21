@@ -97,7 +97,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post].merge(:user_id => current_user.username))
+    @post = Post.new(params[:post].merge(:user_id => current_user.id))
 
     @threshold = (current_user.karma * 0.02).round
 
