@@ -54,15 +54,15 @@ a:active {
   color: #000;
 }
 
-li .meta a {
+.meta a {
   color: #777;
 }
 
-li .meta a:hover {
+.meta a:hover {
   color: #ff4747;
 }
 
-li .meta a:active {
+.meta a:active {
   color: #777;
 }
 
