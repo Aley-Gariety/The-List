@@ -84,14 +84,19 @@ a.profile-link:active {
   margin: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
   margin: 0;
   top: 0;
+  height: 100%;
 }
 
-body > section, body > header, body > footer {
+.wrap > section, .wrap > header, body > footer {
   width: auto;
   max-width: 900px;
   margin: 0 auto;
@@ -99,29 +104,38 @@ body > section, body > header, body > footer {
   padding-right: 20px;
 }
 
-body > header, body > footer {
+.wrap > header, body > footer {
   line-height: 80px;
   text-align: right;
 }
 
-body > header > section {
+.wrap > header > section {
   border-bottom: 1px solid #FF8888;
 }
 
-body > section {
+.wrap > section {
   margin-top: 30px;
+  padding-bottom: 111px;
+}
+
+.wrap {
+  min-height: 100%;
+}
+
+body > footer {
+  margin-top: -111px;
+  clear: both;
+  position: relative;
+}
+
+body > footer > section {
+	margin-top: 30px;
+	border-top: 1px solid #FF8888;
+	text-align: right;
 }
 
 .meta-header {
   display: inline;
-}
-
-/* Footer */
-
-body > footer {
-	margin-top: 30px;
-	border-top: 1px solid #FF8888; 
-	text-align: center;
 }
 
 /* Header Text */
@@ -171,13 +185,13 @@ ol {
   list-style: none;
 }
 
-body > section ol li {
+.wrap > section ol li {
   display: block;
   clear: both;
   margin-bottom: 30px;
 }
 
-body > section ol li .title {
+.wrap > section ol li .title {
   font-size: 1.25em;
   line-height: normal;
 }

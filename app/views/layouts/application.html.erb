@@ -7,46 +7,48 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header>
+  <div class="wrap">
+    <header>
+      <section>
+        <h1><a href="/">The List</a><span class="beta">&nbsp;&nbsp;Beta</span></h1>
+        <div class="meta-header">
+          <% if current_user %>
+            <%= link_to current_user.username, { :controller => "users", :action => "user", :username => current_user.username.downcase}, :class => 'profile-link' %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to 'Recent', recent_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to 'Documentation', docs_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to 'Submit', new_post_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to 'Gift', new_gift_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to "Sign Out", log_out_path %>
+          <% else %>
+            <%= link_to 'Recent', recent_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to 'Documentation', docs_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to "Sign Up", sign_up_path %>
+            &nbsp;&bull;&nbsp;
+            <%= link_to "Sign In", log_in_path %>
+          <% end %>
+        </div>
+      </section>
+    </header>
     <section>
-      <h1><a href="/">The List</a><span class="beta">&nbsp;&nbsp;Beta</span></h1>
-      <div class="meta-header">
-        <% if current_user %>
-          <%= link_to current_user.username, { :controller => "users", :action => "user", :username => current_user.username.downcase}, :class => 'profile-link' %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to 'Recent', recent_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to 'Documentation', docs_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to 'Submit', new_post_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to 'Gift', new_gift_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to "Sign Out", log_out_path %>
-        <% else %>
-          <%= link_to 'Recent', recent_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to 'Documentation', docs_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to "Sign Up", sign_up_path %>
-          &nbsp;&bull;&nbsp;
-          <%= link_to "Sign In", log_in_path %>
-        <% end %>
-      </div>
+    <% flash.each do |name, msg| %>
+  	  <%= content_tag :div, msg, :id => "flash_#{name}" %><br>
+  	<% end %>
+      <%= yield %>
     </section>
-  </header>
-  <section>
-  <% flash.each do |name, msg| %>
-	  <%= content_tag :div, msg, :id => "flash_#{name}" %><br>
-	<% end %>
-    <%= yield %>
-  </section>
+  </div>
   <footer>
     <style>
       /* Responsiveness */
 
       @media only screen and (max-width: 650px), only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-        body > header {
+        .wrap > header {
           line-height: normal;
           text-align: center;
         }
@@ -58,7 +60,7 @@
           position: static;
         }
 
-        body > header > section {
+        .wrap > header > section {
           padding-top: 10px;
           padding-bottom: 20px;
         }
