@@ -303,7 +303,7 @@ pre {
 #comment_body {
   height: 100px;
   width: 300px;
-  max-width: 842px;
+  max-width: 813px;
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -315,7 +315,6 @@ pre {
 
 .comment {
   display: inline-block;
-  margin-bottom: 20px;
   border: 1px solid #DDD;
   width: 368px;
   padding: 10px;
@@ -353,7 +352,6 @@ pre {
 /* Profiles */
 
 #profile {
-  border: 1px solid #DDD;
   min-width: 250px;
   display: inline-block;
   padding: 10px;

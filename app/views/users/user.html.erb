@@ -5,6 +5,8 @@
 <span id="profile-content">Karma: <%= @user.karma %></span>
 <br><span id="profile-content">Member For: <%= time_ago_in_words(@user.created_at) %></span>
 </div>
+<br><br>
+<h3><%= @user.username %>'s Posts:</h3>
 <br>
 <ol>
   <% @posts.each do |post| %>
@@ -43,7 +45,7 @@
       <div class="submission">
         <div class="submission-inner">
           <a href="<%= post.url %>" target="_blank" class="title"><%= post.title %></a><br>
-          <span class="meta">Submitted by <%= post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
+          <span class="meta">Submitted by <%= @user.username %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
         </br>
       </div>
     </li>

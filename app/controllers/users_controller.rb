@@ -28,9 +28,10 @@ class UsersController < ApplicationController
 	def user
     @user = User.find(params[:id])
     @posts = Post
-      .order("created_at DESC")
+      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+      .select("sum(if(direction = 0, value, if(direction is null, 0, -value))) as score, posts.id, url, title, posts.user_id, posts.created_at, comment_count")
+      .order("posts.created_at DESC")
       .limit(10)
-      .where(:user_id => @user.id)
-
+      .where(:user_id => params[:id])
   end
 end
