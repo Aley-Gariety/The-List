@@ -12,14 +12,17 @@ class GiftsController < ApplicationController
   def create
     @gift = Gift.find_or_initialize_by_email(:email => params[:email], :karma => params[:karma])
 
+
     user = User.first
 
     if @gift.new_record? && @gift.save
-      user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.username, 0, params[:name])
+    @gift_token = User.find_by_email(params[:email]).gift_token
+      user.send_gift(params[:email], params[:karma], @gift_token, current_user.username, 0, params[:name])
       redirect_to root_url, :notice => "Your invite has been sent."
     elsif User.find_by_email(params[:email]) != nil
-      user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.username, 1, params[:name])
-      redirect_to root_url, :notice => "Your karma has been gifted."
+    @gift_token = User.find_by_email(params[:email]).gift_token
+      user.send_gift(params[:email], params[:karma], @gift_token, current_user.username, 1, params[:name])
+      redirect_to root_url, :notice => "Your karma has been sent."
     end
   end
 

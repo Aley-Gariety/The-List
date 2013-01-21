@@ -18,7 +18,7 @@ ThelistIo::Application.routes.draw do
 
   get "log_in" => "sessions#new", :as => "log_in"
 
-  get "sign_up" => "users#new", :as => "sign_up"
+  get "/sign_up/:token" => "users#new", :as => "sign_up"
 
   put "upvote_post", :to => "vote#upvote_post", as: :upvote_post
 

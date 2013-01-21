@@ -91,7 +91,7 @@ body {
   top: 0;
 }
 
-body > section, body > header {
+body > section, body > header, body > footer {
   width: auto;
   max-width: 900px;
   margin: 0 auto;
@@ -99,7 +99,7 @@ body > section, body > header {
   padding-right: 20px;
 }
 
-body > header {
+body > header, body > footer {
   line-height: 80px;
   text-align: right;
 }
@@ -114,6 +114,14 @@ body > section {
 
 .meta-header {
   display: inline;
+}
+
+/* Footer */
+
+body > footer {
+	margin-top: 30px;
+	border-top: 1px solid #FF8888; 
+	text-align: center;
 }
 
 /* Header Text */
