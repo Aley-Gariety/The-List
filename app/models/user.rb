@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
     Invite.password_reset(self).deliver
   end
 
-	def send_gift(gifts, karma, gift_token, sender, bool)
+	def send_gift(email, karma, gift_token, sender, bool, name)
     if bool == 0
-		  Invite.gift_invite(gifts, karma, gift_token, sender).deliver
+		  Invite.gift_invite(email, karma, gift_token, sender, name).deliver
 		elsif bool == 1
-		  Invite.gift(gifts, karma, gift_token, sender).deliver
+		  Invite.gift(email, karma, gift_token, sender, name).deliver
 		end
 	end
 end
