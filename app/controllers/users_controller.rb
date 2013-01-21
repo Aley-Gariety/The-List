@@ -27,10 +27,6 @@ class UsersController < ApplicationController
 
 	def user
     @user = User.find(params[:id])
-    @posts = Post
-      .order("created_at DESC")
-      .limit(10)
-      .where(:user_id => @user.id)
 
   end
 end
