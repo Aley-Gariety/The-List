@@ -106,22 +106,18 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
 
-        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => (current_user.karma * 0.02).ceil)
+        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => @threshold)
 
         @new_vote.update_attributes({
       	  :vote_type => 0,
       	  :direction => 0
     	  })
 
-        @new_vote.save
-
-        threshold = (current_user.karma * 0.02).round
-
-        threshold = 10 if threshold < 10
-
-        User.find(current_user.id).update_attributes({
-      	  :karma => current_user.karma - threshold
-    	  })
+        if @new_vote.save
+          User.find(current_user.id).update_attributes({
+        	  :karma => current_user.karma - @threshold
+      	  })
+    	  end
 
         format.html { redirect_to @post }
         format.json { render json: @post, status: :created, location: @post }

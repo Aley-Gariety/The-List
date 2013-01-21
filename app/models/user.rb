@@ -52,6 +52,13 @@ class User < ActiveRecord::Base
   end
 
 	def send_gift(email, karma, gift_token, sender, bool, name)
+
+	  sending_user = User.find_by_username(sender)
+
+    sending_user.update_attributes({
+      :karma => sending_user.karma - karma.to_i
+    })
+
     if bool == 0
 		  Invite.gift_invite(email, karma, gift_token, sender, name).deliver
 		elsif bool == 1
