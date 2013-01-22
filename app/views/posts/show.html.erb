@@ -3,13 +3,13 @@
 <div class="show-li">
   <div class="suffrage<%= @active %>" data-value="<%= @value %>">
     <% if current_user %>
-      <%= link_to '&#9650;'.html_safe, upvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "up" %><br>
+      <%= link_to '&#9650;'.html_safe, vote_path(:post_id => @post.id, :vote_type => 0, :direction => 0, :value => @value), :remote => true, :method => "put", :class => "up" %><br>
     <% else %>
       <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
     <% end %>
     <span><%= @post.score.to_i %></span><br>
     <% if current_user %>
-      <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "down" %><br>
+      <%= link_to '&#9660;'.html_safe, vote_path(:post_id => @post.id, :vote_type => 0, :direction => 1, :value => @value), :remote => true, :method => "put", :class => "down" %><br>
     <% else %>
       <%= link_to '&#9660;'.html_safe, log_in_path, :class => "down" %>
     <% end %>
@@ -22,13 +22,13 @@
   <div class="comment">
     <div class="suffrage<%= @active %>" data-value="<%= @value %>">
       <% if current_user %>
-        <%= link_to '&#9650;'.html_safe, upvote_comment_path(:post_id => c.id), :remote => true, :method => "put", :class => "up" %><br>
+        <%= link_to '&#9650;'.html_safe, vote_path(:post_id => @post.id, :vote_type => 1, :direction => 0, :value => @value), :remote => true, :method => "put", :class => "up" %><br>
       <% else %>
         <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
       <% end %>
       <span><%= c.score.to_i %></span><br>
       <% if current_user %>
-        <%= link_to '&#9660;'.html_safe, downvote_comment_path(:post_id => c.id), :remote => true, :method => "put", :class => "down" %><br>
+        <%= link_to '&#9660;'.html_safe, vote_path(:post_id => @post.id, :vote_type => 1, :direction => 1, :value => @value), :remote => true, :method => "put", :class => "down" %><br>
       <% else %>
         <%= link_to '&#9660;'.html_safe, log_in_path, :class => "down" %>
       <% end %>

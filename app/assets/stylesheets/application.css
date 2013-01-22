@@ -115,7 +115,7 @@ body {
 
 .wrap > section {
   margin-top: 30px;
-  padding-bottom: 111px;
+  padding-bottom: 121px
 }
 
 .wrap {
@@ -189,6 +189,10 @@ ol {
   display: block;
   clear: both;
   margin-bottom: 30px;
+}
+
+.wrap > section ol li:last-child {
+  margin-bottom: 0;
 }
 
 .wrap > section ol li .title {
@@ -310,6 +314,12 @@ pre {
   pointer-events: none;
 }
 
+.owner.upactive .down, .owner.downactive .up {
+  color: #AAA;
+  cursor: default;
+  pointer-events: none;
+}
+
 .submission {
   margin-left: 50px;
 }
@@ -374,8 +384,7 @@ pre {
 /* Profiles */
 
 #profile {
-  min-width: 250px;
-  display: inline-block;
+  display: block;
   padding: 10px;
   padding-left: 0;
 }

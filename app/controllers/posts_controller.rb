@@ -68,6 +68,10 @@ class PostsController < ApplicationController
       end
     end
 
+    if current_user.id == @post.user_id.to_i
+      @active += " owner"
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }

@@ -3,31 +3,13 @@
 
 $(function(){
 
-  var rtime = new Date(1, 1, 2000, 12,00,00),
-      timeout = false,
-      delta = 200,
-      mediaQueries =  $('style')
+  var mediaQueries =  $('style')
 
   function setMediaQuery() {
     mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'));
   }
 
-  $(window).resize(function() {
-    rtime = new Date();
-    if (timeout === false) {
-        timeout = true;
-        setTimeout(resizeend, delta);
-    }
-  });
-
-  function resizeend() {
-      if (new Date() - rtime < delta) {
-          setTimeout(resizeend, delta);
-      } else {
-          timeout = false;
-          setMediaQuery()
-      }
-  }
+  $(window).resize(setMediaQuery);
 
   $('.suffrage > a').click(function(){
     var _this = $(this),
@@ -35,7 +17,7 @@ $(function(){
         suffrage = _this.parent(),
         countSpan = _this.siblings('span'),
         origScore = _this.siblings('span').html(),
-        increment = suffrage.attr('data-value') || 1
+        increment = parseInt(suffrage.attr('data-value')) || 1
 
     if (direction == 'up' && !suffrage.hasClass('upactive')) {
       if (suffrage.hasClass('downactive')) {

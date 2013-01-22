@@ -1,15 +1,23 @@
 <ol>
   <% @posts.each do |post| %>
+
     <%
       if current_user
         if Vote.where(:user_id => current_user.id, :post_id => post.id, :direction => 0).count > 0
-          active = ' upactive'
+          active = 'upactive'
         elsif Vote.where(:user_id => current_user.id, :post_id => post.id, :direction => 1).count > 0
-          active = ' downactive'
+          active = 'downactive'
         end
 
         if Vote.find_by_post_id_and_user_id(post.id, current_user.id)
           value = Vote.find_by_post_id_and_user_id(post.id, current_user.id).value
+        else
+       	  value = current_user.karma * 0.02
+       	  value = 1 if value < 1
+        end
+
+        if current_user.id == post.user_id.to_i
+          active += " owner"
         end
 
       end
@@ -19,15 +27,15 @@
       <div class="order">
         <span><%= @posts.index(post) + 1 %>.</span>
       </div>
-      <div class="suffrage<%= active %>" data-value="<%= value %>">
+      <div class="suffrage <%= active %>" data-value="<%= value %>">
         <% if current_user %>
-          <%= link_to '&#9650;'.html_safe, upvote_post_path(:post_id => post.id), :remote => true, :method => "put", :class => "up" %><br>
+          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
         <% else %>
           <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
         <% end %>
         <span><%= post.score.to_i %></span><br>
         <% if current_user %>
-          <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => post.id), :remote => true, :method => "put", :class => "down" %><br>
+          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>
           <%= link_to '&#9660;'.html_safe, log_in_path, :class => "down" %>
         <% end %>
@@ -41,4 +49,3 @@
     </li>
   <% end %>
 </ol>
-<br>

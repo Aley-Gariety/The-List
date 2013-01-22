@@ -22,15 +22,9 @@ ThelistIo::Application.routes.draw do
 
   get "sign_up" => "users#new", :as => "sign_up"
 
-  put "upvote_post", :to => "vote#upvote_post", as: :upvote_post
-
-  put "downvote_post", :to => "vote#downvote_post", as: :downvote_post
-
-  put "upvote_comment", :to => "vote#upvote_comment", as: :upvote_comment
-
-  put "downvote_comment", :to => "vote#downvote_comment", as: :downvote_comment
-
   get "gifts/redeem" => "gifts#redeem", :as => "redeem"
+
+  put "vote", :to => "vote#vote", as: :vote
 
   resources :users
   resources :sessions
