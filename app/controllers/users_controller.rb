@@ -7,16 +7,15 @@ class UsersController < ApplicationController
 	  @user = User.new
 	end
 
-
 	def create
-		@token = @token = params[:token]
-		
+		@token = params[:token]
+
 	  if User.where(:gift_token => @token).count == 0
 	  	@user = User.find_or_initialize_by_id(params[:user].merge(:gift_token => @token))
 	  else
 	  	render "new"
 	  end
-	  
+
 	  if @user.save
 
 	    redirect_to root_url
