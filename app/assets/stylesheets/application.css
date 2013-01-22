@@ -54,15 +54,15 @@ a:active {
   color: #000;
 }
 
-li .meta a {
+.meta a {
   color: #777;
 }
 
-li .meta a:hover {
+.meta a:hover {
   color: #ff4747;
 }
 
-li .meta a:active {
+.meta a:active {
   color: #777;
 }
 
@@ -84,14 +84,19 @@ a.profile-link:active {
   margin: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
   margin: 0;
   top: 0;
+  height: 100%;
 }
 
-body > section, body > header {
+.wrap > section, .wrap > header, body > footer {
   width: auto;
   max-width: 900px;
   margin: 0 auto;
@@ -99,17 +104,34 @@ body > section, body > header {
   padding-right: 20px;
 }
 
-body > header {
+.wrap > header, body > footer {
   line-height: 80px;
   text-align: right;
 }
 
-body > header > section {
+.wrap > header > section {
   border-bottom: 1px solid #FF8888;
 }
 
-body > section {
+.wrap > section {
   margin-top: 30px;
+  padding-bottom: 111px;
+}
+
+.wrap {
+  min-height: 100%;
+}
+
+body > footer {
+  margin-top: -111px;
+  clear: both;
+  position: relative;
+}
+
+body > footer > section {
+	margin-top: 30px;
+	border-top: 1px solid #FF8888;
+	text-align: right;
 }
 
 .meta-header {
@@ -163,13 +185,13 @@ ol {
   list-style: none;
 }
 
-body > section ol li {
+.wrap > section ol li {
   display: block;
   clear: both;
   margin-bottom: 30px;
 }
 
-body > section ol li .title {
+.wrap > section ol li .title {
   font-size: 1.25em;
   line-height: normal;
 }
@@ -250,7 +272,7 @@ pre {
   width: 40px;
   text-align: center;
   float: left;
-  margin-top: -5px;
+  margin-top: -6px;
   font-size: 1.05em;
   position: relative;
   -webkit-user-select: none;
@@ -290,6 +312,91 @@ pre {
 
 .submission {
   margin-left: 50px;
+}
+
+/* Comments */
+
+#new_comment {
+  border: 1px solid #DDD;
+  display: inline-block;
+  padding: 10px;
+}
+
+#comment_body {
+  height: 100px;
+  width: 300px;
+  max-width: 813px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#comment_body:focus {
+  outline: 0;
+  border: 1px solid #FF8888;
+}
+
+.comment {
+  display: inline-block;
+  border: 1px solid #DDD;
+  width: 368px;
+  padding: 10px;
+}
+
+.comment .meta {
+  display: block;
+}
+
+.comment p {
+  margin: 0;
+  margin-left: 30px;
+}
+
+.comment .suffrage {
+  margin-left: -10px;
+}
+
+.comment-photo {
+  float: left;
+  border: 1px solid #CCC;
+  margin-right: 10px;
+  width: 41px;
+  height: 41px;
+}
+
+.comment-submit {
+  float: right;
+}
+
+.show-li {
+  margin-bottom: 20px;
+}
+
+/* Profiles */
+
+#profile {
+  min-width: 250px;
+  display: inline-block;
+  padding: 10px;
+  padding-left: 0;
+}
+
+#profile-content {
+	display: inline;
+}
+
+.profile-photo {
+	float: left;
+  border: 1px solid #CCC;
+  margin-right: 10px;
+  width: 80px;
+  height: 80px;
+}
+
+/* Flash Notices */
+#flash_notice {
+  border: 1px solid #FF8888;
+  color: #ff4747;
+  padding: 10px;
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {

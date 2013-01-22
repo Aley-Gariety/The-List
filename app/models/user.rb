@@ -12,13 +12,9 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   before_create { generate_token(:auth_token) }
-  
-  before_create { generate_token(:gift_token) }
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email, :on => :create
-  validates_uniqueness_of :email, :on => :create
   validates_presence_of :username, :on => :create
   validates_uniqueness_of :username, :on => :create
 
@@ -50,8 +46,19 @@ class User < ActiveRecord::Base
     save!
     Invite.password_reset(self).deliver
   end
-  
-	def send_gift(email, karma, gift_token, sender)
-		Invite.gift(email, karma, gift_token, sender).deliver
+
+	def send_gift(email, karma, gift_token, sender, bool, name)
+
+	  sending_user = User.find_by_username(sender)
+
+    sending_user.update_attributes({
+      :karma => sending_user.karma - karma.to_i
+    })
+
+    if bool == 0
+		  Invite.gift_invite(email, karma, gift_token, sender, name).deliver
+		elsif bool == 1
+		  Invite.gift(email, karma, gift_token, sender, name).deliver
+		end
 	end
 end

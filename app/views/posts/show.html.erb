@@ -1,20 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<div class="suffrage<%= @active %>">
-  <% if current_user %>
-    <%= link_to '&#9650;'.html_safe, upvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "up" %><br>
-  <% else %>
-    <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
-  <% end %>
-  <span><%= @post.score.to_i %></span><br>
-  <% if current_user %>
-    <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "down" %><br>
-  <% else %>
-    <%= link_to '&#9660;'.html_safe, log_in_path, :class => "down" %>
-  <% end %>
-</div>
+<div class="show-li">
+  <div class="suffrage<%= @active %>" data-value="<%= @value %>">
+    <% if current_user %>
+      <%= link_to '&#9650;'.html_safe, upvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "up" %><br>
+    <% else %>
+      <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
+    <% end %>
+    <span><%= @post.score.to_i %></span><br>
+    <% if current_user %>
+      <%= link_to '&#9660;'.html_safe, downvote_post_path(:post_id => @post.id), :remote => true, :method => "put", :class => "down" %><br>
+    <% else %>
+      <%= link_to '&#9660;'.html_safe, log_in_path, :class => "down" %>
+    <% end %>
+  </div>
 
-<a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
-<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
-<%= render "newcomment" %>
-<span class="meta">Submitted by <%= @post.user_id %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
+  <a href="<%= @post.url %>" target="_blank" class="title"><h2><%= @post.title %></h2></a>
+  <span class="meta">Submitted by <a href="/user/<%= User.find(@post.user_id).username.downcase %>"><%= User.find(@post.user_id).username %></a>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@post.created_at) %> ago.<br></span>
+</div>
+<% @comments.each do |c| %>
+  <div class="comment">
+    <div class="suffrage<%= @active %>" data-value="<%= @value %>">
+      <% if current_user %>
+        <%= link_to '&#9650;'.html_safe, upvote_comment_path(:post_id => c.id), :remote => true, :method => "put", :class => "up" %><br>
+      <% else %>
+        <%= link_to '&#9650;'.html_safe, log_in_path, :class => "up" %>
+      <% end %>
+      <span><%= c.score.to_i %></span><br>
+      <% if current_user %>
+        <%= link_to '&#9660;'.html_safe, downvote_comment_path(:post_id => c.id), :remote => true, :method => "put", :class => "down" %><br>
+      <% else %>
+        <%= link_to '&#9660;'.html_safe, log_in_path, :class => "down" %>
+      <% end %>
+    </div>
+
+    <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(c.user_id).email) %>" class="comment-photo" />
+  	<a href="/user/<%= c.user_id %>"><b><%= User.find(c.user_id).username %></b></a>
+  	<span class="meta">Written <%= time_ago_in_words(c.created_at) %> ago.<br></span>
+  	<p><%= c.body %></p>
+	</div><br><br>
+<% end %>
+
+<% if current_user %>
+  <%= render "newcomment" %>
+<% end %>

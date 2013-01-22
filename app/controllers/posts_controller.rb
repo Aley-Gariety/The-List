@@ -1,23 +1,25 @@
 class PostsController < ApplicationController
 
-  skip_before_filter :require_login, :only => :index
+  skip_before_filter :require_login, :only => [:index, :show, :recent]
+
+  @@posts = Post
+    .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+    .select("posts.id," +
+      "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+      "posts.created_at," +
+      "url," +
+      "title," +
+      "posts.user_id," +
+      "comment_count")
+    .group("posts.id")
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post
-      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
-      .select("posts.id," +
-        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
-        "posts.created_at," +
-        "url," +
-        "title," +
-        "posts.user_id," +
-        "comment_count")
-      .group("posts.id")
+    @posts = @@posts
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
       .limit(10)
-    
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,7 +31,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    
+
     @comments = Comment
       .joins("LEFT JOIN votes ON comments.id = votes.post_id")
       .select("comments.id," +
@@ -45,8 +47,9 @@ class PostsController < ApplicationController
     downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1).count[@post.id] || 0
 
     @score = upvotes - downvotes
-    
+
     @comment = Comment.new
+
     @post = Post
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
@@ -94,7 +97,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post].merge(:user_id => current_user.username))
+    @post = Post.new(params[:post].merge(:user_id => current_user.id))
 
     @threshold = (current_user.karma * 0.02).round
 
@@ -103,22 +106,18 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
 
-        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => (current_user.karma * 0.02).ceil)
+        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => @threshold)
 
         @new_vote.update_attributes({
       	  :vote_type => 0,
       	  :direction => 0
     	  })
 
-        @new_vote.save
-
-        threshold = (current_user.karma * 0.02).round
-
-        threshold = 10 if threshold < 10
-
-        User.find(current_user.id).update_attributes({
-      	  :karma => current_user.karma - threshold
-    	  })
+        if @new_vote.save
+          User.find(current_user.id).update_attributes({
+        	  :karma => current_user.karma - @threshold
+      	  })
+    	  end
 
         format.html { redirect_to @post }
         format.json { render json: @post, status: :created, location: @post }
@@ -158,6 +157,11 @@ class PostsController < ApplicationController
   end
 
   def recent
-    @posts = Post.order('created_at DESC').limit(10)
+
+    @posts = @posts = @@posts
+      .order("created_at DESC")
+      .limit(10)
+
+    render :template => 'posts/index'
   end
 end
