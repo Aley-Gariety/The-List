@@ -10,8 +10,8 @@ class UsersController < ApplicationController
 	def create
 		@token = params[:token]
 
-	  if User.where(:gift_token => @token).count == 0
-	  	@user = User.find_or_initialize_by_id(params[:user].merge(:gift_token => @token))
+	  if User.where(:gift_token => @token).count == 1
+	  	@user = User.update_all(params[:user])
 	  else
 	  	render "new"
 	  end

@@ -12,9 +12,7 @@ class GiftsController < ApplicationController
   def create
     @gift = Gift.find_or_initialize_by_email(:email => params[:email], :karma => params[:karma])
 
-    @gift.update_attributes({
-      :karma => @gift.karma + params[:karma].to_i
-    })
+
 
     user = User.first
 
@@ -25,6 +23,11 @@ class GiftsController < ApplicationController
       user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.username, 1, params[:name])
       redirect_to root_url, :notice => "Your karma has been gifted."
     end
+    
+    @gift.update_attributes({
+      :karma => @gift.karma + params[:karma].to_i
+    })
+    
   end
 
   def edit
