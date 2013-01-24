@@ -4,9 +4,9 @@ attr_accessible :email, :karma, :gift, :username, :password, :password_salt
 set_table_name "users"
 
 before_create { generate_token(:auth_token) }
-
 before_create { generate_token(:gift_token) }
 
+validates_format_of :email, :with => /@/
 
 	def generate_token(column)
 		begin
@@ -15,6 +15,5 @@ before_create { generate_token(:gift_token) }
 		end
 
 		def send_gift(email)
-
-		end
+  end
 end

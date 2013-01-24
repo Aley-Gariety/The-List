@@ -8,17 +8,12 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@token = params[:token]
+	  @token = params[:token]
 
-	  if User.where(:gift_token => @token).count == 1
-	  	@user = User.update_all(params[:user])
-	  else
-	  	render "new"
-	  end
+		@user = User.find_by_gift_token(@token)
 
-	  if @user.save
-
-	    redirect_to root_url
+	  if @user.update_attributes(params[:user])
+	    redirect_to log_in_path, :notice => "Your account has been created. Sign in with your email and password."
 	  else
 	    render "new"
 	  end
