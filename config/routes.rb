@@ -12,17 +12,15 @@ ThelistIo::Application.routes.draw do
 
   match '/user/:username' => 'users#user'
 
-  match "/sign_up/:token" => "users#create"
-
   get "sessions/new"
 
   get "log_out" => "sessions#destroy", :as => "log_out"
 
   get "log_in" => "sessions#new", :as => "log_in"
 
-  get "sign_up" => "users#new", :as => "sign_up"
+  get "gift" => "users#new", :as => "gift"
 
-  get "gifts/redeem" => "gifts#redeem", :as => "redeem"
+  get "redeem/:token" => "users#redeem", :as => "redeem"
 
   put "vote", :to => "vote#vote", as: :vote
 
@@ -30,7 +28,6 @@ ThelistIo::Application.routes.draw do
   resources :sessions
   resources :posts
   resources :comments
-  resources :gifts
   resources :password_resets
 
   # The priority is based upon order of creation:

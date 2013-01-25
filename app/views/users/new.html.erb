@@ -1,4 +1,6 @@
-<h2>Sign Up</h2><br>
+<h2>Gift</h2>
+
+<p>Gifting karma is the only way to invite people to The List. <br> There is a minimum of 10, which is also the amount required to create one post.</p>
 
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
@@ -11,21 +13,18 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+  
+  <p>
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </p>
+  <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
-  </div><br>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div><br>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div><br>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </div><br>
-  <p class="button"><%= f.submit %></p>
+  </p>
+    <p>
+    <%= f.label :karma  %><br />
+    <%= f.text_field :karma %>
+  </p>
+  <p class="button"><%= f.submit "Send Karma"%></p>
 <% end %>

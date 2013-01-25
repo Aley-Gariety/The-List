@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_secure_password
+#  has_secure_password
 
   attr_accessible :email, :password, :password_confirmation, :username, :karma, :gift_token
 
@@ -9,14 +9,15 @@ class User < ActiveRecord::Base
 
   has_many :votes
 
-  before_save :encrypt_password
+#  before_save :encrypt_password
 
   before_create { generate_token(:auth_token) }
 
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
-  validates_presence_of :username, :on => :create
-  validates_uniqueness_of :username, :on => :create
+#  validates_confirmation_of :password, :only => [:update]
+#  validates_presence_of :password, :on => :create, :only => [:update]
+#  validates_presence_of :username, :on => :create, :only => [:update]
+#  validates_uniqueness_of :username, :on => :create, :only => [:update]
+#  validates_format_of :email, :with => /@/
 
   def self.authenticate(email, password)
     user = find_by_email(email)

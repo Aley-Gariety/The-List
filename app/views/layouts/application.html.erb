@@ -21,15 +21,13 @@
             &nbsp;&bull;&nbsp;
             <%= link_to 'Submit', new_post_path %>
             &nbsp;&bull;&nbsp;
-            <%= link_to 'Gift', new_gift_path %>
+            <%= link_to 'Gift', gift_path %>
             &nbsp;&bull;&nbsp;
             <%= link_to "Sign Out", log_out_path %>
           <% else %>
             <%= link_to 'Recent', recent_path %>
             &nbsp;&bull;&nbsp;
             <%= link_to 'Documentation', docs_path %>
-            &nbsp;&bull;&nbsp;
-            <%= link_to "Sign Up", sign_up_path %>
             &nbsp;&bull;&nbsp;
             <%= link_to "Sign In", log_in_path %>
           <% end %>

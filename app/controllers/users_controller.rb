@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_filter :require_login, :except => [:gift,:profile]
+  skip_before_filter :require_login, :except => [:new,:profile]
 
   #for adding a new user
 	def new
@@ -8,15 +8,22 @@ class UsersController < ApplicationController
 	end
 
 	def create
-	  @token = params[:token]
+    @user = User.find_or_initialize_by_email(:email => params[:email], :karma => params[:karma])
 
-		@user = User.find_by_gift_token(@token)
+    user = User.first
 
-	  if @user.update_attributes(params[:user])
-	    redirect_to log_in_path, :notice => "Your account has been created. Sign in with your email and password."
-	  else
-	    render "new"
-	  end
+    if @user.new_record? && @user.save
+      user.send_gift(params[:email], params[:karma], User.find_by_email(params[:email]).gift_token, current_user.username, 0, params[:name])
+      redirect_to root_url, :notice => "Your invite has been sent."
+    elsif User.find_by_email(params[:email]) != nil
+      user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.username, 1, params[:name])
+      redirect_to root_url, :notice => "Your karma has been gifted."
+    end
+
+    @user.update_attributes({
+      :karma => @user.karma + params[:karma].to_i
+    })
+
 	end
 
   def send_gift(email,karma,new_gift_token,sender)
@@ -41,5 +48,15 @@ class UsersController < ApplicationController
       "comment_count")
     .group("posts.id")
     .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
+  end
+  
+  def redeem
+  	@token = params[:token]
+    @user = User.find_by_gift_token!(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to root_url, :notice => "You account has been created."
+    else
+      render :edit
+    end
   end
 end
