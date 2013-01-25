@@ -40,5 +40,6 @@ class UsersController < ApplicationController
       "posts.user_id," +
       "comment_count")
     .group("posts.id")
+    .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
   end
 end
