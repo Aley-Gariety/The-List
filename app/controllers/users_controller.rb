@@ -8,31 +8,29 @@ class UsersController < ApplicationController
 	end
 
 	def create
-    @user = User.find_or_initialize_by_email(:email => params[:email], :karma => params[:karma])
-
-    user = User.first
-
-    if @user.new_record? && @user.save
-      user.send_gift(params[:email], params[:karma], User.find_by_email(params[:email]).gift_token, current_user.username, 0, params[:name])
-      redirect_to root_url, :notice => "Your invite has been sent."
-    elsif User.find_by_email(params[:email]) != nil
-      user.send_gift(params[:email], params[:karma], current_user.gift_token, current_user.username, 1, params[:name])
+		email = params[:user][:email]
+		karma = params[:user][:karma]
+		name = params[:user][:username]
+		
+		generated_token = SecureRandom.urlsafe_base64
+	
+    @user = User.find_or_initialize_by_auth_token(:auth_token => generated_token, :karma => karma)
+    
+    
+    
+    if @user.username != nil
+      User.first.send_gift(email, karma, current_user.gift_token, current_user.username, 1, name)
       redirect_to root_url, :notice => "Your karma has been gifted."
+    elsif @user.save
+      User.first.send_gift(email, karma, generated_token, current_user.username, 0, name)
+      redirect_to root_url, :notice => "Your invite has been sent."
     end
 
     @user.update_attributes({
       :karma => @user.karma + params[:karma].to_i
     })
-
 	end
-
-  def send_gift(email,karma,new_gift_token,sender)
-  	new_gift_token = SecureRandom.urlsafe_base64
-		@new_user = User.new
-		@new_user.save
-	  Invite.gift(email, karma, new_gift_token, sender).deliver
-  end
-
+	
 	def user
     @user = User.find_by_username(params[:username])
 
@@ -50,13 +48,29 @@ class UsersController < ApplicationController
     .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
   end
   
-  def redeem
-  	@token = params[:token]
-    @user = User.find_by_gift_token!(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to root_url, :notice => "You account has been created."
+  def update
+  	@auth_token = params[:auth_token]
+  	@password = params[:password]
+  	
+    @user = User.find_by_auth_token(@auth_token)
+    
+    if params.include?(:user)
+    
+    	password_salt = BCrypt::Engine.generate_salt
+    
+  	  if User.find_by_auth_token(params[:user][:auth_token]).update_attributes({
+	  	  	:email => params[:user][:email],
+	  	  	:username => params[:user][:username],
+	  	  	:password_hash => BCrypt::Engine.hash_secret(params[:user][:password], password_salt),
+	  	  	:password_salt => password_salt
+	  	  })
+  	  
+  	    cookies.delete(:auth_token)
+  	    
+      	redirect_to log_in_path, :notice => "You account has been created. Sign in with your username and password."
+      end
     else
-      render :edit
+      render :update
     end
   end
 end

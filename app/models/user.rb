@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 #  has_secure_password
 
-  attr_accessible :email, :password, :password_confirmation, :username, :karma, :gift_token
+  attr_accessible :email, :password, :password_confirmation, :username, :karma, :gift_token, :auth_token, :password_hash, :password_salt
 
   has_many :posts
 
@@ -9,15 +9,13 @@ class User < ActiveRecord::Base
 
   has_many :votes
 
-#  before_save :encrypt_password
+  before_update :encrypt_password
 
-  before_create { generate_token(:auth_token) }
-
-#  validates_confirmation_of :password, :only => [:update]
-#  validates_presence_of :password, :on => :create, :only => [:update]
-#  validates_presence_of :username, :on => :create, :only => [:update]
-#  validates_uniqueness_of :username, :on => :create, :only => [:update]
-#  validates_format_of :email, :with => /@/
+# 	validates_confirmation_of :password, :only => :update
+# 	validates_presence_of :password, :on => :create, :only => :update
+# 	validates_presence_of :username, :on => :create, :only => :update
+# 	validates_uniqueness_of :username, :on => :create, :only => :update
+# 	validates_format_of :email, :with => /@/
 
   def self.authenticate(email, password)
     user = find_by_email(email)
@@ -29,9 +27,9 @@ class User < ActiveRecord::Base
   end
 
   def encrypt_password
-    if password.present?
+    if @password.present?
       self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      self.password_hash = BCrypt::Engine.hash_secret(@password, password_salt)
     end
   end
 
@@ -47,6 +45,7 @@ class User < ActiveRecord::Base
     save!
     Invite.password_reset(self).deliver
   end
+  
 
 	def send_gift(email, karma, gift_token, sender, bool, name)
 
