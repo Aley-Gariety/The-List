@@ -8,6 +8,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
 	    if @comment.save
+	    	@mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+    	  @mixpanel.track 'comment', { :username => current_user.username }
 
         @post = Post.find(@comment.post_id)
 

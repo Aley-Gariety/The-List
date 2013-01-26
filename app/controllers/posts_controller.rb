@@ -109,7 +109,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-
+	      @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+    	  @mixpanel.track 'post', { :username => current_user.username }
         @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => @threshold)
 
         @new_vote.update_attributes({
