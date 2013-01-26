@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :username, :karma, :gift_token, :auth_token, :password_hash, :password_salt
 
+  attr_accessor :name
+
   has_many :posts
 
   has_many :comments
@@ -10,12 +12,6 @@ class User < ActiveRecord::Base
   has_many :votes
 
   before_update :encrypt_password
-
-# 	validates_confirmation_of :password, :only => :update
-# 	validates_presence_of :password, :on => :create, :only => :update
-# 	validates_presence_of :username, :on => :create, :only => :update
-# 	validates_uniqueness_of :username, :on => :create, :only => :update
-# 	validates_format_of :email, :with => /@/
 
   def self.authenticate(email, password)
     user = find_by_email(email)
@@ -45,7 +41,7 @@ class User < ActiveRecord::Base
     save!
     Invite.password_reset(self).deliver
   end
-  
+
 
 	def send_gift(email, karma, gift_token, sender, bool, name)
 

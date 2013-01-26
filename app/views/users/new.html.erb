@@ -13,21 +13,21 @@
       </ul>
     </div>
   <% end %>
-  
+
   <p>
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
   </p>
-  
+
   <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
-  
+
   <p>
     <%= f.label :karma %><br />
     <%= f.text_field :karma, :value => "10" %>
   </p>
-  
+
   <p class="button"><%= f.submit "Send Karma"%></p>
 <% end %>
