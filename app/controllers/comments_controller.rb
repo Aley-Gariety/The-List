@@ -1,10 +1,6 @@
 class CommentsController < ApplicationController
   def new
     @comment = Comment.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
-    end
   end
 
   def create
@@ -20,7 +16,7 @@ class CommentsController < ApplicationController
     	  })
 
         format.html { redirect_to @post }
-        format.json { render json: @post, status: :created, location: @post }
+        format.json { render json: @post, status: :created }
       end
 	  end
 	end
