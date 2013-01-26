@@ -17,6 +17,8 @@ class VoteController < ApplicationController
 	  })
 
 	  if @new_vote.save
+	  	@mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+    	@mixpanel.track 'vote', { :username => current_user.username, :type => vote_type, :direction => direction, :post_id => post_id }
 
 	    receiving_user = User.find(Post.find(post_id).user_id)
 
