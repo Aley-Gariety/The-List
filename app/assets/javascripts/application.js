@@ -16,7 +16,7 @@ $(function(){
         direction = _this.attr('class'),
         suffrage = _this.parent(),
         countSpan = _this.siblings('span'),
-        origScore = _this.siblings('span').html(),
+        origScore = parseInt(_this.siblings('span').html()),
         increment = parseInt(suffrage.attr('data-value')) || 1
 
     if (direction == 'up' && !suffrage.hasClass('upactive')) {
