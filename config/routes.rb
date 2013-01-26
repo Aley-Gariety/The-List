@@ -20,9 +20,9 @@ ThelistIo::Application.routes.draw do
 
   get "gift" => "users#new", :as => "gift"
 
-  put "vote", :to => "vote#vote", as: :vote
-
   get "/redeem/:auth_token" => "users#update"
+
+  put "vote", :to => "vote#vote", as: :vote
 
   resources :users
   resources :sessions
