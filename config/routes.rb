@@ -11,6 +11,8 @@ ThelistIo::Application.routes.draw do
   match '/recent' => 'posts#recent'
 
   match '/user/:username' => 'users#user'
+  
+  match '/apply' => 'applications#new'
 
   get "sessions/new"
 
@@ -25,6 +27,7 @@ ThelistIo::Application.routes.draw do
   put "vote", :to => "vote#vote", as: :vote
 
   resources :users
+  resources :applications
   resources :sessions
   resources :posts
   resources :comments

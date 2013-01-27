@@ -25,6 +25,8 @@
             &nbsp;&bull;&nbsp;
             <%= link_to "Sign Out", log_out_path %>
           <% else %>
+         	  <%= link_to 'Apply', apply_path, :class => 'profile-link' %>
+         	  &nbsp;&bull;&nbsp;
             <%= link_to 'Recent', recent_path %>
             &nbsp;&bull;&nbsp;
             <%= link_to 'Documentation', docs_path %>
