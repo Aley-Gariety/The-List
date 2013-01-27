@@ -68,7 +68,7 @@ class PostsController < ApplicationController
       end
     end
 
-    if current_user.id == @post.user_id.to_i
+    if current_user && current_user.id == @post.user_id.to_i
       @active += " owner"
     end
 
