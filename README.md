@@ -24,7 +24,7 @@ The List sports a set of "rules" that help automatically curate the order of the
 *   Casting votes:
 *   A vote is worth 2% of your total karma with a minimum of 1. Voting doesn't cost any of your own like posting and gifting do, it only adds to the post's score.
 *   Cost of gifting:
-*   Gifting takes however much of your karma you're willing to give up with a minimum of 10.
+*   Gifting takes however much of your karma you're willing to give up with a minimum of 4.
 *   Ranking algorithm:
 *   The list uses a ranking algorithm similar to the one used by Reddit.com, with a few adjustments. In essence, a post's rank is determined by three factors: how much karma it has received form its voters, how fast its discussion is moving, and how recently it was created. We use this exact SQL query:
 

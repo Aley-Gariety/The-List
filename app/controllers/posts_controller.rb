@@ -85,7 +85,7 @@ class PostsController < ApplicationController
 
     @threshold = (current_user.karma * 0.02).round
 
-    @threshold = 10 if @threshold < 10
+    @threshold = 4 if @threshold < 4
 
     respond_to do |format|
       format.html # new.html.erb
@@ -105,7 +105,7 @@ class PostsController < ApplicationController
 
     @threshold = (current_user.karma * 0.02).round
 
-    @threshold = 10 if @threshold < 10
+    @threshold = 4 if @threshold < 4
 
     respond_to do |format|
       if @post.save
