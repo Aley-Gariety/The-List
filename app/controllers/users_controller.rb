@@ -79,7 +79,7 @@ class UsersController < ApplicationController
 
     	    cookies.delete(:auth_token)
 
-        	redirect_to log_in_path, :notice => "You account has been created. Sign in with your username and password."
+        	redirect_to log_in_path, :notice => "You account has been created. Sign in with your email and password."
         end
       else
         redirect_to request.env["HTTP_REFERER"], :notice => "Ooops. You should check your form again."
