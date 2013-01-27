@@ -402,11 +402,14 @@ pre {
 }
 
 /* Flash Notices */
+
 #flash_notice {
   border: 1px solid #FF8888;
   color: #ff4747;
   padding: 10px;
 }
+
+/* iPhone size */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   body {

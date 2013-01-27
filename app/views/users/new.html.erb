@@ -1,33 +1,36 @@
 <h2>Gift</h2>
 
-<p>Gifting karma is the only way to invite people to The List. <br> There is a minimum of 10, which is also the amount required to create one post.</p>
+<p>Gifting karma is the only way to invite people to The List. <br> There is a minimum of 4, which is also the amount required to create one post.</p>
+<% if current_user.karma >= 4 %>
+  <%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </p>
+
+    <p>
+      <%= f.label :karma %><br />
+      <%= f.text_field :karma, :value => "10" %>
+    </p>
+
+    <p class="button"><%= f.submit "Send Karma"%></p>
   <% end %>
-
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <%= f.label :karma %><br />
-    <%= f.text_field :karma, :value => "10" %>
-  </p>
-
-  <p class="button"><%= f.submit "Send Karma"%></p>
+<% else %>
+  <span>You need at least 4 karma to gift. You currently have <span class="red"><%= current_user.karma %> karma</span>. See <a href="/docs">the FAQ</a> to learn about getting karma once yours has been depleted.</span>
 <% end %>
