@@ -170,9 +170,8 @@ class PostsController < ApplicationController
   end
 
   def recent
-
-    @posts = @posts = @@posts
-      .order("created_at DESC")
+    @posts = @@posts
+      .order("posts.created_at DESC")
       .limit(10)
 
     render :template => 'posts/index'
