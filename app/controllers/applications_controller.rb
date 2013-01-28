@@ -13,12 +13,15 @@ class ApplicationsController < ApplicationController
 
 	def create
     @application = Application.create params[:application]
-
-    	if Application.create params[:application]
-    	redirect_to root_url, :notice => "Your application has been submitted and will be reviewed."
+    
+    respond_to do |format|
+    if Application.create (params[:application])
+      format.html { redirect_to root_url, :notice => "Your application has been submitted and will be reviewed."  }
+      format.json { render json: @application, status: :created, location: @post }
     else
-    	render :action => :new
+     format.html { render action: :new }
+     format.json { render json: @application.errors, status: :unprocessable_entity }
+     end
     end
-
-	end
+  end
 end
