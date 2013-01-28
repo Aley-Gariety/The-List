@@ -55,7 +55,7 @@ a:active {
 }
 
 .meta a {
-  color: #777;
+  color: #AAA;
 }
 
 .meta a:hover {
@@ -63,7 +63,7 @@ a:active {
 }
 
 .meta a:active {
-  color: #777;
+  color: #AAA;
 }
 
 a.profile-link {
@@ -76,6 +76,14 @@ a.profile-link:hover {
 
 a.profile-link:active {
   color: #000;
+}
+
+.title:visited {
+  color: #AAA;
+}
+
+.title:visited + * + * {
+  display: none;
 }
 
 /* Page structure */
@@ -201,7 +209,7 @@ ol {
 }
 
 .meta {
-  color: #777;
+  color: #AAA;
   font-size: .75em;
   line-height: normal;
 }
