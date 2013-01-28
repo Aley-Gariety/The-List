@@ -43,8 +43,8 @@ class PostsController < ApplicationController
       .group("comments.id")
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(comments.created_at) / 300000) DESC")
 
-    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0).count[@post.id] || 0
-    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1).count[@post.id] || 0
+    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0, :vote_type => 0).count[@post.id] || 0
+    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1, :vote_type => 0).count[@post.id] || 0
 
     @score = upvotes - downvotes
 
@@ -61,11 +61,20 @@ class PostsController < ApplicationController
         "comment_count").find(params[:id])
 
     if current_user
-      if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0).count > 0
+      if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0, :vote_type => 0).count > 0
         @active = ' upactive'
-      elsif Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 1).count > 0
+      elsif Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 1, :vote_type => 0).count > 0
         @active = ' downactive'
       end
+    end
+
+    found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(@post.id, current_user.id, 0)
+
+    if found_vote
+      @value = found_vote.value
+    else
+   	  @value = current_user.karma * 0.02
+   	  @value = 1 if value < 1
     end
 
     if current_user && current_user.id == @post.user_id.to_i
@@ -111,10 +120,9 @@ class PostsController < ApplicationController
       if @post.save
 	      @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
     	  @mixpanel.track 'post', { :username => current_user.username }
-        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => @threshold)
+        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => @threshold, :vote_type => 0)
 
         @new_vote.update_attributes({
-      	  :vote_type => 0,
       	  :direction => 0
     	  })
 

@@ -9,6 +9,9 @@
 <br>
 <h3><%= @user.username %>'s Posts:</h3>
 <br>
+<% if @posts.count == {} %>
+  <%= @user.username %> has no posts yet.
+<% end %>
 <ol>
   <% @posts.each do |post| %>
     <%
