@@ -66,15 +66,15 @@ a:active {
   color: #AAA;
 }
 
-a.profile-link {
+.meta-header a:first-child {
   color: #ff4747;
 }
 
-a.profile-link:hover {
+.meta-header a:first-child:hover {
   color: #ff8888;
 }
 
-a.profile-link:active {
+.meta-header a:first-child:active {
   color: #000;
 }
 

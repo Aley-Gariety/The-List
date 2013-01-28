@@ -9,6 +9,14 @@ $(function(){
     mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'));
   }
 
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = decodeURIComponent(value);
+    });
+    return vars;
+  }
+
   $(window).resize(setMediaQuery);
 
   $('.suffrage > a').click(function(){
@@ -37,4 +45,6 @@ $(function(){
 
   });
 
+  $('#user_name').val(getUrlVars()['name'])
+  $('#user_email').val(getUrlVars()['email'])
 });

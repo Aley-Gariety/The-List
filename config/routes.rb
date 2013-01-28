@@ -11,8 +11,8 @@ ThelistIo::Application.routes.draw do
   match '/recent' => 'posts#recent'
 
   match '/user/:username' => 'users#user'
-  
-  match '/apply' => 'applications#new'
+
+  match '/applicants' => "requests#index"
 
   get "sessions/new"
 
@@ -24,14 +24,21 @@ ThelistIo::Application.routes.draw do
 
   get "/redeem/:auth_token" => "users#update"
 
+  get "/apply" => "requests#new", :as => "apply"
+
   put "vote", :to => "vote#vote", as: :vote
 
   resources :users
-  resources :applications
+
   resources :sessions
+
   resources :posts
+
   resources :comments
+
   resources :password_resets
+
+  resources :requests
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

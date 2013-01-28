@@ -1,0 +1,30 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div><br>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div><br>
+  <div class="field">
+    <%= f.label :url, "URL" %><br />
+    <p>Show us something you've made or written that might be impressive.</p>
+    <%= f.text_field :url, :placeholder => "http://mysite.com/myproject" %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div><br>
+<% end %>

@@ -1,0 +1,15 @@
+<h2>Applicants Awaiting Invitations</h2><br>
+
+<% if @requests.count == 0 %>
+  All applicants have received invitations, boo-yeah!
+<% end %>
+
+<ul>
+  <% @requests.each do |request| %>
+    <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(request.email) %>" class="profile-photo" />
+    <h3><%= request.name %></h3>
+    <a href="<%= request.url %>"><%= request.url %></a><br>
+    <span><%= time_ago_in_words(request.created_at) %> ago</span><br>
+    <%= link_to "Send #{request.name} an Invitation", "/gift?name=#{request.name}&email=#{request.email}" %>
+  <% end %>
+</ul>

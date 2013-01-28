@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   #for adding a new user
 	def new
+		email = params[:email]
+		name = params[:name]
+
     respond_to do |format|
       @user = User.new
       format.html # new.html.erb
@@ -21,6 +24,14 @@ class UsersController < ApplicationController
     @user = User.find_or_initialize_by_auth_token(:auth_token => generated_token, :karma => karma)
 
     unless [email, karma, name].any?{|f| f.blank? }
+
+      @user.update_attributes({
+        :karma => @user.karma + params[:karma].to_i
+      })
+
+      @applicant = Request.find_by_email(email)
+      @applicant.destroy if @applicant
+
       if User.find_by_email(params[:user][:email])
         User.first.send_gift(email, karma, '', current_user.username, 1, name)
         redirect_to root_url, :notice => "Your karma has been gifted."
@@ -31,10 +42,6 @@ class UsersController < ApplicationController
     else
       redirect_to request.env["HTTP_REFERER"], :notice => "Ooops. You should check your form again."
     end
-
-    @user.update_attributes({
-      :karma => @user.karma + params[:karma].to_i
-    })
 	end
 
 	def user
