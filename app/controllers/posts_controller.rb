@@ -49,8 +49,8 @@ class PostsController < ApplicationController
       .where(:post_id => @post.id)
       .group("comments.id")
 
-    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0, :vote_type => 0).count[@post.id] || 0
-    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1, :vote_type => 0).count[@post.id] || 0
+    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0, :vote_type => 1).count[@post.id] || 0
+    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1, :vote_type => 1).count[@post.id] || 0
 
     @score = upvotes - downvotes
 
