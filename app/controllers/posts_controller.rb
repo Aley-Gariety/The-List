@@ -68,17 +68,20 @@ class PostsController < ApplicationController
       end
     end
 
-    found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(@post.id, current_user.id, 0)
+    if current_user
+      found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(@post.id, current_user.id, 0)
 
-    if found_vote
-      @value = found_vote.value
-    else
-   	  @value = current_user.karma * 0.02
-   	  @value = 1 if value < 1
-    end
+      if found_vote
+        @value = found_vote.value
+      else
+     	  @value = current_user.karma * 0.02
+     	  @value = 1 if @value < 1
+      end
 
-    if current_user && current_user.id == @post.user_id.to_i
-      @active += " owner"
+
+      if current_user.id == @post.user_id.to_i
+        @active += " owner"
+      end
     end
 
     respond_to do |format|
