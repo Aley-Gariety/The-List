@@ -27,4 +27,15 @@ class Invite < ActionMailer::Base
   def log(message)
     mail :to => "personal@jacksongariety.com", :subject => "The List - Log", :body => message
   end
+  
+  def notify(type,email,mentioner)
+  	@type = type
+  	@email = email
+  	@mentioner = mentioner
+  	
+  	# mention
+  	if type == 0
+  		mail :to => email, :subject => "You've been mentioned on The List", :body => message
+  	end
+  end
 end
