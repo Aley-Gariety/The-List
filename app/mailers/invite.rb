@@ -1,5 +1,5 @@
 class Invite < ActionMailer::Base
-  default from: "The List <organichackers@gmail.com>"
+  default from: "The List <postmaster@thelistio.mailgun.org>"
 
   def gift(email, karma, token, sender, name)
 	  @email = email

@@ -1,9 +1,9 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp.mailgun.org",
   :port                 => 587,
-  :domain               => "gmail.com",
-  :user_name            => "organichackers",
-  :password             => "0rgan1chackers",
+  :domain               => "thelistio.mailgun.org",
+  :user_name            => "postmaster@thelistio.mailgun.org",
+  :password             => "43kf8ja8t436",
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
