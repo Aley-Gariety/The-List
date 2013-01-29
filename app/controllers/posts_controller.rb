@@ -16,10 +16,17 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @page = params[:page]
+
     @posts = @@posts
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
-      .limit(15)
+      .page(@page)
 
+    if @page
+      @multiplier = @page.to_i - 1
+    else
+      @multiplier = 0
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -173,10 +180,21 @@ class PostsController < ApplicationController
   end
 
   def recent
+    @page = params[:page]
+
+    if @page
+      @multiplier = @page.to_i - 1
+    else
+      @multiplier = 0
+    end
+
     @posts = @@posts
       .order("posts.created_at DESC")
-      .limit(15)
+      .page(@page)
 
-    render :template => 'posts/index'
+    respond_to do |format|
+      format.html { render "/posts/index" }
+      format.json { render json: @posts }
+    end
   end
 end

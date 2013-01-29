@@ -7,10 +7,10 @@ ThelistIo::Application.routes.draw do
   match '/docs' => 'pages#docs'
 
   match '/stats' => 'pages#stats'
-  
+
   match '/blog' => 'pages#blog'
 
-  match '/recent' => 'posts#recent'
+  get '/recent' => 'posts#recent'
 
   match '/user/:username' => 'users#user'
 
@@ -18,9 +18,9 @@ ThelistIo::Application.routes.draw do
 
   get "sessions/new"
 
-  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "signout" => "sessions#destroy", :as => "signout"
 
-  get "log_in" => "sessions#new", :as => "log_in"
+  get "signin" => "sessions#new", :as => "signin"
 
   get "gift" => "users#new", :as => "gift"
 
@@ -34,7 +34,9 @@ ThelistIo::Application.routes.draw do
 
   resources :sessions
 
-  resources :posts
+  resources :posts do
+    get 'page-:page', :action => :index, :on => :collection
+  end
 
   resources :comments
 

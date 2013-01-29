@@ -246,7 +246,7 @@ hr {
   margin-bottom: 20px;
   border: 0;
   height: 1px;
-  background: #666;
+  background: #AAA;
 }
 
 ul.qa li:nth-child(2n - 1) {
@@ -416,9 +416,14 @@ pre {
 /* Flash Notices */
 
 #flash_notice {
-  border: 1px solid #FF8888;
-  color: #ff4747;
+  border: 1px solid #777;
+  color: #000;
   padding: 10px;
+}
+
+/* Pagination */
+.next {
+  float: right;
 }
 
 /* iPhone size */

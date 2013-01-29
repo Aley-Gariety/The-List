@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(params[:comment].merge(:user_id => current_user.id))
+    @comment = Comment.new(params[:comment].merge(:user_id => current_user.id)).order("DESC")
 
     respond_to do |format|
 	    if @comment.save
