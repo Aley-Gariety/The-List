@@ -7,7 +7,7 @@ ThelistIo::Application.routes.draw do
   match '/docs' => 'pages#docs'
 
   match '/stats' => 'pages#stats'
-  
+
   match '/blog' => 'pages#blog'
 
   get '/recent' => 'posts#recent'
@@ -34,7 +34,9 @@ ThelistIo::Application.routes.draw do
 
   resources :sessions
 
-  resources :posts
+  resources :posts do
+    get 'page-:page', :action => :index, :on => :collection
+  end
 
   resources :comments
 

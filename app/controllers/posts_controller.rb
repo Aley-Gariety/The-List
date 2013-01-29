@@ -2,6 +2,8 @@ class PostsController < ApplicationController
 
   skip_before_filter :require_login, :only => [:index, :show, :recent]
 
+  caches_page :index
+
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
     .select("posts.id," +
@@ -16,10 +18,17 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @page = params[:page]
+
     @posts = @@posts
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
-      .page(params[:page])
+      .page(@page)
 
+    if @page
+      @multiplier = @page.to_i - 1
+    else
+      @multiplier = 0
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -173,9 +182,17 @@ class PostsController < ApplicationController
   end
 
   def recent
+    @page = params[:page]
+
+    if @page
+      @multiplier = @page.to_i - 1
+    else
+      @multiplier = 0
+    end
+
     @posts = @@posts
       .order("posts.created_at DESC")
-      .page(params[:page])
+      .page(@page)
 
     respond_to do |format|
       format.html { render "/posts/index" }

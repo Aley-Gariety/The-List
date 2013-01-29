@@ -421,6 +421,11 @@ pre {
   padding: 10px;
 }
 
+/* Pagination */
+.next {
+  float: right;
+}
+
 /* iPhone size */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
