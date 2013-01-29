@@ -37,8 +37,8 @@
      	  comment_value = 1 if comment_value < 1
       end
 
-      if current_user && current_user.id == c.user_id.to_i
-        comment_active += " owner"
+      if current_user.id == c.user_id.to_i
+        comment_active = comment_active.to_s + " owner"
       end
 
     end
