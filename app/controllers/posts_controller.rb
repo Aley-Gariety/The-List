@@ -48,7 +48,6 @@ class PostsController < ApplicationController
         "comments.user_id")
       .where(:post_id => @post.id)
       .group("comments.id")
-      .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(comments.created_at) / 300000) ASC")
 
     upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0, :vote_type => 0).count[@post.id] || 0
     downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1, :vote_type => 0).count[@post.id] || 0
@@ -130,11 +129,7 @@ class PostsController < ApplicationController
       if @post.save
 	      @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
     	  @mixpanel.track 'post', { :username => current_user.username }
-        @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_value(:user_id => current_user.id, :post_id => @post.id, :value => @threshold, :vote_type => 0)
-
-        @new_vote.update_attributes({
-      	  :direction => 0
-    	  })
+        @new_vote = Vote.new(:post_id => @post.id, :user_id => current_user.id, :vote_type => 0, :direction => 0, :value => @threshold)
 
         if @new_vote.save
           User.find(current_user.id).update_attributes({

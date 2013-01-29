@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>The List</title>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "modernizr" %>
-  <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="wrap">
@@ -72,6 +73,8 @@
     </style>
     <%= javascript_include_tag "application" %>
   <section>
+    <%= link_to "Guidelines", '/guidelines' %>
+    &nbsp;&bull;&nbsp;
     <%= link_to "Applicants", '/applicants' %>
     &nbsp;&bull;&nbsp;
     <%= link_to "Blog", '/blog' %>

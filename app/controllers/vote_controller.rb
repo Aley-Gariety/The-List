@@ -6,7 +6,13 @@ class VoteController < ApplicationController
     direction = params[:direction].to_i
     value = params[:value].to_i
 
-  	return false unless Vote.where(:user_id => user_id, :post_id => post_id, :vote_type => vote_type, :direction => direction).count == 0 || (current_user.id == Post.find(post_id).user_id)
+    if vote_type.to_i == 0
+      found_post = Post.find(post_id)
+    else
+      found_post = Comment.find(post_id)
+    end
+
+  	return false unless Vote.where(:user_id => user_id, :post_id => post_id, :vote_type => vote_type, :direction => direction).count == 0 || (current_user.id == found_post.user_id)
 
 	  @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_vote_type(:user_id => current_user.id, :post_id => post_id, :vote_type => vote_type, :value => value)
 
@@ -20,7 +26,7 @@ class VoteController < ApplicationController
 	  	@mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
     	@mixpanel.track 'vote', { :username => current_user.username, :type => vote_type, :direction => direction, :post_id => post_id }
 
-	    receiving_user = User.find(Post.find(post_id).user_id)
+	    receiving_user = User.find(found_post.user_id)
 
 	    if direction == 0
 	     change = receiving_user.karma + value
@@ -28,9 +34,7 @@ class VoteController < ApplicationController
 	     change = receiving_user.karma - value
 	    end
 
-  	  receiving_user.update_attributes({
-    	  :karma => change
-  	  })
+  	  receiving_user.update_attributes({ :karma => change })
 	  end
   end
 end
