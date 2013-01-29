@@ -48,7 +48,7 @@ class PostsController < ApplicationController
         "comments.user_id")
       .where(:post_id => @post.id)
       .group("comments.id")
-      .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(comments.created_at) / 300000) DESC")
+      .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(comments.created_at) / 300000) ASC")
 
     upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0, :vote_type => 0).count[@post.id] || 0
     downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1, :vote_type => 0).count[@post.id] || 0
