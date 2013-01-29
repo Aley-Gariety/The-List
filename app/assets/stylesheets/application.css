@@ -55,7 +55,7 @@ a:active {
 }
 
 .meta a {
-  color: #AAA;
+  color: #777;
 }
 
 .meta a:hover {
@@ -63,7 +63,7 @@ a:active {
 }
 
 .meta a:active {
-  color: #AAA;
+  color: #777;
 }
 
 .meta-header a:first-child {
@@ -79,11 +79,15 @@ a:active {
 }
 
 .title:visited {
-  color: #AAA;
+  color: #777;
 }
 
-.title:visited + * + * {
-  display: none;
+.title:visited:hover {
+  color: #ff4747;
+}
+
+.title:visited:active {
+  color: #777;
 }
 
 /* Page structure */
@@ -209,7 +213,7 @@ ol {
 }
 
 .meta {
-  color: #AAA;
+  color: #777;
   font-size: .75em;
   line-height: normal;
 }
