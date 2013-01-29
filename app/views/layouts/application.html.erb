@@ -23,7 +23,7 @@
             &nbsp;&bull;&nbsp;
             <%= link_to 'Gift', gift_path %>
             &nbsp;&bull;&nbsp;
-            <%= link_to "Sign Out", log_out_path %>
+            <%= link_to "Sign Out", signout_path %>
           <% else %>
          	  <%= link_to 'Sign Up', apply_path %>
          	  &nbsp;&bull;&nbsp;
@@ -31,7 +31,7 @@
             &nbsp;&bull;&nbsp;
             <%= link_to 'About', docs_path %>
             &nbsp;&bull;&nbsp;
-            <%= link_to "Sign In", log_in_path %>
+            <%= link_to "Sign In", signin_path %>
           <% end %>
         </div>
       </section>
@@ -74,7 +74,7 @@
   <section>
     <%= link_to "Applicants", '/applicants' %>
     &nbsp;&bull;&nbsp;
-    <%= link_to "Feedback", 'mailto:colby@aley.me,business@jacksongariety.com' %>
+    <%= link_to "Feedback", 'mailto:colby@aley.me,business@jacksongariety.com?subject=The%20List%20Inquiry' %>
   </section>
   </footer>
   <script type="text/javascript">

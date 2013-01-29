@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   def index
     @posts = @@posts
       .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
-      .limit(15)
+      .page(params[:page])
 
 
     respond_to do |format|
@@ -175,8 +175,11 @@ class PostsController < ApplicationController
   def recent
     @posts = @@posts
       .order("posts.created_at DESC")
-      .limit(15)
+      .page(params[:page])
 
-    render :template => 'posts/index'
+    respond_to do |format|
+      format.html { render "/posts/index" }
+      format.json { render json: @posts }
+    end
   end
 end
