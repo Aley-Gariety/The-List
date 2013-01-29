@@ -24,6 +24,10 @@
     <p>Show us something you've made or written that might be impressive.</p>
     <%= f.text_field :url, :placeholder => "http://mysite.com/myproject" %>
   </div><br>
+  <div class="field">
+    <%= f.check_box :listme %>
+    <%= f.label :listme, "Don't list me and my Gravatar on the applicants page please." %><br />
+  </div><br>
   <div class="actions">
     <%= f.submit "Apply" %>
   </div><br>
