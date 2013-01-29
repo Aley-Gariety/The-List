@@ -7,6 +7,8 @@ ThelistIo::Application.routes.draw do
   match '/docs' => 'pages#docs'
 
   match '/stats' => 'pages#stats'
+  
+  match '/blog' => 'pages#blog'
 
   match '/recent' => 'posts#recent'
 
