@@ -2,8 +2,6 @@ class PostsController < ApplicationController
 
   skip_before_filter :require_login, :only => [:index, :show, :recent]
 
-  caches_page :index
-
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
     .select("posts.id," +
