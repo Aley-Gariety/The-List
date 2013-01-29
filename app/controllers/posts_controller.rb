@@ -42,24 +42,19 @@ class PostsController < ApplicationController
     @comments = Comment
       .joins("LEFT JOIN votes ON comments.id = votes.post_id")
       .select("comments.id," +
-        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+        "sum(if(vote_type = 1, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
         "comments.created_at," +
         "body," +
         "comments.user_id")
       .where(:post_id => @post.id)
       .group("comments.id")
 
-    upvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 0, :vote_type => 1).count[@post.id] || 0
-    downvotes = Vote.group(:post_id).where(:post_id => @post.id, :direction => 1, :vote_type => 1).count[@post.id] || 0
-
-    @score = upvotes - downvotes
-
     @comment = Comment.new
 
     @post = Post
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
-        "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+        "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
         "posts.created_at," +
         "url," +
         "title," +
