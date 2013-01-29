@@ -2,21 +2,21 @@ ThelistIo::Application.routes.draw do
 
   root :to => "posts#index"
 
-  match '/guidelines' => 'pages#guidelines'
+  match 'guidelines' => 'pages#guidelines'
 
-  match '/docs' => 'pages#docs'
+  match 'docs' => 'pages#docs'
 
-  match '/stats' => 'pages#stats'
+  match 'stats' => 'pages#stats'
 
-  match '/blog' => 'pages#blog'
+  match 'blog' => 'pages#blog'
 
-  get '/recent' => 'posts#recent'
+  match 'user/:username' => 'users#user'
 
-  match '/user/:username' => 'users#user'
-
-  match '/applicants' => "requests#index"
+  match 'applicants' => "requests#index"
 
   get "sessions/new"
+
+  get 'posts/recent' => 'posts#recent', :as => "recent"
 
   get "signout" => "sessions#destroy", :as => "signout"
 
@@ -24,9 +24,9 @@ ThelistIo::Application.routes.draw do
 
   get "gift" => "users#new", :as => "gift"
 
-  get "/redeem/:auth_token" => "users#update"
+  get "redeem/:auth_token" => "users#update"
 
-  get "/apply" => "requests#new", :as => "apply"
+  get "apply" => "requests#new", :as => "apply"
 
   put "vote", :to => "vote#vote", as: :vote
 
@@ -36,6 +36,7 @@ ThelistIo::Application.routes.draw do
 
   resources :posts do
     get 'page-:page', :action => :index, :on => :collection
+    get 'recent/page-:page', :action => :recent, :on => :collection
   end
 
   resources :comments

@@ -23,21 +23,30 @@ class UsersController < ApplicationController
 
     @user = User.find_or_initialize_by_auth_token(:auth_token => generated_token, :karma => karma)
 
-    unless [email, karma, name].any?{|f| f.blank? }
+    unless [email, karma, name].any?{|f| f.blank? } || karma.to_i < 0
+      unless current_user.karma < karma.to_i
+        found_user = User.find_by_email(email)
 
-      @user.update_attributes({
-        :karma => @user.karma + params[:karma].to_i
-      })
+        current_user.update_attributes({
+          :karma => current_user.karma - karma.to_i
+        })
 
-      @applicant = Request.find_by_email(email)
-      @applicant.destroy if @applicant
+        @applicant = Request.find_by_email(email)
+        @applicant.destroy if @applicant
 
-      if User.find_by_email(params[:user][:email])
-        User.first.send_gift(email, karma, '', current_user.username, 1, name)
-        redirect_to root_url, :notice => "Your karma has been gifted."
-      elsif @user.save
-        User.first.send_gift(email, karma, generated_token, current_user.username, 0, name)
-        redirect_to root_url, :notice => "Your invite has been sent."
+        if found_user
+          found_user.update_attributes({
+            :karma => found_user.karma + karma.to_i
+          })
+
+          User.first.send_gift(email, karma, '', current_user.username, 1, name)
+          redirect_to root_url, :notice => "Your karma has been gifted."
+        elsif @user.save
+          User.first.send_gift(email, karma, generated_token, current_user.username, 0, name)
+          redirect_to root_url, :notice => "Your invite has been sent."
+        end
+      else
+        redirect_to request.env["HTTP_REFERER"], :notice => "You have insufficient karma."
       end
     else
       redirect_to request.env["HTTP_REFERER"], :notice => "Ooops. You should check your form again."

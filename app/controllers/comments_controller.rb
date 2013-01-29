@@ -16,20 +16,24 @@ class CommentsController < ApplicationController
         @post.update_attributes({
       	  :comment_count => @post.comment_count + 1
     	  })
-    	  
-#    	  finding_regex = /^(?!.*\bRT\b)(?:.+\s)?@\w+/i
-    	  
+
+    	  @new_vote = Vote.new(:post_id => @comment.id, :user_id => current_user.id, :vote_type => 1, :direction => 0, :value => 0)
+
+    	  @new_vote.save
+
+#      	  finding_regex = /^(?!.*\bRT\b)(?:.+\s)?@\w+/i
+#
 #     	  if params[:body].match(finding_regex)
 #     	  	mentioned_users = params[:body].match(finding_regex).to_s
 #     	  	matches = params[:body].match(finding_regex)
 #     	  	if mentioned_users = matches.to_s?
-#     	  	
+#
 #     	  	mentioned_users.each do |u|
 #     	  		Invite.notify(0, User.find_by_username(u.sub!(/@/,'')).email, current_user.username).deliver
 #     	  		end
 #     	  	end
 #     	  end
- 
+
         format.html { redirect_to @post }
         format.json { render json: @post, status: :created }
       end

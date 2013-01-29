@@ -2,15 +2,16 @@
 <html>
 <head>
   <title>The List</title>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "modernizr" %>
-  <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="wrap">
     <header>
       <section>
-        <h1><a href="/">The List</a><span class="beta">&nbsp;&nbsp;Beta</span></h1>
+        <h1><a href="/">The List</a><span class="beta">&nbsp;&nbsp;v1</span></h1>
         <div class="meta-header">
           <% if current_user %>
             <%= link_to current_user.username, { :controller => "users", :action => "user", :username => current_user.username.downcase} %>
@@ -72,6 +73,8 @@
     </style>
     <%= javascript_include_tag "application" %>
   <section>
+    <%= link_to "Guidelines", '/guidelines' %>
+    &nbsp;&bull;&nbsp;
     <%= link_to "Applicants", '/applicants' %>
     &nbsp;&bull;&nbsp;
     <%= link_to "Blog", '/blog' %>
