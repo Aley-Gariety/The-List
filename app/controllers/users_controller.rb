@@ -18,11 +18,11 @@ class UsersController < ApplicationController
 		email = params[:user][:email]
 		karma = params[:user][:karma]
 		name = params[:user][:name]
-
+		
 		generated_token = SecureRandom.urlsafe_base64
-
-    @user = User.find_or_initialize_by_auth_token(:auth_token => generated_token, :karma => karma)
-
+		
+    @user = User.find_or_initialize_by_auth_token(:auth_token => generated_token, :karma => karma, :email => email)
+    
     unless [email, karma, name].any?{|f| f.blank? } || karma.to_i < 0
       unless current_user.karma < karma.to_i
         found_user = User.find_by_email(email)
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
 
     	    cookies.delete(:auth_token)
 
-        	redirect_to "/guidelines", :notice => "You account has been created. <a href=\"/signin\">Click here to sign in.</a>".html_safe
+        	redirect_to "/guidelines", :notice => "Your account has been created. <a href=\"/signin\">Click here to sign in.</a>".html_safe
         end
       else
         redirect_to request.env["HTTP_REFERER"], :notice => "Ooops. You should check your form again."
