@@ -459,10 +459,13 @@ pre {
   body {
     zoom: 200%;
   }
-  .title {
+  .submission, .suffrage {
     font-size: 2.5em;
   }
-  .meta {
-    font-size: 1.5em;
+  .up,.down {
+    margin-left: -10px;
+  }
+  .suffrage > span {
+    margin-left: -6px;
   }
 }
