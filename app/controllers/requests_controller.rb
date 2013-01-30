@@ -46,6 +46,8 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
+    	@mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+    	@mixpanel.track 'request', { :email => @request.email }
         format.html { redirect_to requests_path, notice: "Your application has been received and will be reviewed." }
         format.json { render json: @request, status: :created, location: @request }
       else

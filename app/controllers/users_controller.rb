@@ -42,6 +42,8 @@ class UsersController < ApplicationController
           User.first.send_gift(email, karma, '', current_user.username, 1, name)
           redirect_to root_url, :notice => "Your karma has been gifted."
         elsif @user.save
+     	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+        	@mixpanel.track 'gift', { :karma => @user.karma }
           User.first.send_gift(email, karma, generated_token, current_user.username, 0, name)
           redirect_to root_url, :notice => "Your invite has been sent."
         end
@@ -94,6 +96,8 @@ class UsersController < ApplicationController
   	  	  })
 
     	    cookies.delete(:auth_token)
+     	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+        	@mixpanel.track 'signup', { :username => username }
 
         	redirect_to "/guidelines", :notice => "Your account has been created. <a href=\"/signin\">Click here to sign in.</a>".html_safe
         end
