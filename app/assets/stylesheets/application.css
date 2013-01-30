@@ -131,7 +131,7 @@ body {
   margin: 0;
   top: 0;
   height: 100%;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeLegibility;
 }
 
@@ -453,10 +453,16 @@ pre {
   float: right;
 }
 
-/* iPhone size */
+/* Mobile */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   body {
     zoom: 200%;
+  }
+  .title {
+    font-size: 2.5em;
+  }
+  .meta {
+    font-size: 1.5em;
   }
 }
