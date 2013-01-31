@@ -63,7 +63,7 @@
   	<a href="/user/<%= User.find(c.user_id).username %>"><b><%= User.find(c.user_id).username %></b></a>
   	<span class="meta">Written <%= time_ago_in_words(c.created_at) %> ago.<br></span>
   	<p><%= c.body %></p>
-	</div><br><br>
+	</div><br>
 <% end %>
 
 <% if current_user %>

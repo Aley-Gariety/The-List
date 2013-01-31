@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
     .select("posts.id," +
-      "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+      "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
       "posts.created_at," +
       "url," +
       "title," +
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     @page = params[:page]
 
     @posts = @@posts
-      .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
+      .order("log10(abs(sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0))) + 1) * sign(sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0))) + (unix_timestamp(posts.created_at) / 300000) DESC")
       .page(@page)
 
     if @page
@@ -67,9 +67,7 @@ class PostsController < ApplicationController
       elsif Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 1, :vote_type => 0).count > 0
         @active = ' downactive'
       end
-    end
 
-    if current_user
       found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(@post.id, current_user.id, 0)
 
       if found_vote
