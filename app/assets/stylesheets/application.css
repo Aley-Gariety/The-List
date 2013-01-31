@@ -406,11 +406,13 @@ pre {
 
 .comment-photo {
   float: left;
-  border: 1px solid #CCC;
   margin-right: 10px;
   margin-bottom: 10px;
   width: 41px;
   height: 41px;
+  -webkit-border-radius: 25px;
+     -moz-border-radius: 25px;
+          border-radius: 25px;
 }
 
 .comment-submit {
@@ -435,10 +437,12 @@ pre {
 
 .profile-photo {
 	float: left;
-  border: 1px solid #CCC;
   margin-right: 10px;
   width: 80px;
   height: 80px;
+  -webkit-border-radius: 190px;
+     -moz-border-radius: 190px;
+          border-radius: 190px;
 }
 
 /* Flash Notices */

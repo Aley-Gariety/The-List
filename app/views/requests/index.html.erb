@@ -6,8 +6,8 @@
 
 <% @requests.each do |request| %>
   <%
-    unless request.url[/^http:\/\//] || request.url[/^https:\/\//]
-      request.url = 'http://' + request.url
+    unless request.url.downcase[/^http:\/\//] || request.url.downcase[/^https:\/\//]
+      request.url = 'http://' + request.url.downcase
     end
   %>
   <% if request.listme == false || (current_user && (current_user.username == "Colby" ||  current_user.username == "Jackson")) %>
