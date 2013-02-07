@@ -367,16 +367,17 @@ pre {
 
 #new_comment {
   border: 1px solid #DDD;
-  display: inline-block;
+  display: block;
   padding: 10px;
 }
 
 #comment_body {
   height: 100px;
-  width: 300px;
+  display: block;
   max-width: 813px;
   padding: 5px;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 #comment_body:focus {
@@ -385,9 +386,8 @@ pre {
 }
 
 .comment {
-  display: inline-block;
+  display: block;
   border: 1px solid #DDD;
-  width: 368px;
   padding: 10px;
 }
 
@@ -406,10 +406,13 @@ pre {
 
 .comment-photo {
   float: left;
-  border: 1px solid #CCC;
   margin-right: 10px;
+  margin-bottom: 10px;
   width: 41px;
   height: 41px;
+  -webkit-border-radius: 25px;
+     -moz-border-radius: 25px;
+          border-radius: 25px;
 }
 
 .comment-submit {
@@ -434,10 +437,12 @@ pre {
 
 .profile-photo {
 	float: left;
-  border: 1px solid #CCC;
   margin-right: 10px;
   width: 80px;
   height: 80px;
+  -webkit-border-radius: 190px;
+     -moz-border-radius: 190px;
+          border-radius: 190px;
 }
 
 /* Flash Notices */
@@ -449,8 +454,20 @@ pre {
 }
 
 /* Pagination */
+
 .next {
   float: right;
+}
+
+/* 940px wide */
+
+@media only screen and (max-width: 940px) {
+  #comment_body {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
 }
 
 /* Mobile */
@@ -463,7 +480,7 @@ pre {
     font-size: 2.5em;
   }
   .up,.down {
-    margin-left: -10px;
+    margin-left: -9px;
   }
   .suffrage > span {
     margin-left: -6px;

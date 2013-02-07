@@ -18,11 +18,11 @@ class UsersController < ApplicationController
 		email = params[:user][:email]
 		karma = params[:user][:karma]
 		name = params[:user][:name]
-		
+
 		generated_token = SecureRandom.urlsafe_base64
-		
+
     @user = User.find_or_initialize_by_auth_token(:auth_token => generated_token, :karma => karma, :email => email)
-    
+
     unless [email, karma, name].any?{|f| f.blank? } || karma.to_i < 0
       unless current_user.karma < karma.to_i
         found_user = User.find_by_email(email)
@@ -62,14 +62,13 @@ class UsersController < ApplicationController
     .where(:user_id => User.find_by_username(params[:username]).id)
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
     .select("posts.id," +
-      "sum(if(direction = 0, value, if(direction is null, 0, -value))) as score," +
+      "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
       "posts.created_at," +
       "url," +
       "title," +
       "posts.user_id," +
       "comment_count")
     .group("posts.id")
-    .order("log10(abs(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + 1) * sign(sum(if(direction = 0, value, if(direction is null, 0, -value)))) + (unix_timestamp(posts.created_at) / 300000) DESC")
   end
 
   def update
