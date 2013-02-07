@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+    
   def new
     @comment = Comment.new
   end
@@ -39,4 +40,5 @@ class CommentsController < ApplicationController
       end
 	  end
 	end
+	
 end
