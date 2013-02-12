@@ -59,7 +59,7 @@
       <% end %>
     </div>
 
-    <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(c.user_id).email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fperson.jpg&s=200" class="comment-photo" />
+    <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(c.user_id).email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fphoto.jpg&s=200" class="comment-photo" />
   	<a href="/user/<%= User.find(c.user_id).username %>"><b><%= User.find(c.user_id).username %></b></a>
   	<span class="meta">Written <%= time_ago_in_words(c.created_at) %> ago.<br></span>
   	<p><%= c.body %></p>
