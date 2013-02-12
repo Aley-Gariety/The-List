@@ -10,7 +10,7 @@ class Request < ActiveRecord::Base
   
   
   def spam
-    if ['viagra','online','cialis','buy'].any? { |w| name =~ /#{w}/ }
+    if ['viagra','online','cialis','buy'].any? { |w| name.downcase =~ /#{w}/ }
       errors.add(:name, ' is spam?')
     end
   end
