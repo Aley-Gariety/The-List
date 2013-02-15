@@ -1,5 +1,5 @@
 <div id="profile">
-  <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(@user).email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fprofile.jpg&s=200" class="profile-photo" />
+  <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(@user).email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fphoto.jpg&s=200" class="profile-photo" />
 
   <h2 id="profile-content"><%= @user.username %></h2><br>
   <span id="profile-content">Karma: <%= @user.karma %></span><br>

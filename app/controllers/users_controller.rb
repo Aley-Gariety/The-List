@@ -69,6 +69,7 @@ class UsersController < ApplicationController
       "posts.user_id," +
       "comment_count")
     .group("posts.id")
+    .reverse!
   end
 
   def update
