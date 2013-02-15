@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  skip_before_filter :require_login, :only => [:index, :show, :recent]
+  skip_before_filter :require_login, :only => [:index, :show, :recent, :top]
 
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")

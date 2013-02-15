@@ -295,20 +295,20 @@ pre {
 }
 
 #top-users, #top-posts {
-  width: 44.99%;
+  width: 44.93%;
   float: left;
   margin-bottom: 15px;
 }
 
 #top-posts {
   border-right: 1px solid #DDD;
-  padding-right: 5%;
+  padding-right: 4.93%;
 }
 
 #top-users {
   float: left;
   height: 100%;
-  padding-left: 5%;
+  padding-left: 4.93%;
 }
 
 #top-users img {
