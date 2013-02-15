@@ -294,6 +294,30 @@ pre {
   white-space:pre-line;
 }
 
+#top-user, #top-posts {
+  width: 45%;
+  float: left;
+  padding-right: 55px;
+  margin-bottom: 15px;
+}
+
+#top-users {
+  float: left;
+  border-left: 1px solid #CCC;
+  height: 100%;
+  padding-left: 40px;
+}
+
+#top-users img {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 7px;
+}
+
+#top-users .submission {
+  margin-left: 65px;
+}
+
 /* Suffrage */
 .order {
   width: 10px;
