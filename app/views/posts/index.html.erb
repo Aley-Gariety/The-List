@@ -2,6 +2,10 @@
   No posts at the moment.
 <% end %>
 
+<% if request.env['PATH_INFO'] == "/posts/recent" %>
+  <h2>Recent Posts</h2><br>
+<% end %>
+
 <ol>
   <% @posts.each do |post| %>
 

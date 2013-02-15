@@ -70,7 +70,7 @@
       <div class="submission">
         <div class="submission-inner">
           <%= link_to user.username, "/user/" + user.username %><br>
-          <span class="meta"><%= user.karma %> karma</span>
+          <span class="meta"><%= user.karma %> karma — <%= Post.where(:user_id => user.id).count %> posts — <%= Comment.where(:user_id => user.id).count %> comments</span>
       </div>
     </li>
   <% end %>

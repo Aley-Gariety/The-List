@@ -294,18 +294,21 @@ pre {
   white-space:pre-line;
 }
 
-#top-user, #top-posts {
-  width: 45%;
+#top-users, #top-posts {
+  width: 44.99%;
   float: left;
-  padding-right: 55px;
   margin-bottom: 15px;
+}
+
+#top-posts {
+  border-right: 1px solid #DDD;
+  padding-right: 5%;
 }
 
 #top-users {
   float: left;
-  border-left: 1px solid #CCC;
   height: 100%;
-  padding-left: 40px;
+  padding-left: 5%;
 }
 
 #top-users img {
