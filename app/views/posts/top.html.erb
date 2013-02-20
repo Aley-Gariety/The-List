@@ -2,11 +2,8 @@
   No posts at the moment.
 <% end %>
 
-<% if request.env['PATH_INFO'] == "/posts/recent" %>
-  <h2>Recent Posts</h2><br>
-<% end %>
-
-<ol>
+<ol id="top-posts">
+  <h2>Top Posts</h2><br>
   <% @posts.each do |post| %>
 
     <%
@@ -35,7 +32,7 @@
 
     <li>
       <div class="order">
-        <span><%= @posts.index(post) + 1 + (15 * @multiplier) %>.</span>
+        <span><%= @posts.index(post) + 1 %>.</span>
       </div>
       <div class="suffrage <%= active %>" data-value="<%= value %>">
         <% if current_user %>
@@ -59,5 +56,23 @@
     </li>
   <% end %>
 </ol>
+
+<ol id="top-users">
+  <h2>Top Users</h2><br>
+  <% @users.each do |user| %>
+    <li>
+      <div class="order">
+        <span><%= @users.index(user) + 1 %>.</span>
+      </div>
+      <div class="suffrage">
+        <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(user.email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fprofile.jpg&s=200" class="comment-photo" />
+      </div>
+      <div class="submission">
+        <div class="submission-inner">
+          <%= link_to user.username, "/user/" + user.username %><br>
+          <span class="meta"><%= user.karma %> karma — <%= Post.where(:user_id => user.id).count %> posts — <%= Comment.where(:user_id => user.id).count %> comments</span>
+      </div>
+    </li>
+  <% end %>
+</ol>
 <br><br>
-<%= paginate @posts %>

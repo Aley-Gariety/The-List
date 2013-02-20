@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  skip_before_filter :require_login, :only => [:index, :show, :recent]
+  skip_before_filter :require_login, :only => [:index, :show, :recent, :top]
 
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
@@ -181,6 +181,31 @@ class PostsController < ApplicationController
       format.html { render "/posts/index" }
       format.json { render json: @posts }
       format.rss { render :layout => false }
+    end
+  end
+
+  def top
+    @posts = @@posts
+      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+      .select("posts.id," +
+        "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "posts.created_at," +
+        "url," +
+        "title," +
+        "posts.user_id," +
+        "comment_count")
+      .group("posts.id")
+      .limit(15)
+      .order("sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) DESC")
+
+    @users = User
+      .where("username IS NOT NULL")
+      .limit(15)
+      .order("karma DESC")
+
+    respond_to do |format|
+      format.html { render "/posts/top" }
+      format.json { render json: @posts }
     end
   end
 end

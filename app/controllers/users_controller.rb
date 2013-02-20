@@ -99,7 +99,11 @@ class UsersController < ApplicationController
      	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
         	@mixpanel.track 'signup', { :username => username }
 
-        	redirect_to "/guidelines", :notice => "Your account has been created. <a href=\"/signin\">Click here to sign in.</a>".html_safe
+        	user = User.authenticate(params[:user][:email], params[:user][:password])
+        	if user
+            cookies.permanent[:auth_token] = user.auth_token
+            redirect_to "/posts/new", :notice => "Your account has been created. Make your first submission!"
+        	end
         end
       else
         redirect_to request.env["HTTP_REFERER"], :notice => "Ooops. You should check your form again."
