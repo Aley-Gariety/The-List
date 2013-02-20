@@ -1,5 +1,8 @@
 ThelistIo::Application.routes.draw do
 
+  resources :suggestions
+
+
   root :to => "posts#index"
 
   match 'guidelines' => 'pages#guidelines'
@@ -13,6 +16,10 @@ ThelistIo::Application.routes.draw do
   match 'user/:username' => 'users#user'
 
   match 'applicants' => "requests#index"
+  
+  get "suggestions" => "suggestions#index"
+  
+  get "suggestions/new" => "suggestions#new"
 
   get "sessions/new"
 
