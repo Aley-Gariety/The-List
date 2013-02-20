@@ -3,6 +3,7 @@
 <head>
   <title>The List</title>
   <%= csrf_meta_tags %>
+  <%= auto_discovery_link_tag(:rss, "http://thelist.io/posts/recent.rss") %>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "modernizr" %>

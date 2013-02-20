@@ -47,4 +47,6 @@ $(function(){
 
   $('#user_name').val(getUrlVars()['name'])
   $('#user_email').val(getUrlVars()['email'])
+  $('#post_title').val(getUrlVars()['t'])
+  $('#post_url').val(getUrlVars()['u'])
 });

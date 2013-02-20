@@ -92,6 +92,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
+  
+  
     @post = Post.new
 
     @threshold = (current_user.karma * 0.02).round
@@ -102,11 +104,6 @@ class PostsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @post }
     end
-  end
-
-  # GET /posts/1/edit
-  def edit
-    @post = Post.find(params[:id])
   end
 
   # POST /posts
@@ -183,6 +180,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { render "/posts/index" }
       format.json { render json: @posts }
+      format.rss { render :layout => false }
     end
   end
 
