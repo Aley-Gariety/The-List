@@ -7,9 +7,10 @@ function goBack()
   window.history.back()
   }
 </script>
-  <title>404 | AIN'T NOBODY GOT TIME FOR THAT</title>
+  <title>The List - 404</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
+  	h1 {color: #262626;}
+    body { background-color: #fff; color: #666; text-align: center; font-family: 'Source Sans Pro'; }
     div.dialog {
       width: 25em;
       padding: 0 4em;
@@ -17,6 +18,18 @@ function goBack()
       border-right-color: #999;
       border-bottom-color: #999;
     }
+    @font-face {
+	    font-family: 'Source Sans Pro';
+	    src: local('Source Sans Pro Bold'),
+	     local('SourceSansPro-Bold'),
+	     url('/fonts/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.eot?#iefix') format('embedded-opentype'),
+	     url('/fonts/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.ttf') format('truetype'),
+	     url('http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.woff') format('woff'),
+	     url('/fonts/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.svg#svgFontName') format('svg');
+	     font-style: normal;
+	     font-weight: 700;
+	     }
+
     a { font-size: 2em;}
     imput[type='button'] { font-size: 100%; color: #f00; line-height: 1.5em; }
   </style>
@@ -25,7 +38,9 @@ function goBack()
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
-    <br><a href="http://www.youtube.com/watch?v=Nh7UgAprdpM" targer="_blank" ><img src="http://aley.media.s3.amazonaws.com/Screen%20Shot%202013-01-25%20at%2011.24.37%20PM.png" alt="404"></a>
+  	<h1>We're sorry</h1>
+  	<h4>The page you were looking for cannot be found. <br>In other words, this is a 404.</h4>
+    <br>
     <input type="button" value="Back" onclick="goBack()">
   </div>
 </body>

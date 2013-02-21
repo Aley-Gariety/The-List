@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :votes
   
-  validates_uniqueness_of :username, :on => :update, :message => "This username has already been used."
+  validates_uniqueness_of :username, :case_sensative => false
 
   before_update :encrypt_password
 
