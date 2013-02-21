@@ -2,10 +2,13 @@
 <html>
 <head>
 <script>
-function goBack()
-  {
-  window.history.back()
-  }
+function goBack() {
+    if (window.history.previous == undefined) {
+        window.location = "/" }
+            else window.history.back()
+        {
+    }
+}
 </script>
   <title>The List - 404</title>
   <style type="text/css">
@@ -39,7 +42,7 @@ function goBack()
   <!-- This file lives in public/404.html -->
   <div class="dialog">
   	<h1>We're sorry</h1>
-  	<h4>The page you were looking for cannot be found. <br>In other words, this is a 404.</h4>
+  	<h4>The page you were looking for cannot be found. <br>In other words, this is a <span style="color:#ff4747;">404</span>.</h4>
     <br>
     <input type="button" value="Back" onclick="goBack()">
   </div>
