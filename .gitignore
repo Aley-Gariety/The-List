@@ -16,6 +16,8 @@
 
 # Ignore rails environmental changes
 /config/environment.rb
+# Keep passwords away from the file
+/connfig/database.yml
 
 # Ignore precompiled assets
 /public/assets/
