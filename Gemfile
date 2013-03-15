@@ -41,4 +41,3 @@ gem 'rakismet'
 # To use debugger
 # gem 'debugger'
 
-gem "kaminari"
