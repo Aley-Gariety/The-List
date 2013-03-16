@@ -42,3 +42,6 @@ gem 'rakismet'
 # gem 'debugger'
 
 gem "kaminari"
+
+#Instapaper API support
+gem 'instapaper', :git => 'git://github.com/spagalloco/instapaper.git'
