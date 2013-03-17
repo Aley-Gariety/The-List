@@ -91,16 +91,16 @@ a:active {
   color: #777;
 }
 
-.meta-header a:first-child {
+.meta-header a:first-child, .red:link {
   color: #ff4747;
 }
 
-.meta-header a:first-child:hover {
-  color: #ff8888;
+.meta-header a:first-child:hover, .red:hover {
+  color: #ff9999 !important;
 }
 
-.meta-header a:first-child:active {
-  color: #000;
+.meta-header a:first-child:active, .red:active {
+  color: #000 !important;
 }
 
 .title:visited {
@@ -190,11 +190,6 @@ h1 {
           user-select: none;
 }
 
-h1 .beta {
-  font-size: .3em;
-  font-weight: 100;
-  color: #666;
-}
 
 h1 a, h1 a:hover {
   text-decoration: none;
@@ -264,10 +259,6 @@ form td {
   padding-right: 20px;
 }
 
-.red {
-  color: #ff4747;
-}
-
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -319,6 +310,10 @@ pre {
 
 #top-users .submission {
   margin-left: 65px;
+}
+
+.red {
+  color: #ff4747 !important;
 }
 
 /* Suffrage */
@@ -389,6 +384,7 @@ pre {
 .submission {
   margin-left: 50px;
 }
+
 
 /* Comments */
 
