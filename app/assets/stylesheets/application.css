@@ -426,6 +426,11 @@ pre {
   padding: 10px;
 }
 
+.comment h1 {
+  font-size: 2.5em;
+  position: relative;
+}
+
 .comment .meta {
   display: block;
 }

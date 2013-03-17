@@ -10,6 +10,7 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem "mixpanel"
 gem "kaminari"
 gem "honeypot-captcha"
+gem "redcarpet"
 
 # Gems used only for assets and not required
 # in production environments by default.
