@@ -27,25 +27,29 @@ class UsersController < ApplicationController
       unless current_user.karma < karma.to_i
         found_user = User.find_by_email(email)
 
-        current_user.update_attributes({
-          :karma => current_user.karma - karma.to_i
-        })
-
-        @applicant = Request.find_by_email(email)
-        @applicant.destroy if @applicant
-
-        if found_user
-          found_user.update_attributes({
-            :karma => found_user.karma + karma.to_i
+        unless current_user.id == found_user.id
+          current_user.update_attributes({
+            :karma => current_user.karma - karma.to_i + (@@free_invites == true && karma.to_i >= 4 ? 4 : 0)
           })
 
-          User.first.send_gift(email, karma, '', current_user.username, 1, name)
-          redirect_to root_url, :notice => "Your karma has been gifted."
-        elsif @user.save
-     	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
-        	@mixpanel.track 'gift', { :karma => @user.karma }
-          User.first.send_gift(email, karma, generated_token, current_user.username, 0, name)
-          redirect_to root_url, :notice => "Your invite has been sent."
+          @applicant = Request.find_by_email(email)
+          @applicant.destroy if @applicant
+
+          if found_user
+            found_user.update_attributes({
+              :karma => found_user.karma + karma.to_i
+            })
+
+            User.first.send_gift(email, karma, '', current_user.username, 1, name)
+            redirect_to root_url, :notice => "Your karma has been gifted."
+          elsif @user.save
+       	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+          	@mixpanel.track 'gift', { :karma => @user.karma }
+            User.first.send_gift(email, karma, generated_token, current_user.username, 0, name)
+            redirect_to root_url, :notice => "Your invite has been sent."
+          end
+        else
+          redirect_to request.env["HTTP_REFERER"], :notice => "You can't gift yourself karma, sorry."
         end
       else
         redirect_to request.env["HTTP_REFERER"], :notice => "You have insufficient karma."

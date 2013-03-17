@@ -474,9 +474,15 @@ pre {
 
 /* Flash Notices */
 
-#flash_notice {
+#flash_notice, #flash_free_invites {
   border: 1px solid #777;
   color: #000;
+  padding: 10px;
+}
+
+#flash_error {
+  border: 1px solid #ff4747;
+  color: #ff4747;
   padding: 10px;
 }
 

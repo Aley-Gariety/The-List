@@ -9,7 +9,7 @@
 <br>
 <h3><%= @user.username %>'s Posts:</h3>
 <br>
-<% if @posts.count == {} %>
+<% if @posts.count == 0 %>
   <%= @user.username %> has no posts yet.
 <% end %>
 <ol>
