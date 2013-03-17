@@ -7,7 +7,7 @@
     <% else %>
       <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
     <% end %>
-    <span data-total="<%= @post.score.to_i %>" data-up="<%= @post.upvotes.to_i %>" data-down="<%= @post.downvotes.to_i %>"><%= @post.score.to_i %></span><br>
+    <span data-total="<%= @post.score.to_i %>" data-up="+<%= @post.upvotes.to_i %>" data-down="<%= @post.downvotes.to_i %>"><%= @post.score.to_i %></span><br>
     <% if current_user %>
       <%= link_to '&#9660;'.html_safe, vote_path(:post_id => @post.id, :vote_type => 0, :direction => 1, :value => @value), :remote => true, :method => "put", :class => "down" %><br>
     <% else %>
@@ -51,7 +51,7 @@
       <% else %>
         <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
       <% end %>
-      <span data-total="<%= c.score.to_i %>" data-up="<%= c.upvotes.to_i %>" data-down="<%= c.downvotes.to_i %>"><%= c.score.to_i %></span><br>
+      <span data-total="<%= c.score.to_i %>" data-up="+<%= c.upvotes.to_i %>" data-down="<%= c.downvotes.to_i %>"><%= c.score.to_i %></span><br>
       <% if current_user %>
         <%= link_to '&#9660;'.html_safe, vote_path(:post_id => c.id, :vote_type => 1, :direction => 1, :value => comment_value), :remote => true, :method => "put", :class => "down" %><br>
       <% else %>

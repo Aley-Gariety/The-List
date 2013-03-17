@@ -3,7 +3,8 @@
 
 $(function(){
 
-  var mediaQueries =  $('style')
+  var mediaQueries =  $('style'),
+      timer
 
   function setMediaQuery() {
     mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'))
@@ -51,8 +52,15 @@ $(function(){
   $('#post_url').val(getUrlVars()['u'])
 
   $(".suffrage span").click(function(){
-    var str
-    var $this = $(this)
+    var str,
+      $this = $(this)
+
+    clearTimeout(timer)
+    timer = setTimeout(function(){
+      $(".suffrage span").each(function(){
+        $(this).html($(this).attr("data-total")).removeAttr("class")
+      })
+    }, 2000)
 
     if ($this.hasClass("up-toggled")) {
       str = "down"

@@ -352,11 +352,11 @@ pre {
 }
 
 .up-toggled {
-  color: green;
+  color: #09c409;
 }
 
 .down-toggled {
-  color: red;
+  color: #ff4747;
 }
 
 .up, .down {
