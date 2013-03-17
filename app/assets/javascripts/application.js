@@ -6,18 +6,18 @@ $(function(){
   var mediaQueries =  $('style')
 
   function setMediaQuery() {
-    mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'));
+    mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'))
   }
 
   function getUrlVars() {
-    var vars = {};
+    var vars = {}
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-      vars[key] = decodeURIComponent(value);
-    });
-    return vars;
+      vars[key] = decodeURIComponent(value)
+    })
+    return vars
   }
 
-  $(window).resize(setMediaQuery);
+  $(window).resize(setMediaQuery)
 
   $('.suffrage > a').click(function(){
     var _this = $(this),
@@ -43,10 +43,28 @@ $(function(){
 
     suffrage.attr('class','suffrage ' + direction + 'active')
 
-  });
+  })
 
   $('#user_name').val(getUrlVars()['name'])
   $('#user_email').val(getUrlVars()['email'])
   $('#post_title').val(getUrlVars()['t'])
   $('#post_url').val(getUrlVars()['u'])
-});
+
+  $(".suffrage span").click(function(){
+    var str
+    var $this = $(this)
+
+    if ($this.hasClass("up-toggled")) {
+      str = "down"
+    } else if ($this.hasClass("down-toggled")) {
+      str = "total"
+    } else {
+      str = "up"
+    }
+
+    $(".suffrage span").each(function(){
+      $(this).html($(this).attr("data-total")).removeAttr("class")
+    })
+    $(this).html($(this).attr("data-" + str)).attr("class",str + "-toggled")
+  })
+})

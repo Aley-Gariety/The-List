@@ -347,6 +347,18 @@ pre {
           user-select: none;
 }
 
+.suffrage span {
+  cursor: pointer;
+}
+
+.up-toggled {
+  color: green;
+}
+
+.down-toggled {
+  color: red;
+}
+
 .up, .down {
   cursor: pointer;
   padding-left: 15px;

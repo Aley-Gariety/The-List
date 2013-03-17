@@ -5,7 +5,9 @@ class PostsController < ApplicationController
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
     .select("posts.id," +
-      "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+      "sum(if(vote_type = 0, if(direction = 0, value, -value),0)) as score," +
+      "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+      "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
       "posts.created_at," +
       "url," +
       "title," +
@@ -43,6 +45,8 @@ class PostsController < ApplicationController
       .joins("LEFT JOIN votes ON comments.id = votes.post_id")
       .select("comments.id," +
         "sum(if(vote_type = 1, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 1, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 1, if(direction = 1, -value, 0),0)) as downvotes," +
         "comments.created_at," +
         "body," +
         "comments.user_id")
@@ -55,6 +59,8 @@ class PostsController < ApplicationController
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
         "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
         "posts.created_at," +
         "url," +
         "title," +
@@ -189,6 +195,8 @@ class PostsController < ApplicationController
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
         "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
         "posts.created_at," +
         "url," +
         "title," +
