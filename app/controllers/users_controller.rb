@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       unless current_user.karma < karma.to_i
         found_user = User.find_by_email(email)
 
-        unless current_user.id == found_user.id
+        unless current_user.email == email
           current_user.update_attributes({
             :karma => current_user.karma - karma.to_i + (@@free_invites == true && karma.to_i >= 4 ? 4 : 0)
           })
@@ -90,24 +90,32 @@ class UsersController < ApplicationController
       password_conf = params[:user][:password_confirmation]
 
       unless [email, username, password, password_conf].any?{|f| f.blank? }
-      	password_salt = BCrypt::Engine.generate_salt
+        if username =~ /^[a-zA-Z0-9_-]*$/
+          if email =~ /@/
+          	password_salt = BCrypt::Engine.generate_salt
 
-    	  if User.find_by_auth_token(params[:user][:auth_token]).update_attributes({
-  	  	  	:email => params[:user][:email],
-  	  	  	:username => params[:user][:username],
-  	  	  	:password_hash => BCrypt::Engine.hash_secret(params[:user][:password], password_salt),
-  	  	  	:password_salt => password_salt
-  	  	  })
+        	  if User.find_by_auth_token(params[:user][:auth_token]).update_attributes({
+      	  	  	:email => params[:user][:email],
+      	  	  	:username => params[:user][:username],
+      	  	  	:password_hash => BCrypt::Engine.hash_secret(params[:user][:password], password_salt),
+      	  	  	:password_salt => password_salt
+      	  	  })
 
-    	    cookies.delete(:auth_token)
-     	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
-        	@mixpanel.track 'signup', { :username => username }
+        	    cookies.delete(:auth_token)
+         	    @mixpanel = Mixpanel::Tracker.new "15c792135a188f39a0b6875a46a28d74"
+            	@mixpanel.track 'signup', { :username => username }
 
-        	user = User.authenticate(params[:user][:email], params[:user][:password])
-        	if user
-            cookies.permanent[:auth_token] = user.auth_token
-            redirect_to "/posts/new", :notice => "Your account has been created. Make your first submission!"
-        	end
+            	user = User.authenticate(params[:user][:email], params[:user][:password])
+            	if user
+                cookies.permanent[:auth_token] = user.auth_token
+                redirect_to "/posts/new", :notice => "Your account has been created. Make your first submission!"
+            	end
+            end
+          else
+            redirect_to request.env["HTTP_REFERER"], :notice => "Not a valid email."
+          end
+        else
+          redirect_to request.env["HTTP_REFERER"], :notice => "Usernames must only contain letters, numbers, underscores, and hyphens."
         end
       else
         redirect_to request.env["HTTP_REFERER"], :notice => "Ooops. You should check your form again."

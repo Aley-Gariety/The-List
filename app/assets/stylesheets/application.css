@@ -482,6 +482,10 @@ pre {
   padding: 10px;
 }
 
+#error_explanation li {
+  list-style-position: inside;
+}
+
 /* Pagination */
 
 .next {

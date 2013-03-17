@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :comments
 
   has_many :votes
-  
+
   validates_uniqueness_of :username, :on => :update, :case_sensative => false
 
   before_update :encrypt_password
