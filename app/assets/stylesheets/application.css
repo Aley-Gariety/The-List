@@ -458,6 +458,10 @@ pre {
   margin-bottom: 20px;
 }
 
+ul li {
+  list-style-position: inside;
+}
+
 /* Profiles */
 
 #profile {
