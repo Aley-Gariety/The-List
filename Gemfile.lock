@@ -122,7 +122,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
-  honeypot-captcha
   jquery-rails
   kaminari
   mixpanel
