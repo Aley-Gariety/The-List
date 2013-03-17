@@ -1,4 +1,4 @@
-<%= form_for(@request) do |f| %>
+<%= form_for @request, :html => { :honeypot => true } do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>

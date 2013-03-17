@@ -8,6 +8,7 @@ class Request < ActiveRecord::Base
   validates_format_of :email, :with => /@/
   validate :spamname
   validate :spamurl
+  validate :honeypot
   
   
   def spamname
