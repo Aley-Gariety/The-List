@@ -5,7 +5,7 @@
     <% else %>
       <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
     <% end %>
-    <span><%= @suggestion.score.to_i %></span><br>
+    <span data-total="<%= @suggestion.score.to_i %>" data-up="+<%= @suggestion.upvotes.to_i %>" data-down="<%= @suggestion.downvotes.to_i %>"><%= @suggestion.score.to_i %></span><br>
     <% if current_user %>
       <%= link_to '&#9660;'.html_safe, vote_path(:post_id => @suggestion.id, :vote_type => 2, :direction => 1, :value => @value), :remote => true, :method => "put", :class => "down" %><br>
     <% else %>
@@ -51,7 +51,7 @@
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
-        <span><%= c.score.to_i %></span><br>
+        <span data-total="<%= c.score.to_i %>" data-up="+<%= c.upvotes.to_i %>" data-down="<%= c.downvotes.to_i %>"><%= c.score.to_i %></span><br>
         <% if current_user %>
           <%= link_to '&#9660;'.html_safe, vote_path(:post_id => c.id, :vote_type => 3, :direction => 1, :value => comment_value), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>

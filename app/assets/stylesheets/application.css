@@ -92,7 +92,7 @@ a:active {
 }
 
 .meta-header a {
-  background: #F6F6F6;
+  background: #F4F4F4;
   padding: 3px;
   padding-left: 10px;
   padding-right: 10px;
@@ -103,7 +103,7 @@ a:active {
 
 .meta-header a:hover {
   color: #999;
-  background: #F9F9F9;
+  background: #F8F8F8;
 }
 
 .meta-header a:active {
@@ -130,6 +130,10 @@ a:active {
 
 footer a:link, footer a, footer span {
   color: #777;
+}
+
+footer a:hover {
+  color: #ff7474;
 }
 
 footer a:active {
@@ -297,6 +301,22 @@ ol {
 }
 
 /* Generic elements */
+
+#dragme {
+  position: absolute;
+  color: #777;
+  bottom: 0;
+  right: 0;
+  display: none;
+  width: 75px;
+  height: 25px;
+  line-height: 25px;
+  background: #FFF;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
 
 #markdown-ready {
   color: #777;

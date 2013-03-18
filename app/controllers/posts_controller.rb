@@ -213,4 +213,12 @@ class PostsController < ApplicationController
       format.json { render json: @posts }
     end
   end
+
+  def fetch_title
+    @title = Pismo::Document.new(params[:url]).title
+
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
 end

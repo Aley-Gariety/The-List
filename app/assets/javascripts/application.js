@@ -4,7 +4,8 @@
 $(function(){
 
   var mediaQueries =  $('style'),
-      timer
+      timer,
+      url = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
 
   function setMediaQuery() {
     mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'))
@@ -54,8 +55,43 @@ $(function(){
   $(".quote").click(function(){
     $("#comment_body").val("<i>Written by " + $(this).siblings(".comment-meta").children("a").find("b").html() + ":</i>\n > " + $(this).siblings(".comment-body").html() + $("#comment_body").val())
     $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+  });
+
+  // Auto-fill the title field
+  function fetchTitle() {
+    setTimeout(function(){
+      if (url.test($("#post_url").val()) && $("#post_title").val() == "") {
+        $.ajax({
+          url: "/posts/fetch-title",
+          data: {
+            url: "http://www.rubyinside.com/cramp-asychronous-event-driven-ruby-web-app-framework-2928.html"
+          },
+          success: function(data){
+            console.log(data)
+            $("#post_title").val(data)
+          }
+        })
+      }
+    },0)
+  }
+
+  $("#post_url").keypress(fetchTitle).on("paste",fetchTitle)
+
+  // Bookmarklet tooltip
+  $("#bookmarklet").hover(function(){
+    $(document).mousemove(function(e){
+        $("#dragme").css({
+        "display": "inline",
+        "top": e.pageY + 10,
+        "left": e.pageX + 10
+      })
+    });
+  }, function(){
+    $("#dragme").css("display","none")
+    $(document).off("mousemove")
   })
 
+  // Toggle upvotes/downvotes/total
   $(".suffrage span").click(function(){
     var str,
       $this = $(this)

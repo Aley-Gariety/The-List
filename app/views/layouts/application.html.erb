@@ -86,6 +86,8 @@
     <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to "Blog", '/blog' %>
     <span>&nbsp;&bull;&nbsp;</span>
+    <%= link_to "Bookmarklet", "javascript:window.open(%22http://thelist.io/posts/new?u=%22+encodeURIComponent(document.location)+%22&t=%22+encodeURIComponent(document.title))", :id => "bookmarklet" %>
+    <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to 'About', docs_path %>
     <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to 'Contact', "mailto:personal@jacksongariety.com,colby@aley.me?subject=The%20List%20Inquiry" %>
@@ -109,5 +111,6 @@
       w.attachEvent("onload", gs);
   })(window);
 </script>
+<div id="dragme">Drag me.</div>
 </body>
 </html>
