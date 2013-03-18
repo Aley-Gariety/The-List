@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     @user = User.find_by_username(params[:username])
 
     @posts = Post
+    	.where(:user_id => User.find_by_username(params[:username]).id)
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
         "sum(if(vote_type = 0, if(direction = 0, value, -value),0)) as score," +
