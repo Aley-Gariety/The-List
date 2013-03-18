@@ -92,10 +92,12 @@ a:active {
 }
 
 .meta-header a {
-  background: #F4F4F4;
+  background: #F1F1F1;
   padding: 3px;
   padding-left: 10px;
   padding-right: 10px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
   border-radius: 15px;
   color: #555;
   text-decoration: none;
@@ -103,7 +105,7 @@ a:active {
 
 .meta-header a:hover {
   color: #999;
-  background: #F8F8F8;
+  background: #F5F5F5;
 }
 
 .meta-header a:active {
@@ -303,6 +305,37 @@ ol {
 
 /* Generic elements */
 
+input[type="submit"] {
+  background: #F1F1F1;
+  color: #444;
+  -webkit-border-radius: 20px;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  background: #F5F5F5;
+  color: #999;
+}
+
+input[type="submit"]:active {
+  color: #FFF;
+  background: #555;
+}
+
+input[type="text"] {
+  border: 1px solid #DDD;
+  padding: 5px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #AAA;
+}
+
 .light {
   font-size: .75em;
   color: #666;
@@ -413,6 +446,11 @@ pre {
 }
 
 /* Suffrage */
+
+.suggestion-suffrage {
+  margin-left: -15px;
+}
+
 .order {
   width: 12px;
   float: left;
@@ -681,10 +719,6 @@ ul li {
 	width: 200px;
 	text-align: left;
   float: left;
-}
-
-#profile-content:nth-child(2) {
-	margin-top: 10px;
 }
 
 .profile-photo {

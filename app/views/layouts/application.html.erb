@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The List</title>
+  <title>The List — A Social Knowledge Board</title>
   <%= csrf_meta_tags %>
   <%= auto_discovery_link_tag(:rss, "http://thelist.io/posts/recent.rss") %>
   <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -15,7 +15,7 @@
         <h1><a href="/">The List</a></h1>
         <div class="meta-header">
           <% if current_user %>
-            <%= link_to current_user.username, { :controller => "users", :action => "user", :username => current_user.username.downcase} %>
+            <%= link_to current_user.username + " (Level " + detect_level(current_user).to_s + ")", { :controller => "users", :action => "user", :username => current_user.username.downcase } %>
             <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'Recent', recent_path %>
             <span>&nbsp;&bull;&nbsp;</span>
@@ -55,8 +55,15 @@
           text-align: center;
         }
 
+        .meta-header a {
+          line-height: 40px;
+        }
+
         body > footer > section {
           text-align: center;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          line-height: 30px;
         }
 
         h1 {
@@ -77,6 +84,8 @@
     <%= link_to "Suggestions", '/suggestions' %>
     <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to 'Top', top_path %>
+    <span>&nbsp;&bull;&nbsp;</span>
+    <%= link_to "Levels", '/user-levels' %>
     <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to "RSS", '/posts/recent.rss' %>
     <span>&nbsp;&bull;&nbsp;</span>

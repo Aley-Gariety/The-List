@@ -32,13 +32,13 @@ class ApplicationController < ActionController::Base
   	user = User.find(user_id)
 
    	if user.karma.between?(0, 24)
-   		@@level = 0
-   	elsif current_user && user.karma.between?(25, 49)
    		@@level = 1
-   	elsif user.karma.between?(50, 99)
+   	elsif current_user && user.karma.between?(25, 49)
    		@@level = 2
-   	elsif user.karma >= 100
+   	elsif user.karma.between?(50, 99)
    		@@level = 3
+   	elsif user.karma >= 100
+   		@@level = 4
    	end
   end
 
