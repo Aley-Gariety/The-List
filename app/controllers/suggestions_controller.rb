@@ -1,7 +1,7 @@
 class SuggestionsController < ApplicationController
 
   skip_before_filter :require_login, :only => [:index, :show, :recent, :top]
-  
+
   @@suggestions = Suggestion
     .joins("LEFT JOIN votes ON suggestions.id = votes.post_id")
     .select("suggestions.id," +
@@ -30,7 +30,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1.json
   def show
     @suggestion = Suggestion.find(params[:id])
-    
+
     @comments = Comment
       .joins("LEFT JOIN votes ON comments.id = votes.post_id")
       .select("comments.id," +
@@ -44,7 +44,7 @@ class SuggestionsController < ApplicationController
       .group("comments.id")
 
     @comment = Comment.new
-    
+
     @suggestion = Suggestion
       .joins("LEFT JOIN votes ON suggestions.id = votes.post_id")
       .select("suggestions.id," +
@@ -77,7 +77,7 @@ class SuggestionsController < ApplicationController
         @active += " owner"
       end
     end
-    
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -108,10 +108,8 @@ class SuggestionsController < ApplicationController
 
     respond_to do |format|
       if @suggestion.save
-      
-   	    @new_vote = Vote.new(:post_id => @suggestion.id, :user_id => current_user.id, :vote_type => 2, :direction => 0, :value => 1)
 
-        @new_vote.save
+   	    @new_vote = Vote.create(:post_id => @suggestion.id, :user_id => current_user.id, :vote_type => 2, :direction => 0, :value => 1)
 
         format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.' }
         format.json { render json: @suggestion, status: :created, location: @suggestion }

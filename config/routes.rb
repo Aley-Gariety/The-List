@@ -13,9 +13,9 @@ ThelistIo::Application.routes.draw do
   match 'user/:username' => 'users#user'
 
   match 'applicants' => "requests#index"
-  
+
   get "suggestions" => "suggestions#index"
-  
+
   get "suggestions/new" => "suggestions#new"
 
   get "sessions/new"
@@ -50,7 +50,7 @@ ThelistIo::Application.routes.draw do
   resources :password_resets
 
   resources :requests
-  
+
   resources :suggestions do
       get 'page-:page', :action => :index, :on => :collection
       get 'recent/page-:page', :action => :recent, :on => :collection

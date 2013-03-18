@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318004345) do
+ActiveRecord::Schema.define(:version => 20130318023104) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20130318004345) do
     t.integer  "downvotes",    :default => 0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-    t.integer  "comment_type"
+    t.integer  "comment_type", :default => 0
   end
 
   create_table "posts", :force => true do |t|

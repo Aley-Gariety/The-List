@@ -1,14 +1,24 @@
 module PostsHelper
+  class CommentMarkdown < Redcarpet::Render::HTML
+    def header(title, level)
+      case level
+      when 1
+        "##{title}"
+      else
+        "<strong>#{title}</strong>"
+      end
+    end
+  end
+
   def markdown(text)
-    renderer = Redcarpet::Render::HTML.new({
-      :filter_html => true,
-      :hard_wrap => true
-    })
-    markdown = Redcarpet::Markdown.new(renderer, {
+    markdown = Redcarpet::Markdown.new(CommentMarkdown, {
       :autolink => true,
       :no_intra_emphasis => true,
+      :no_styles => true,
       :fenced_code => true,
-      :gh_blockcode => true
+      :gh_blockcode => true,
+      :filter_html => true,
+      :hard_wrap => true
     })
 
     markdown.render(text).html_safe

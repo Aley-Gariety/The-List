@@ -51,6 +51,11 @@ $(function(){
   $('#post_title').val(getUrlVars()['t'])
   $('#post_url').val(getUrlVars()['u'])
 
+  $(".quote").click(function(){
+    $("#comment_body").val("<i>Written by " + $(this).siblings(".comment-meta").children("a").find("b").html() + ":</i>\n > " + $(this).siblings(".comment-body").html() + $("#comment_body").val())
+    $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+  })
+
   $(".suffrage span").click(function(){
     var str,
       $this = $(this)
@@ -60,7 +65,7 @@ $(function(){
       $(".suffrage span").each(function(){
         $(this).html($(this).attr("data-total")).removeAttr("class")
       })
-    }, 2000)
+    }, 1500)
 
     if ($this.hasClass("up-toggled")) {
       str = "down"
