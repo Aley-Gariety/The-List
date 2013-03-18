@@ -11,7 +11,7 @@
     end
   %>
   <% if request.listme == false || (current_user && (current_user.username == "Colby" ||  current_user.username == "Jackson")) %>
-    <div>
+    <div class="applicant">
       <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(request.email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fphoto.jpg&s=200" class="profile-photo" />
       <h3><%= request.name %></h3>
       <%= link_to request.url, request.url, :target => "_blank" %><br>

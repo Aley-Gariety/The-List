@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
-
   protect_from_forgery
 
   helper_method :current_user
 
-	before_filter :require_login, :free_invites, :detect_level
+	before_filter :require_login, :detect_level
+	before_filter :free_invites, :only => [:index]
 
 	private
 
@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
       flash.now[:free_invites] = "It's free invite day! <a href=\"/gift\">Send up to 4 karma for no cost.</a>".html_safe
     end
   end
-  
+
   def detect_level
 #   	if current_user.karma
 #   	end
-  end 
+  end
 end

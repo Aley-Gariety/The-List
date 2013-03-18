@@ -381,10 +381,6 @@ pre {
   margin-bottom: 15px;
 }
 
-#top-posts.profile-list {
-  border: none;
-}
-
 #top-posts {
   border-right: 1px solid #DDD;
   padding-right: 4.93%;
@@ -394,10 +390,8 @@ pre {
   float: left;
   height: 100%;
   padding-left: 4.93%;
-}
-
-#top-comments {
   border-left: 1px solid #DDD;
+  margin-left: -1px;
 }
 
 #top-users li {
@@ -506,6 +500,10 @@ pre {
   border: 1px solid #DDD;
   display: block;
   padding: 10px;
+}
+
+.comment-body {
+  margin-left: 42px;
 }
 
 .quote {
@@ -661,6 +659,12 @@ ul li {
 }
 
 /* Profiles */
+
+.applicant img {
+  width: 91px;
+  height: 91px;
+  margin-bottom: 10px;
+}
 
 #profile {
   display: inline-block;

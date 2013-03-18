@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   skip_before_filter :require_login, :except => [:new,:profile]
+  before_filter :free_invites, :only => [:new]
 
   #for adding a new user
 	def new
@@ -72,9 +73,9 @@ class UsersController < ApplicationController
         "url," +
         "title," +
         "posts.user_id")
+      .order("posts.created_at desc")
       .group("posts.id")
       .limit(15)
-      .reverse!
 
     @comments = Comment
       .joins("LEFT JOIN votes ON comments.id = votes.post_id")
@@ -82,13 +83,15 @@ class UsersController < ApplicationController
         "sum(if(vote_type = 1, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
         "sum(if(vote_type = 1, if(direction = 0, value, 0),0)) as upvotes," +
         "sum(if(vote_type = 1, if(direction = 1, -value, 0),0)) as downvotes," +
+        "comments.post_id," +
+        "comments.comment_type," +
         "comments.created_at," +
         "body," +
         "comments.user_id")
+      .order("comments.created_at desc")
       .where(:user_id => @user.id)
       .group("comments.id")
       .limit(15)
-      .reverse!
   end
 
   def update
