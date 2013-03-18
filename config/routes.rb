@@ -10,9 +10,13 @@ ThelistIo::Application.routes.draw do
 
   match 'blog' => 'pages#blog'
 
-  match 'blog/downtime.html' => 'pages#blog2'
+  match 'blog/downtime' => 'pages#blog2'
 
-  match 'blog/api-status.html' => 'pages#blog1'
+  match 'blog/api-status' => 'pages#blog1'
+  
+  match 'blog/spit-and-shine' => 'pages#blog3'
+  
+  match 'user-levels' => 'pages#levels'
 
   match 'user/:username' => 'users#user'
 
