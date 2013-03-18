@@ -11,8 +11,7 @@ class PostsController < ApplicationController
       "posts.created_at," +
       "url," +
       "title," +
-      "posts.user_id," +
-      "comment_count")
+      "posts.user_id")
     .group("posts.id")
 
   # GET /posts
@@ -50,7 +49,7 @@ class PostsController < ApplicationController
         "comments.created_at," +
         "body," +
         "comments.user_id")
-      .where(:post_id => @post.id)
+      .where(:post_id => @post.id, :comment_type => 0)
       .group("comments.id")
 
     @comment = Comment.new
@@ -64,8 +63,7 @@ class PostsController < ApplicationController
         "posts.created_at," +
         "url," +
         "title," +
-        "posts.user_id," +
-        "comment_count").find(params[:id])
+        "posts.user_id").find(params[:id])
 
     if current_user
       if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0, :vote_type => 0).count > 0
@@ -200,8 +198,7 @@ class PostsController < ApplicationController
         "posts.created_at," +
         "url," +
         "title," +
-        "posts.user_id," +
-        "comment_count")
+        "posts.user_id")
       .group("posts.id")
       .limit(15)
       .order("sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) DESC")

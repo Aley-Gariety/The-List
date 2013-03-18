@@ -1,8 +1,5 @@
 ThelistIo::Application.routes.draw do
 
-  resources :suggestions
-
-
   root :to => "posts#index"
 
   match 'guidelines' => 'pages#guidelines'
@@ -53,5 +50,10 @@ ThelistIo::Application.routes.draw do
   resources :password_resets
 
   resources :requests
+  
+  resources :suggestions do
+      get 'page-:page', :action => :index, :on => :collection
+      get 'recent/page-:page', :action => :recent, :on => :collection
+  end
 
 end

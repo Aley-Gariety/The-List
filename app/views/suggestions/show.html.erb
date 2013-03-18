@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<div class="show-li">
+  <div class="suffrage<%= @active %>" data-value="<%= @value %>">
+    <% if current_user %>
+      <%= link_to '&#9650;'.html_safe, vote_path(:post_id => @suggestion.id, :vote_type => 2, :direction => 0, :value => @value), :remote => true, :method => "put", :class => "up" %><br>
+    <% else %>
+      <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
+    <% end %>
+    <span><%= @suggestion.score.to_i %></span><br>
+    <% if current_user %>
+      <%= link_to '&#9660;'.html_safe, vote_path(:post_id => @suggestion.id, :vote_type => 2, :direction => 1, :value => @value), :remote => true, :method => "put", :class => "down" %><br>
+    <% else %>
+      <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
+    <% end %>
+  </div>
+
+  <h2 class="title"><%= @suggestion.title %></h2>
+  <p><%= @suggestion.text %></p>
+  <span class="meta">Suggested by <a href="/user/<%= User.find(@suggestion.user_id).username.downcase %>"><%= User.find(@suggestion.user_id).username %></a>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@suggestion.created_at) %> ago.<br></span>
+</div>
+<% @comments.each do |c| %>
+
+  <%
+    if current_user
+      if Vote.find_by_user_id_and_post_id_and_direction_and_vote_type(current_user.id, c.id, 0, 3)
+        comment_active = 'upactive'
+      elsif Vote.find_by_user_id_and_post_id_and_direction_and_vote_type(current_user.id, c.id, 1, 3)
+        comment_active = 'downactive'
+      end
+
+      found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(c.id, current_user.id, 3)
+
+      if found_vote
+        comment_value = found_vote.value
+      else
+     	  comment_value = current_user.karma * 0.02
+     	  comment_value = 1 if comment_value < 1
+      end
+
+      if current_user.id == c.user_id.to_i
+        comment_active = comment_active.to_s + " owner"
+      end
+
+    end
+  %>
+
+  <div class="comment">
+    <div class="suffrage <%= comment_active %>" data-value="<%= comment_value %>">
+      <% if current_user %>
+        <%= link_to '&#9650;'.html_safe, vote_path(:post_id => c.id, :vote_type => 3, :direction => 0, :value => comment_value), :remote => true, :method => "put", :class => "up" %><br>
+      <% else %>
+        <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
+      <% end %>
+      <span><%= c.score.to_i %></span><br>
+      <% if current_user %>
+        <%= link_to '&#9660;'.html_safe, vote_path(:post_id => c.id, :vote_type => 3, :direction => 1, :value => comment_value), :remote => true, :method => "put", :class => "down" %><br>
+      <% else %>
+        <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
+      <% end %>
+    </div>
+
+    <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(c.user_id).email) %>?d=http%3A%2F%2Fthelist.io%2Fassets%2Fprofile.jpg&s=200" class="comment-photo" />
+  	<a href="/user/<%= User.find(c.user_id).username %>"><b><%= User.find(c.user_id).username %></b></a>
+  	<span class="meta">Written <%= time_ago_in_words(c.created_at) %> ago.<br></span>
+  	<p><%= c.body %></p>
+	</div><br>
+<% end %>
+
+<% if current_user %>
+  <%= render "newcomment" %>
+<% end %>
