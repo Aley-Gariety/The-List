@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :detect_level
 
-	before_filter :require_login, :detect_level
+	before_filter :require_login
 	before_filter :free_invites, :only => [:index]
 
 	private
