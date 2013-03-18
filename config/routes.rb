@@ -8,7 +8,10 @@ ThelistIo::Application.routes.draw do
 
   match 'stats' => 'pages#stats'
 
+  # Blog
   match 'blog' => 'pages#blog'
+  match 'blog/downtime.html' => 'pages#blog2'
+  match 'blog/api-status.html' => 'pages#blog1'
 
   match 'user/:username' => 'users#user'
 
