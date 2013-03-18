@@ -1,5 +1,5 @@
 <div class="show-li">
-  <div class="suffrage<%= @active %>" data-value="<%= @value %>">
+  <div class="suggestion-suffrage suffrage<%= @active %>" data-value="<%= @value %>">
     <% if current_user %>
       <%= link_to '&#9650;'.html_safe, vote_path(:post_id => @suggestion.id, :vote_type => 2, :direction => 0, :value => @value), :remote => true, :method => "put", :class => "up" %><br>
     <% else %>
@@ -13,7 +13,8 @@
     <% end %>
   </div>
 
-  <h2 class="title"><%= @suggestion.title %></h2>
+  <h2 class="title"><%= @suggestion.title %></h2><br>
+  <h3>Additional Information:</h3>
   <p><%= @suggestion.text %></p>
   <span class="meta">Suggested by <a href="/user/<%= User.find(@suggestion.user_id).username.downcase %>"><%= User.find(@suggestion.user_id).username %></a>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(@suggestion.created_at) %> ago.<br></span>
 </div>

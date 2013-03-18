@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
-
   protect_from_forgery
 
   helper_method :current_user, :detect_level
 
-	before_filter :require_login, :free_invites
+	before_filter :require_login
+	before_filter :free_invites, :only => [:index]
 
 	private
 
@@ -27,18 +27,18 @@ class ApplicationController < ActionController::Base
       flash.now[:free_invites] = "It's free invite day! <a href=\"/gift\">Send up to 4 karma for no cost.</a>".html_safe
     end
   end
-  
+
   def detect_level(user_id)
   	user = User.find(user_id)
-  
+
    	if user.karma.between?(0, 24)
-   		@@level = 0
-   	elsif current_user && user.karma.between?(25, 49)
    		@@level = 1
-   	elsif user.karma.between?(50, 99)
+   	elsif current_user && user.karma.between?(25, 49)
    		@@level = 2
-   	elsif user.karma >= 100
+   	elsif user.karma.between?(50, 99)
    		@@level = 3
+   	elsif user.karma >= 100
+   		@@level = 4
    	end
   end
 

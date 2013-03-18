@@ -3,6 +3,7 @@
     <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(@user).email) %>?d=http%3A%2F%2Fthelist.io%2Fassets%2Fprofile.jpg&s=200" class="profile-photo" />
 
     <h2 id="profile-content"><%= @user.username %></h2><br>
+    <span id="profile-content">Level <%= detect_level(@user) %></span><br>
     <span id="profile-content">Has <%= @user.karma %> karma</span><br>
     <span id="profile-content">Member for <%= time_ago_in_words(@user.created_at) %></span>
   </div><br><br>
@@ -68,9 +69,15 @@
   <h2>Recent Comments:</h2><br>
   <% @comments.each_with_index do |comment, i| %>
     <% if current_user
-      if Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 0, :vote_type => 1).count > 0
+      if comment.comment_type == 0
+        vote_type = 1
+      else
+        vote_type = 3
+      end
+
+      if Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 0, :vote_type => vote_type).count > 0
         active = ' upactive'
-      elsif Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 1, :vote_type => 1).count > 0
+      elsif Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 1, :vote_type => vote_type).count > 0
         active = ' downactive'
       end
 
@@ -105,8 +112,8 @@
           <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
         <% end %>
       </div>
-      <span class="light"><%= time_ago_in_words(comment.created_at) %> ago:</span>
-      <div><%= markdown(comment.body) %></div>
+      <span class="light"><%= time_ago_in_words(comment.created_at) %> ago on <%= link_to Post.find(comment.post_id).title, Post.find(comment.post_id) %></span>
+      <div class="comment-body"><%= markdown(comment.body) %></div>
     </li>
   <% end %>
 </ol>
