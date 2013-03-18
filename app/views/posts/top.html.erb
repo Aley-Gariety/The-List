@@ -40,7 +40,7 @@
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
-        <span><%= post.score.to_i %></span><br>
+        <span data-total="<%= post.score.to_i %>" data-up="+<%= post.upvotes.to_i %>" data-down="<%= post.downvotes.to_i %>"><%= post.score.to_i %></span><br>
         <% if current_user %>
           <%= link_to '&#9660;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>
@@ -50,7 +50,7 @@
       <div class="submission">
         <div class="submission-inner">
           <a href="<%= post.url %>" target="_blank" class="title"><%= post.title %></a><br>
-          <span class="meta">Submitted by <%= link_to User.find(post.user_id).username, :controller => "users", :action => "user", :username => User.find(post.user_id).username.downcase %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
+          <span class="meta">Submitted by <%= link_to User.find(post.user_id).username, { :controller => "users", :action => "user", :username => User.find(post.user_id).username.downcase }, { :class => ("red" if  detect_level(post.user_id) == 3) }%>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View " + Comment.where(:post_id => post.id, :comment_type => 0).count.to_s + " Comments", post %></span>
         </br>
       </div>
     </li>
@@ -65,11 +65,11 @@
         <span><%= @users.index(user) + 1 %>.</span>
       </div>
       <div class="suffrage">
-        <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(user.email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fphoto.jpg&s=200" class="comment-photo" />
+        <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(user.email) %>?d=http%3A%2F%2Fthelist.io%2Fassets%2Fprofile.jpg&s=200" class="comment-photo" />
       </div>
       <div class="submission">
         <div class="submission-inner">
-          <%= link_to user.username, "/user/" + user.username %><br>
+          <%= link_to user.username, "/user/" + user.username, :class => ("red" if user.karma > 100)%><br>
           <span class="meta"><%= user.karma %> karma — <%= Post.where(:user_id => user.id).count %> posts — <%= Comment.where(:user_id => user.id).count %> comments</span>
       </div>
     </li>

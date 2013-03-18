@@ -1,18 +1,17 @@
-<div id="profile">
-  <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(@user).email) %>?d=http%3A%2F%2Fthelist.io%2Fimages%2Fphoto.jpg&s=200" class="profile-photo" />
+<div id="profile-wrapper">
+  <div id="profile">
+    <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(@user).email) %>?d=http%3A%2F%2Fthelist.io%2Fassets%2Fprofile.jpg&s=200" class="profile-photo" />
 
-  <h2 id="profile-content"><%= @user.username %></h2><br>
-  <span id="profile-content">Karma: <%= @user.karma %></span><br>
-  <span id="profile-content">Member For: <%= time_ago_in_words(@user.created_at) %></span>
+    <h2 id="profile-content"><%= @user.username %></h2><br>
+    <span id="profile-content">Has <%= @user.karma %> karma</span><br>
+    <span id="profile-content">Member for <%= time_ago_in_words(@user.created_at) %></span>
+  </div><br><br>
 </div>
-<br>
-<br>
-<h3><%= @user.username %>'s Posts:</h3>
-<br>
-<% if @posts.count == {} %>
+<% if @posts.count == 0 %>
   <%= @user.username %> has no posts yet.
 <% end %>
-<ol>
+<ol id="top-posts" class="profile-list">
+  <h2>Recent Posts:</h2><br>
   <% @posts.each do |post| %>
     <%
       if current_user
@@ -48,7 +47,7 @@
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
-        <span><%= post.score.to_i %></span><br>
+        <span data-total="<%= post.score.to_i %>" data-up="+<%= post.upvotes.to_i %>" data-down="<%= post.downvotes.to_i %>"><%= post.score.to_i %></span><br>
         <% if current_user %>
           <%= link_to '&#9660;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>
@@ -58,9 +57,56 @@
       <div class="submission">
         <div class="submission-inner">
           <a href="<%= post.url %>" target="_blank" class="title"><%= post.title %></a><br>
-          <span class="meta">Submitted by <%= @user.username %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
+          <span class="meta">Submitted by <%= @user.username %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View " + Comment.where(:post_id => post.id, :comment_type => 0).count.to_s + " Comments", post %></span>
         </br>
       </div>
+    </li>
+  <% end %>
+</ol>
+
+<ol id="top-comments">
+  <h2>Recent Comments:</h2><br>
+  <% @comments.each_with_index do |comment, i| %>
+    <% if current_user
+      if Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 0, :vote_type => 1).count > 0
+        active = ' upactive'
+      elsif Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 1, :vote_type => 1).count > 0
+        active = ' downactive'
+      end
+
+      found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(comment.id, current_user.id, 0)
+
+      if found_vote
+        value = found_vote.value
+      else
+     	  value = current_user.karma * 0.02
+     	  value = 1 if value < 1
+      end
+
+
+      if current_user.id == comment.user_id.to_i && active
+        active += " owner"
+      end
+    end %>
+    <li class="comment">
+      <div class="order">
+        <span><%= i + 1 %>.</span>
+      </div>
+      <div class="suffrage<%= active %>" data-value="<%= value %>">
+        <% if current_user %>
+          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => comment.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
+        <% else %>
+          <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
+        <% end %>
+        <span data-total="<%= comment.score.to_i %>" data-up="+<%= comment.upvotes.to_i %>" data-down="<%= comment.downvotes.to_i %>"><%= comment.score.to_i %></span><br>
+        <% if current_user %>
+          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => comment.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
+        <% else %>
+          <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
+        <% end %>
+      </div>
+      <span class="light"><%= time_ago_in_words(comment.created_at) %> ago:</span>
+      <div><%= markdown(comment.body) %></div>
     </li>
   <% end %>
 </ol>

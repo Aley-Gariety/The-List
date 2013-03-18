@@ -5,12 +5,13 @@ class PostsController < ApplicationController
   @@posts = Post
     .joins("LEFT JOIN votes ON posts.id = votes.post_id")
     .select("posts.id," +
-      "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+      "sum(if(vote_type = 0, if(direction = 0, value, -value),0)) as score," +
+      "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+      "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
       "posts.created_at," +
       "url," +
       "title," +
-      "posts.user_id," +
-      "comment_count")
+      "posts.user_id")
     .group("posts.id")
 
   # GET /posts
@@ -43,10 +44,12 @@ class PostsController < ApplicationController
       .joins("LEFT JOIN votes ON comments.id = votes.post_id")
       .select("comments.id," +
         "sum(if(vote_type = 1, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 1, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 1, if(direction = 1, -value, 0),0)) as downvotes," +
         "comments.created_at," +
         "body," +
         "comments.user_id")
-      .where(:post_id => @post.id)
+      .where(:post_id => @post.id, :comment_type => 0)
       .group("comments.id")
 
     @comment = Comment.new
@@ -55,11 +58,12 @@ class PostsController < ApplicationController
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
         "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
         "posts.created_at," +
         "url," +
         "title," +
-        "posts.user_id," +
-        "comment_count").find(params[:id])
+        "posts.user_id").find(params[:id])
 
     if current_user
       if Vote.where(:user_id => current_user.id, :post_id => @post.id, :direction => 0, :vote_type => 0).count > 0
@@ -92,8 +96,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-  
-  
     @post = Post.new
 
     @threshold = (current_user.karma * 0.02).round
@@ -189,11 +191,12 @@ class PostsController < ApplicationController
       .joins("LEFT JOIN votes ON posts.id = votes.post_id")
       .select("posts.id," +
         "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
         "posts.created_at," +
         "url," +
         "title," +
-        "posts.user_id," +
-        "comment_count")
+        "posts.user_id")
       .group("posts.id")
       .limit(15)
       .order("sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) DESC")
@@ -206,6 +209,14 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { render "/posts/top" }
       format.json { render json: @posts }
+    end
+  end
+
+  def fetch_title
+    @title = Pismo::Document.new(params[:url]).title
+
+    respond_to do |format|
+      format.html { render :layout => false }
     end
   end
 end

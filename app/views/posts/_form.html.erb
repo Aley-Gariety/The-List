@@ -14,18 +14,19 @@
   <span>Will cost you <span class="red"><%= @threshold %> karma</span>.</span><br><br>
 
   <div class="field">
+    <%= f.label :url, "URL" %><br>
+    <%= f.text_field :url, :autocomplete => "off" %><br>
+    <span class="light">(We'll try to fill in the title for you.)</span>
+  </div><br>
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div><br>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
-  </div><br>
-  <div class="field">
-    <%= check_box(:post, :agreement) %>
+    <%= check_box(:post, :agreement, :checked => (detect_level(current_user.id) >= 1 ? true : false)) %>
     <%= label(:post, :agreement, 'Yes, I have read the '.html_safe) %><a href="/guidelines" target="_blank">guidelines</a>.
   </div><br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Post" %>
   </div>
 <% end %>

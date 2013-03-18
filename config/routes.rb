@@ -1,8 +1,5 @@
 ThelistIo::Application.routes.draw do
 
-  resources :suggestions
-
-
   root :to => "posts#index"
 
   match 'guidelines' => 'pages#guidelines'
@@ -13,12 +10,20 @@ ThelistIo::Application.routes.draw do
 
   match 'blog' => 'pages#blog'
 
+  match 'blog/downtime' => 'pages#blog2'
+
+  match 'blog/api-status' => 'pages#blog1'
+  
+  match 'blog/spit-and-shine' => 'pages#blog3'
+  
+  match 'user-levels' => 'pages#levels'
+
   match 'user/:username' => 'users#user'
 
   match 'applicants' => "requests#index"
-  
+
   get "suggestions" => "suggestions#index"
-  
+
   get "suggestions/new" => "suggestions#new"
 
   get "sessions/new"
@@ -45,6 +50,7 @@ ThelistIo::Application.routes.draw do
 
   resources :posts do
     get 'page-:page', :action => :index, :on => :collection
+    get 'fetch-title', :action => :fetch_title, :on => :collection
     get 'recent/page-:page', :action => :recent, :on => :collection
   end
 
@@ -53,5 +59,10 @@ ThelistIo::Application.routes.draw do
   resources :password_resets
 
   resources :requests
+
+  resources :suggestions do
+      get 'page-:page', :action => :index, :on => :collection
+      get 'recent/page-:page', :action => :recent, :on => :collection
+  end
 
 end

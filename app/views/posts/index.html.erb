@@ -7,7 +7,7 @@
 <% end %>
 
 <ol>
-  <% @posts.each do |post| %>
+  <% @posts.each_with_index do |post, i| %>
 
     <%
       if current_user
@@ -35,7 +35,7 @@
 
     <li>
       <div class="order">
-        <span><%= @posts.index(post) + 1 + (15 * @multiplier) %>.</span>
+        <span><%= i + 1 + (15 * @multiplier) %>.</span>
       </div>
       <div class="suffrage <%= active %>" data-value="<%= value %>">
         <% if current_user %>
@@ -43,7 +43,7 @@
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
-        <span><%= post.score.to_i %></span><br>
+        <span data-total="<%= post.score.to_i %>" data-up="+<%= post.upvotes.to_i %>" data-down="<%= post.downvotes.to_i %>"><%= post.score.to_i %></span><br>
         <% if current_user %>
           <%= link_to '&#9660;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>
@@ -53,7 +53,7 @@
       <div class="submission">
         <div class="submission-inner">
           <a href="<%= post.url %>" target="_blank" class="title"><%= post.title %></a><br>
-          <span class="meta">Submitted by <%= link_to User.find(post.user_id).username, :controller => "users", :action => "user", :username => User.find(post.user_id).username.downcase %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
+          <span class="meta">Submitted by <%= link_to User.find(post.user_id).username, { :controller => "users", :action => "user", :username => User.find(post.user_id).username.downcase }, { :class => ("red" if  detect_level(post.user_id) == 3) } %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to comment_count(post.id, 0), post %></span>
         </br>
       </div>
     </li>

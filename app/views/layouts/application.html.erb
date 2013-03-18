@@ -4,7 +4,7 @@
   <title>The List</title>
   <%= csrf_meta_tags %>
   <%= auto_discovery_link_tag(:rss, "http://thelist.io/posts/recent.rss") %>
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "modernizr" %>
 </head>
@@ -12,38 +12,36 @@
   <div class="wrap">
     <header>
       <section>
-        <h1><a href="/">The List</a><span class="beta">&nbsp;&nbsp;v1</span></h1>
+        <h1><a href="/">The List</a></h1>
         <div class="meta-header">
           <% if current_user %>
             <%= link_to current_user.username, { :controller => "users", :action => "user", :username => current_user.username.downcase} %>
-            &nbsp;&bull;&nbsp;
-            <%= link_to 'Top', top_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'Recent', recent_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'Submit', new_post_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'Invite', gift_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to "Sign Out", signout_path %>
           <% else %>
          	  <%= link_to 'Sign Up', apply_path %>
-         	  &nbsp;&bull;&nbsp;
+         	  <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'Top', top_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'Recent', recent_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to 'About', docs_path %>
-            &nbsp;&bull;&nbsp;
+            <span>&nbsp;&bull;&nbsp;</span>
             <%= link_to "Sign In", signin_path %>
           <% end %>
         </div>
       </section>
     </header>
     <section>
-    <% flash.each do |name, msg| %>
-  	  <%= content_tag :div, msg, :id => "flash_#{name}" %><br>
-  	<% end %>
+      <% flash.each do |name, msg| %>
+    	   <%= content_tag :div, msg, :id => "flash_#{name}" %><br>
+    	<% end %>
       <%= yield %>
     </section>
   </div>
@@ -76,16 +74,25 @@
     </style>
     <%= javascript_include_tag "application" %>
   <section>
+    <%= link_to "Suggestions", '/suggestions' %>
+    <span>&nbsp;&bull;&nbsp;</span>
+    <%= link_to 'Top', top_path %>
+    <span>&nbsp;&bull;&nbsp;</span>
+    <%= link_to "RSS", '/posts/recent.rss' %>
+    <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to "Guidelines", '/guidelines' %>
-    &nbsp;&bull;&nbsp;
+    <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to "Applicants", '/applicants' %>
-    &nbsp;&bull;&nbsp;
+    <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to "Blog", '/blog' %>
-    &nbsp;&bull;&nbsp;
+    <span>&nbsp;&bull;&nbsp;</span>
+    <%= link_to "Bookmarklet", "javascript:window.open(%22http://thelist.io/posts/new?u=%22+encodeURIComponent(document.location)+%22&t=%22+encodeURIComponent(document.title))", :id => "bookmarklet" %>
+    <span>&nbsp;&bull;&nbsp;</span>
     <%= link_to 'About', docs_path %>
-    &nbsp;&bull;&nbsp;
-    <%= link_to "Feedback", 'mailto:colby@aley.me,business@jacksongariety.com?subject=The%20List%20Inquiry' %>
+    <span>&nbsp;&bull;&nbsp;</span>
+    <%= link_to 'Contact', "mailto:personal@jacksongariety.com,colby@aley.me?subject=The%20List%20Inquiry" %>
   </section>
+  <script src="http://hashtraffic.com/js/hashtraffic-desktop.js" type="text/javascript"></script>
   </footer>
   <script type="text/javascript">
   var GoSquared = {};
@@ -104,5 +111,6 @@
       w.attachEvent("onload", gs);
   })(window);
 </script>
+<div id="dragme">Drag me.</div>
 </body>
 </html>

@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129215655) do
+ActiveRecord::Schema.define(:version => 20130318023104) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.integer  "upvotes",    :default => 0
-    t.integer  "downvotes",  :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "upvotes",      :default => 0
+    t.integer  "downvotes",    :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "comment_type", :default => 0
   end
 
   create_table "posts", :force => true do |t|
@@ -28,9 +29,8 @@ ActiveRecord::Schema.define(:version => 20130129215655) do
     t.string   "url"
     t.text     "text"
     t.string   "user_id"
-    t.integer  "comment_count", :default => 0
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests", :force => true do |t|
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20130129215655) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "listme"
+  end
+
+  create_table "suggestions", :force => true do |t|
+    t.string   "title"
+    t.string   "text"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -60,7 +68,7 @@ ActiveRecord::Schema.define(:version => 20130129215655) do
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "votes", :force => true do |t|
-    t.boolean  "vote_type"
+    t.integer  "vote_type"
     t.boolean  "direction"
     t.integer  "user_id"
     t.integer  "post_id"
