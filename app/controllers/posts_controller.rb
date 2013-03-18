@@ -96,8 +96,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-
-
     @post = Post.new
 
     @threshold = (current_user.karma * 0.02).round

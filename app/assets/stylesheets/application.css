@@ -277,6 +277,7 @@ h2.welcome {
 ol {
   padding-left: 0;
   list-style: none;
+  text-align: left;
 }
 
 .wrap > section ol li {
@@ -374,10 +375,14 @@ pre {
   white-space:pre-line;
 }
 
-#top-users, #top-posts {
+#top-users, #top-posts, #top-comments {
   width: 44.93%;
   float: left;
   margin-bottom: 15px;
+}
+
+#top-posts.profile-list {
+  border: none;
 }
 
 #top-posts {
@@ -385,10 +390,14 @@ pre {
   padding-right: 4.93%;
 }
 
-#top-users {
+#top-users, #top-comments {
   float: left;
   height: 100%;
   padding-left: 4.93%;
+}
+
+#top-comments {
+  border-left: 1px solid #DDD;
 }
 
 #top-users li {
@@ -526,6 +535,15 @@ pre {
   color: #FFF;
 }
 
+#top-comments .comment {
+  border: none;
+  min-height: 0;
+}
+
+#top-comments .comment img {
+  margin: 0;
+}
+
 .comment:hover .quote {
   display: block;
 }
@@ -645,20 +663,31 @@ ul li {
 /* Profiles */
 
 #profile {
-  display: block;
+  display: inline-block;
   padding: 10px;
   padding-left: 0;
 }
 
+#profile-wrapper {
+  text-align: center;
+}
+
 #profile-content {
 	display: inline;
+	width: 200px;
+	text-align: left;
+  float: left;
+}
+
+#profile-content:nth-child(2) {
+	margin-top: 10px;
 }
 
 .profile-photo {
 	float: left;
   margin-right: 10px;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   -webkit-border-radius: 190px;
      -moz-border-radius: 190px;
           border-radius: 190px;

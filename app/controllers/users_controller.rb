@@ -63,16 +63,32 @@ class UsersController < ApplicationController
     @user = User.find_by_username(params[:username])
 
     @posts = Post
-    .where(:user_id => User.find_by_username(params[:username]).id)
-    .joins("LEFT JOIN votes ON posts.id = votes.post_id")
-    .select("posts.id," +
-      "sum(if(vote_type = 0, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
-      "posts.created_at," +
-      "url," +
-      "title," +
-      "posts.user_id")
-    .group("posts.id")
-    .reverse!
+      .joins("LEFT JOIN votes ON posts.id = votes.post_id")
+      .select("posts.id," +
+        "sum(if(vote_type = 0, if(direction = 0, value, -value),0)) as score," +
+        "sum(if(vote_type = 0, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 0, if(direction = 1, -value, 0),0)) as downvotes," +
+        "posts.created_at," +
+        "url," +
+        "title," +
+        "posts.user_id")
+      .group("posts.id")
+      .limit(15)
+      .reverse!
+
+    @comments = Comment
+      .joins("LEFT JOIN votes ON comments.id = votes.post_id")
+      .select("comments.id," +
+        "sum(if(vote_type = 1, if(direction = 0, value, if(direction is null, 0, -value)),0)) as score," +
+        "sum(if(vote_type = 1, if(direction = 0, value, 0),0)) as upvotes," +
+        "sum(if(vote_type = 1, if(direction = 1, -value, 0),0)) as downvotes," +
+        "comments.created_at," +
+        "body," +
+        "comments.user_id")
+      .where(:user_id => @user.id)
+      .group("comments.id")
+      .limit(15)
+      .reverse!
   end
 
   def update
