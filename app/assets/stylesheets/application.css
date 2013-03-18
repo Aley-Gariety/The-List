@@ -91,6 +91,16 @@ a:active {
   color: #777;
 }
 
+.meta-header a {
+  background: #F6F6F6;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 15px;
+  color: #555;
+  text-decoration: none;
+}
+
 .meta-header a:first-child, .red:link {
   color: #ff4747;
 }
@@ -461,6 +471,23 @@ pre {
 
 .show-li {
   margin-bottom: 20px;
+}
+
+
+.comment img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+blockquote {
+  border-left: 5px solid #7d7d7d;
+  margin: 15px 20px 0 5px;
+  padding-left: 20px;
+  opacity: .95;
+}
+
+blockquote p {
+  margin-left: 0 !important;
 }
 
 ul li {
