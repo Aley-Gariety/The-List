@@ -50,7 +50,7 @@
       <div class="submission">
         <div class="submission-inner">
           <%= link_to suggestion.title, suggestion, :class => "title" %><br>
-          <span class="meta">Suggested by <%= link_to User.find(suggestion.user_id).username, { :controller => "users", :action => "user", :username => User.find(suggestion.user_id).username.downcase }, { :class => ("red" if User.find(suggestion.user_id).karma > 100) } %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(suggestion.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View " + Comment.where(:post_id => suggestion.id, :comment_type => 1).count.to_s + " Comments", suggestion %></span>
+          <span class="meta">Suggested by <%= link_to User.find(suggestion.user_id).username, { :controller => "users", :action => "user", :username => User.find(suggestion.user_id).username.downcase }, { :class => ("red" if User.find(suggestion.user_id).karma > 100) } %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(suggestion.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to comment_count(suggestion.id), suggestion %></span>
         </br>
       </div>
     </li>
