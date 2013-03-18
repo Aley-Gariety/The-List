@@ -24,8 +24,8 @@ module PostsHelper
     markdown.render(text).html_safe
   end
   
-  def comment_count(post_id)
-  	amount = Comment.where(:post_id => post_id, :comment_type => 0).count
+  def comment_count(post_id, comment_type)
+  	amount = Comment.where(:post_id => post_id, :comment_type => comment_type).count
   	
   	if amount == 0
   		"Leave a Comment"
