@@ -70,8 +70,7 @@ class UsersController < ApplicationController
       "posts.created_at," +
       "url," +
       "title," +
-      "posts.user_id," +
-      "comment_count")
+      "posts.user_id")
     .group("posts.id")
     .reverse!
   end

@@ -8,13 +8,17 @@ class VoteController < ApplicationController
 
     if vote_type.to_i == 0
       found_post = Post.find(post_id)
-    else
-      found_post = Comment.find(post_id)
+    elsif vote_type.to_i == 1
+      found_post = Comment.find_by_id_and_comment_type(post_id, 0)
+    elsif vote_type.to_i == 2
+   	  found_post = Suggestion.find(post_id)
+    elsif vote_type.to_i == 3
+   	  found_post = Comment.find_by_id_and_comment_type(post_id, 1)
     end
 
   	return false unless Vote.where(:user_id => user_id, :post_id => post_id, :vote_type => vote_type, :direction => direction).count == 0 || (current_user.id == found_post.user_id)
 
-	  @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_vote_type(:user_id => current_user.id, :post_id => post_id, :vote_type => vote_type, :value => value)
+	  @new_vote = Vote.find_or_initialize_by_post_id_and_user_id_and_vote_type_and_value(:user_id => current_user.id, :post_id => post_id, :vote_type => vote_type, :value => value)
 
 	  value *= 2 unless @new_vote.new_record?
 

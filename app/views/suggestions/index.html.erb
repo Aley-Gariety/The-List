@@ -1,0 +1,59 @@
+<% if @suggestions.count == {} %>
+  No suggestions at the moment.
+<% end %>
+
+<h2>Suggestions</h2>
+<p>The List is a community driven website. <%= link_to "Suggest", new_suggestion_path  %> a feature.</p><br>
+
+<ol>
+  <% @suggestions.each do |suggestion| %>
+
+    <%
+      if current_user
+        if Vote.where(:user_id => current_user.id, :post_id => suggestion.id, :direction => 0, :vote_type => 2).count > 0
+          active = 'upactive'
+        elsif Vote.where(:user_id => current_user.id, :post_id => suggestion.id, :direction => 1, :vote_type => 2).count > 0
+          active = 'downactive'
+        end
+
+        found_vote = Vote.find_by_post_id_and_user_id_and_vote_type(suggestion.id, current_user.id, 2)
+
+        if found_vote
+          value = found_vote.value
+        else
+       	  value = current_user.karma * 0.02
+       	  value = 1 if value < 1
+        end
+        if current_user.id == suggestion.user_id.to_i
+          active += " owner"
+        end
+      end
+    %>
+
+    <li>
+      <div class="order">
+
+      </div>
+      <div class="suffrage <%= active %>" data-value="<%= value %>">
+        <% if current_user %>
+          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => suggestion.id, :vote_type => 2, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
+        <% else %>
+          <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
+        <% end %>
+        <span><%= suggestion.score.to_i %></span><br>
+        <% if current_user %>
+          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => suggestion.id, :vote_type => 2, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
+        <% else %>
+          <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
+        <% end %>
+      </div>
+      <div class="submission">
+        <div class="submission-inner">
+          <%= link_to suggestion.title, suggestion, :class => "title" %><br>
+          <span class="meta">Suggested by <%= link_to User.find(suggestion.user_id).username, { :controller => "users", :action => "user", :username => User.find(suggestion.user_id).username.downcase }, { :class => ("red" if User.find(suggestion.user_id).karma > 100) } %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(suggestion.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View " + Comment.where(:post_id => suggestion.id, :comment_type => 1).count.to_s + " Comments", suggestion %></span>
+        </br>
+      </div>
+    </li>
+  <% end %>
+</ol>
+<br><br>

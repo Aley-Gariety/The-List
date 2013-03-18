@@ -58,7 +58,7 @@
       <div class="submission">
         <div class="submission-inner">
           <a href="<%= post.url %>" target="_blank" class="title"><%= post.title %></a><br>
-          <span class="meta">Submitted by <%= @user.username %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View #{post.comment_count} Comments", post %></span>
+          <span class="meta">Submitted by <%= @user.username %>&nbsp;&mdash;&nbsp;<%= time_ago_in_words(post.created_at) %> ago&nbsp;&mdash;&nbsp;<%= link_to "View " + Comment.where(:post_id => post.id, :comment_type => 0).count.to_s + " Comments", post %></span>
         </br>
       </div>
     </li>
