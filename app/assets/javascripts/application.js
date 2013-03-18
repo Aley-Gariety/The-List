@@ -64,18 +64,19 @@ $(function(){
         $.ajax({
           url: "/posts/fetch-title",
           data: {
-            url: "http://www.rubyinside.com/cramp-asychronous-event-driven-ruby-web-app-framework-2928.html"
+            url: encodeURI($("#post_url").val())
           },
           success: function(data){
-            console.log(data)
-            $("#post_title").val(data)
+            if (data) {
+              $("#post_title").val(data)
+            }
           }
         })
       }
     },0)
   }
 
-  $("#post_url").keypress(fetchTitle).on("paste",fetchTitle)
+  $("#post_url").keydown(fetchTitle).on("paste",fetchTitle)
 
   // Bookmarklet tooltip
   $("#bookmarklet").hover(function(){

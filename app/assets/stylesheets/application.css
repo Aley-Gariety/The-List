@@ -302,6 +302,11 @@ ol {
 
 /* Generic elements */
 
+.light {
+  font-size: .75em;
+  color: #666;
+}
+
 #dragme {
   position: absolute;
   color: #777;

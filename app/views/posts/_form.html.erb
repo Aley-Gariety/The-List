@@ -14,12 +14,13 @@
   <span>Will cost you <span class="red"><%= @threshold %> karma</span>.</span><br><br>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.label :url, "URL" %><br>
+    <%= f.text_field :url, :autocomplete => "off" %><br>
+    <span class="light">(We'll try to fill in the title for you.)</span>
   </div><br>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
   </div><br>
   <div class="field">
     <%= check_box(:post, :agreement) %>
