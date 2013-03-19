@@ -1,6 +1,62 @@
 //= require jquery
 //= require jquery_ujs
 
+function htmlDecode(input){
+  var e = document.createElement('div');
+  e.innerHTML = input;
+  return e.childNodes[0].nodeValue;
+}
+
+function getUrlVars() {
+  var vars = {}
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    vars[key] = decodeURIComponent(value)
+  })
+  return vars
+}
+
+(function(){
+	var small = "(a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v[.]?|via|vs[.]?)";
+	var punct = "([!\"#$%&'()*+,./:;<=>?@[\\\\\\]^_`{|}~-]*)";
+
+	this.titleCaps = function(title){
+		var parts = [], split = /[:.;?!] |(?: |^)["Ò]/g, index = 0;
+
+		while (true) {
+			var m = split.exec(title);
+
+			parts.push( title.substring(index, m ? m.index : title.length)
+				.replace(/\b([A-Za-z][a-z.'Õ]*)\b/g, function(all){
+					return /[A-Za-z]\.[A-Za-z]/.test(all) ? all : upper(all);
+				})
+				.replace(RegExp("\\b" + small + "\\b", "ig"), lower)
+				.replace(RegExp("^" + punct + small + "\\b", "ig"), function(all, punct, word){
+					return punct + upper(word);
+				})
+				.replace(RegExp("\\b" + small + punct + "$", "ig"), upper));
+
+			index = split.lastIndex;
+
+			if ( m ) parts.push( m[0] );
+			else break;
+		}
+
+		return parts.join("").replace(/ V(s?)\. /ig, " v$1. ")
+			.replace(/(['Õ])S\b/ig, "$1s")
+			.replace(/\b(AT&T|Q&A)\b/ig, function(all){
+				return all.toUpperCase();
+			});
+	};
+
+	function lower(word){
+		return word.toLowerCase();
+	}
+
+	function upper(word){
+	  return word.substr(0,1).toUpperCase() + word.substr(1);
+	}
+})();
+
 $(function(){
 
   var mediaQueries =  $('style'),
@@ -9,14 +65,6 @@ $(function(){
 
   function setMediaQuery() {
     mediaQueries.html(mediaQueries.html().replace(/\(([^\)]+)\)/,'(max-width: ' + ($('.meta-header').width() + 258) + 'px)'))
-  }
-
-  function getUrlVars() {
-    var vars = {}
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-      vars[key] = decodeURIComponent(value)
-    })
-    return vars
   }
 
   $(window).resize(setMediaQuery)
@@ -68,7 +116,7 @@ $(function(){
           },
           success: function(data){
             if (data) {
-              $("#post_title").val(data)
+              $("#post_title").val(titleCaps(htmlDecode(data)))
             }
           }
         })
@@ -76,7 +124,7 @@ $(function(){
     },0)
   }
 
-  $("#post_url").keydown(fetchTitle).on("paste",fetchTitle)
+  $("#post_url").on("paste, keydown",fetchTitle)
 
   // Bookmarklet tooltip
   $("#bookmarklet").hover(function(){
