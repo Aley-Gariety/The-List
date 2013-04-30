@@ -101,13 +101,13 @@
       </div>
       <div class="suffrage<%= active %>" data-value="<%= value %>">
         <% if current_user %>
-          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => comment.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
+          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
         <span data-total="<%= comment.score.to_i %>" data-up="+<%= comment.upvotes.to_i %>" data-down="<%= comment.downvotes.to_i %>"><%= comment.score.to_i %></span><br>
         <% if current_user %>
-          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => comment.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
+          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
         <% else %>
           <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
         <% end %>
