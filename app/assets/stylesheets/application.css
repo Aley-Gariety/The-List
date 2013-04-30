@@ -309,6 +309,8 @@ input[type="submit"] {
   background: #F1F1F1;
   color: #444;
   -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+          border-radius: 20px;
   padding: 3px;
   padding-left: 10px;
   padding-right: 10px;

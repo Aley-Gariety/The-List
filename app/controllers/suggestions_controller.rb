@@ -17,7 +17,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions
   # GET /suggestions.json
   def index
-    @suggestions = @@suggestions.order("log10(abs(sum(if(vote_type = 2, if(direction = 0, value, if(direction is null, 0, -value)),0))) + 1) * sign(sum(if(vote_type = 2, if(direction = 0, value, if(direction is null, 0, -value)),0))) + (unix_timestamp(suggestions.created_at) / 300000) DESC")
+    @suggestions = @@suggestions.order("sum(if(vote_type = 2, if(direction = 0, value, -value),0)) DESC, suggestions.created_at DESC")
       .page(@page)
 
     respond_to do |format|
@@ -54,7 +54,8 @@ class SuggestionsController < ApplicationController
         "suggestions.created_at," +
         "text," +
         "title," +
-        "suggestions.user_id").find(params[:id])
+        "suggestions.user_id")
+      .find(params[:id])
 
     if current_user
       if Vote.where(:user_id => current_user.id, :post_id => @suggestion.id, :direction => 0, :vote_type => 2).count > 0

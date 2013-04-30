@@ -64,7 +64,7 @@
 
       <img src="http://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(User.find(c.user_id).email) %>?d=http%3A%2F%2Fthelist.io%2Fassets%2Fprofile.jpg&s=200" class="comment-photo" /><br>
 
-      <a href="/user/<%= User.find(c.user_id).username %>"><b><%= User.find(c.user_id).username %></b></a>
+      <a href="/user/<%= User.find(c.user_id).username %>" class="<%= "red" if (detect_level(c.user_id) == 4) %>"><b><%= User.find(c.user_id).username %></b></a>
       <span class="meta">Written <%= time_ago_in_words(c.created_at) %> ago.<br></span>
     </div>
   	<div class="comment-body"><%= markdown(c.body) %></div>
