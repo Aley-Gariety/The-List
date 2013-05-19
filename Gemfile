@@ -12,6 +12,7 @@ gem "kaminari"
 gem "honeypot-captcha"
 gem "redcarpet"
 gem "pismo"
+gem "newrelic_rpm"
 
 # Gems used only for assets and not required
 # in production environments by default.
