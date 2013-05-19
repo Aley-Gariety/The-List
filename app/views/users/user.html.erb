@@ -39,9 +39,11 @@
     %>
 
     <li>
+<!--
       <div class="order">
         <span><%= @posts.index(post) + 1 %>.</span>
       </div>
+-->
       <div class="suffrage<%= active %>" data-value="<%= value %>">
         <% if current_user %>
           <%= link_to '&#9650;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
@@ -68,7 +70,7 @@
 <ol id="top-comments">
   <h2>Recent Comments:</h2><br>
   <% @comments.each_with_index do |comment, i| %>
-    <% if current_user
+    <%
       if comment.comment_type == 0
         vote_type = 1
         model = Post
@@ -76,6 +78,8 @@
         vote_type = 3
         model = Suggestion
       end
+    %>
+    <% if current_user
 
       if Vote.where(:user_id => current_user.id, :post_id => comment.id, :direction => 0, :vote_type => vote_type).count > 0
         active = ' upactive'
@@ -98,9 +102,11 @@
       end
     end %>
     <li class="comment">
+<!--
       <div class="order">
         <span><%= i + 1 %>.</span>
       </div>
+-->
       <div class="suffrage<%= active %>" data-value="<%= value %>">
         <% if current_user %>
           <%= link_to '&#9650;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>

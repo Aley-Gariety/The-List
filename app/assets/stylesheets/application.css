@@ -6,63 +6,31 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}bu
 /* Some fonts */
 
 @font-face {
-	font-family: 'Source Sans Pro';
-	src: local('Source Sans Pro Bold'),
-	     local('SourceSansPro-Bold'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.eot?#iefix') format('embedded-opentype'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.ttf') format('truetype'),
-	     url('http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.woff') format('woff'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.svg#svgFontName') format('svg');
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGC-IiwWNzQT_LXAtr-Ee9Pw.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.woff) format('woff');
 }
 
 @font-face {
-	font-family: 'Source Sans Pro';
-	src: local('Source Sans Pro'),
-	     local('SourceSansPro-Regular'),
-	     url('/fonts/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.eot?#iefix') format('embedded-opentype'),
-	     url('/fonts/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.ttf') format('truetype'),
-	     url('http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff') format('woff'),
-	     url('/fonts/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.svg#svgFontName') format('svg');
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-	font-family: 'Source Sans Pro';
-	src: local('Source Sans Pro Italic'),
-	     local('SourceSansPro-It'),
-	     url('/fonts/M2Jd71oPJhLKp0zdtTvoM_bce-VcyLJMRR1FC9qWbU8.eot?#iefix') format('embedded-opentype'),
-	     url('/fonts/M2Jd71oPJhLKp0zdtTvoM_bce-VcyLJMRR1FC9qWbU8.ttf') format('truetype'),
-	     url('http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/M2Jd71oPJhLKp0zdtTvoM_bce-VcyLJMRR1FC9qWbU8.woff') format('woff'),
-	     url('/fonts/M2Jd71oPJhLKp0zdtTvoM_bce-VcyLJMRR1FC9qWbU8.svg#svgFontName') format('svg');
+  font-family: 'Source Sans Pro';
   font-style: italic;
   font-weight: 400;
-}
-
-@font-face {
-	font-family: 'Source Sans Pro';
-	src: local('Source Sans Pro Black'),
-	     local('SourceSansPro-Black'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGC7eGk4PJkA83J1AXCmgUfc.eot?#iefix') format('embedded-opentype'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGC7eGk4PJkA83J1AXCmgUfc.ttf') format('truetype'),
-	     url('http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGC7eGk4PJkA83J1AXCmgUfc.woff') format('woff'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGC7eGk4PJkA83J1AXCmgUfc.svg#svgFontName') format('svg');
-  font-style: normal;
-  font-weight: 900;
-}
-
-@font-face {
-	font-family: 'Source Sans Pro';
-	src: local('Source Sans Pro Semibold'),
-	     local('SourceSansPro-Semibold'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGCmgpmuQqK2I-L2S9cF65Ek.eot?#iefix') format('embedded-opentype'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGCmgpmuQqK2I-L2S9cF65Ek.ttf') format('truetype'),
-	     url('http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGCmgpmuQqK2I-L2S9cF65Ek.woff') format('woff'),
-	     url('/fonts/toadOcfmlt9b38dHJxOBGCmgpmuQqK2I-L2S9cF65Ek.svg#svgFontName') format('svg');
-  font-style: normal;
-  font-weight: 600;
+  src: local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/M2Jd71oPJhLKp0zdtTvoM_bce-VcyLJMRR1FC9qWbU8.woff) format('woff');
 }
 
 /* Anchors */
@@ -285,7 +253,7 @@ ol {
 .wrap > section ol li {
   display: block;
   clear: both;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .wrap > section ol li:last-child {
@@ -469,7 +437,7 @@ pre {
 }
 
 .suffrage {
-  width: 40px;
+  width: 30px;
   text-align: center;
   float: left;
   margin-top: -6px;
@@ -484,6 +452,7 @@ pre {
 
 .suffrage span {
   cursor: pointer;
+  margin-left: -15px;
 }
 
 .up-toggled {
@@ -496,7 +465,7 @@ pre {
 
 .up, .down {
   cursor: pointer;
-  padding-left: 15px;
+  padding-left: 0;
   padding-right: 15px;
   text-decoration: none;
 }
@@ -529,7 +498,7 @@ pre {
 }
 
 .submission {
-  margin-left: 50px;
+  margin-left: 35px;
 }
 
 
@@ -542,7 +511,7 @@ pre {
 }
 
 .comment-body {
-  margin-left: 42px;
+  margin-left: 30px;
 }
 
 .quote {
@@ -622,10 +591,6 @@ pre {
 
 .comment p {
   margin-left: 0;
-}
-
-.comment .suffrage {
-  margin-left: -10px;
 }
 
 .comment-photo {

@@ -34,9 +34,11 @@
     %>
 
     <li>
+<!--
       <div class="order">
         <span><%= i + 1 + (15 * @multiplier) %>.</span>
       </div>
+-->
       <div class="suffrage <%= active %>" data-value="<%= value %>">
         <% if current_user %>
           <%= link_to '&#9650;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
