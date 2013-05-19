@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318023104) do
+ActiveRecord::Schema.define(:version => 20130519085013) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20130318023104) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "posts", ["id", "created_at"], :name => "index_posts_on_id_and_created_at"
 
   create_table "requests", :force => true do |t|
     t.string   "name"
@@ -65,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130318023104) do
     t.string   "gift_token"
   end
 
+  add_index "users", ["karma"], :name => "index_users_on_karma"
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "votes", :force => true do |t|
@@ -76,5 +79,7 @@ ActiveRecord::Schema.define(:version => 20130318023104) do
     t.datetime "updated_at",                :null => false
     t.integer  "value",      :default => 0
   end
+
+  add_index "votes", ["post_id", "value"], :name => "index_votes_on_post_id_and_value"
 
 end
