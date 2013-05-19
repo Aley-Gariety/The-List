@@ -46,16 +46,18 @@
 -->
       <div class="suffrage<%= active %>" data-value="<%= value %>">
         <% if current_user %>
-          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
+          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %>
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
+        <br>
         <span data-total="<%= post.score.to_i %>" data-up="+<%= post.upvotes.to_i %>" data-down="<%= post.downvotes.to_i %>"><%= post.score.to_i %></span><br>
         <% if current_user %>
-          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
+          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => post.id, :vote_type => 0, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %>
         <% else %>
           <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
         <% end %>
+        <br>
       </div>
       <div class="submission">
         <div class="submission-inner">
@@ -109,16 +111,18 @@
 -->
       <div class="suffrage<%= active %>" data-value="<%= value %>">
         <% if current_user %>
-          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %><br>
+          <%= link_to '&#9650;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 0, :value => value), :remote => true, :method => "put", :class => "up" %>
         <% else %>
           <%= link_to '&#9650;'.html_safe, signin_path, :class => "up" %>
         <% end %>
+        <br>
         <span data-total="<%= comment.score.to_i %>" data-up="+<%= comment.upvotes.to_i %>" data-down="<%= comment.downvotes.to_i %>"><%= comment.score.to_i %></span><br>
         <% if current_user %>
-          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %><br>
+          <%= link_to '&#9660;'.html_safe, vote_path(:post_id => comment.id, :vote_type => vote_type, :direction => 1, :value => value), :remote => true, :method => "put", :class => "down" %>
         <% else %>
           <%= link_to '&#9660;'.html_safe, signin_path, :class => "down" %>
         <% end %>
+        <br>
       </div>
       <span class="light"><%= time_ago_in_words(comment.created_at) %> ago on <%= link_to model.find(comment.post_id).title, model.find(comment.post_id) %></span>
       <div class="comment-body"><%= markdown(comment.body) %></div>
