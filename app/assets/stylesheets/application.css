@@ -784,4 +784,16 @@ ul li {
   .suffrage > span {
     margin-left: -6px;
   }
+  h1 a {
+	  font-size: 2.2em;
+  }
+  .suffrage span {
+  	margin-left: -25px;
+  }
+  h2 {
+	  font-size: 4em;
+  }
+  input {
+	  size: 2em;
+  }
 }
