@@ -752,6 +752,7 @@ ul li {
 
 .next {
   float: right;
+  white-space: nowrap;
 }
 
 /* 940px wide */
