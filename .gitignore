@@ -6,7 +6,8 @@
 
 # Ignore bundler config
 /.bundle
-
+# Getting tired of your garbage, Apple
+.DS_Store
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
