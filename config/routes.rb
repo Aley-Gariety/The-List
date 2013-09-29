@@ -2,6 +2,8 @@ ThelistIo::Application.routes.draw do
 
   root :to => "posts#index"
 
+  mount API => 'api/'
+
   match 'guidelines' => 'pages#guidelines'
 
   match 'docs' => 'pages#docs'
