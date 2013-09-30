@@ -22,7 +22,17 @@ class API < Grape::API
     end
     post do
       post = Post.new(url: params[:url], title: params[:title], user_id: @@user.id)
+      threshold = (@@user.karma * 0.02).round
+
+      threshold = 4 if threshold < 4
       if post.save
+        new_vote = Vote.new(post_id: post.id, user_id: @@user.id, vote_type: 0, direction: 0, value: threshold)
+
+        if new_vote.save
+          User.find(@@user.id).update_attributes({
+            :karma => @@user.karma - threshold
+          })
+        end
         present post, with: Serializers::Post
       else
         error!('409 URL exists', 409)
